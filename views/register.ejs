@@ -10,6 +10,37 @@
     <div class="container-fluid bg-3 text-center">    
         <h3><%= page %></h3><br>
     </div>
+
+    <div class='container'>
+
+      <form class="col-lg-4 offset-lg-4" action="/user/register" method="POST">
+
+          <div class='form-group'>
+            <label for="usernameInput">Username</label>
+            <input type='text' class='form-control' placeholder='Username' name="username" id="usernameInput">
+          </div>
+
+          <div class="form-group">
+            <label for="emailInput">Email</label>
+            <input type="email" class="form-control"aria-describedby="emailHelp" placeholder="Enter email" name="email" id='emailInput'>
+            <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="passwordInput1">Password</label>
+            <input type="password" class="form-control" placeholder="Password" name='password1' id="passwordInput1">
+          </div>
+
+          <div class="form-group">
+              <label for="passwordInput2">Confirm Passowrd</label>
+              <input type="password" class="form-control" placeholder="Enter Password Again" name="password2" id="passwordInput2">
+          </div>
+    
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    
+    </div>
+    
     
 </body>
 

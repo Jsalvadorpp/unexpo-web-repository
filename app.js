@@ -5,10 +5,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 
-//+ database
+//= database
 var databaseName = 'Unexpo_repository'
 mongoose.connect(`mongodb://localhost:27017/${databaseName}`, 
 {useNewUrlParser: true,useUnifiedTopology: true });
+mongoose.set('useCreateIndex', true);
 
 var db = mongoose.connection;
 
@@ -18,7 +19,7 @@ db.once('open', function() {
   console.log(`Connected to the database: ${databaseName}`);
 });
 
-//+ set routes
+//= set routes
 var homepageRouter = require('./routes/homepage');
 var usersRouter = require('./routes/users');
 
@@ -34,7 +35,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//+ use routes
+//= use routes
 app.use('/', homepageRouter);
 app.use('/user', usersRouter);
 
