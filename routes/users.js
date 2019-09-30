@@ -10,12 +10,8 @@ var users = require('../models/users');
 //==============================
 //= user/register route
 router.get('/register', function(req, res) {
-  const pageData = {
-    page: 'Sign up',
-    menuId: 'sign up'
-  };
-
-  res.render('register', pageData);
+  
+  res.render('register',{page: 'register'});
 });
 //= get user data from sign up form
 router.post('/register', [
@@ -33,7 +29,7 @@ router.post('/register', [
       }),
 
     check('email')
-      .not().isEmpty().withMessage('email is required')
+      .not().isEmpty()
       .isEmail().withMessage('invalid email')
       .normalizeEmail()
       .custom( async (value) => {
@@ -66,22 +62,23 @@ router.post('/register', [
     return res.status(400).send(errors);
   }else{
 
+    //= password encryption
+    var salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(req.body.password1, salt);
+
+
     //= if no erros then insert new user into the database
     user = new users({
       username: req.body.username,
       email: req.body.email,
-      password: req.body.password1
+      password: hashedPassword
     });
  
     user.save( (err,savedUser) => {
       if (err)  return console.error(err);
     });
 
-    res.render('login',
-    {
-      page: 'Login',
-      menuId: 'login'
-    });
+    res.render('login', {page: 'login'});
 
   }
 
@@ -94,12 +91,8 @@ router.post('/register', [
 
 //= user/login route
 router.get('/login', function(req, res) {
-  const pageData = {
-    page: 'Login',
-    menuId: 'login'
-  };
 
-  res.render('login', pageData);
+  res.render('login', {page: 'login'});
 });
 
 module.exports = router;
