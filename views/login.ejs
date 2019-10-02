@@ -8,9 +8,11 @@
     <% include partials/menu-navbar %>
 
     <div class="container-fluid bg-3 text-center">    
+        <%- messages('partials/flash-messages', locals) %>
         <h3>Login</h3><br>
     </div>
 
+    <% include partials/frontend-scripts %>
 </body>
-
+  
 </html>

@@ -15,6 +15,8 @@
 
       <form class="col-lg-4 offset-lg-4" action="/user/register" method="POST">
 
+        <%- messages('partials/flash-messages', locals) %>
+
           <div class='form-group'>
             <label for="usernameInput">Username</label>
             <input type='text' class='form-control' placeholder='Username' name="username" id="usernameInput">
@@ -41,7 +43,7 @@
     
     </div>
     
-    
+    <% include partials/frontend-scripts %>
 </body>
 
 </html>
