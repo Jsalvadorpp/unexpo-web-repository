@@ -6,6 +6,10 @@ var logger = require('morgan');
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const session = require('express-session');
+const passport = require('passport');
+
+//= passport config 
+require('./config/passport-config')(passport);
 
 //= database
 var databaseName = 'Unexpo_repository'
@@ -25,12 +29,14 @@ db.once('open', function() {
 var homepageRouter = require('./routes/homepage');
 var usersRouter = require('./routes/users');
 
+//= initialize express app
 var app = express();
 
-// view engine setup
+//= view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+//= packages middlewares
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -45,6 +51,8 @@ app.use(function (req, res, next) {
   res.locals.messages = require('express-messages')(req, res);
   next();
 });
+app.use(passport.initialize());
+app.use(passport.session());
 
 //= use routes
 app.use('/', homepageRouter);

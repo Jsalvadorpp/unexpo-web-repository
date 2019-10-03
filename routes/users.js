@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
-
+const passport = require('passport');
 
 //= getting data from users database
 var users = require('../models/users');
@@ -104,6 +104,44 @@ router.post('/register', [
 router.get('/login', function(req, res) {
 
   res.render('login', {page: 'login'});
+});
+
+//= getting data from user in login form
+router.post('/login',[
+
+  //= check input
+  check('email')
+      .not().isEmpty().withMessage("email is required").bail()
+      .isEmail().withMessage('invalid email').bail()
+      .normalizeEmail(),
+
+  check('password')
+      .not().isEmpty().withMessage('password is required').bail()
+
+], (req,res,next) => {
+  //= handle request and response
+  const errors = validationResult(req)
+
+  //= if errors then return to login form and display errors
+  if (!errors.isEmpty()) {
+
+  errors.array().forEach( error => {
+    req.flash('danger',error.msg);
+  });
+  res.redirect('login');
+
+  //= if no errors then try to login 
+  }else{
+
+    //= passport authentication
+    passport.authenticate('local',{ 
+
+      successRedirect: '/',
+      failureRedirect: '/user/login',
+      failureFlash: true }
+
+    )(req, res, next);
+  }
 });
 
 module.exports = router;
