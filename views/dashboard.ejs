@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include partials/head %> 
+</head>
+
+<body>
+  <% include partials/menu-navbar %>
+
+  <div class="container-fluid bg-3 text-center">    
+    <h3>Dashboard </h3><br>
+    <h2>Welcome! <%= user.username %></h2><br>
+    <a class="btn btn-success" href="/user/logout">Logout</a>
+
+  </div>
+
+</body>
+
+</html>

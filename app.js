@@ -47,12 +47,20 @@ app.use(session({
   saveUninitialized: true,
   resave: true}));
 app.use(flash());
-app.use(function (req, res, next) {
+//= express messages middleware 
+app.use( (req, res, next) => {
+  //= local to messages
   res.locals.messages = require('express-messages')(req, res);
   next();
 });
 app.use(passport.initialize());
 app.use(passport.session());
+//= middleware to check if user is logged
+app.use( (req,res,next) => {
+  res.locals.userIsLogged = req.isAuthenticated();
+  res.locals.user = req.user;
+  next();
+});
 
 //= use routes
 app.use('/', homepageRouter);
