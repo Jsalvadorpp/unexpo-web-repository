@@ -7,10 +7,10 @@ const ensureAuth = require('../config/ensureAuth');
 router.get('/', ensureAuth , (req, res, next) => {
 
   const pageData = {
-    page: 'Add-Files',
+    page: 'Upload'
   };
 
-  res.render('addFile', pageData);
+  res.render('upload', pageData);
 
 });
 
