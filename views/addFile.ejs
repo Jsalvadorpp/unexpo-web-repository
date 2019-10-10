@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include partials/head %> 
+</head>
+
+<body>
+    <% include partials/menu-navbar %>
+
+    <div class="container-fluid bg-3 text-center">    
+        <h3>Add a file</h3><br>
+    </div>
+
+    <div class='container'>
+
+      <form class="col-lg-4 offset-lg-4" action="/addFile" method="POST">
+
+        <%- messages('partials/flash-messages', locals) %>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="customFile">
+          <label class="custom-file-label" for="customFile">Choose file</label>
+        </div><br>
+
+        <br><button type="submit" class="btn btn-primary btn-block">Upload</button>
+      </form>
+    
+    </div>
+
+    
+    <% include partials/frontend-scripts %>
+
+    <script>
+      //= script to view the name of the file on select
+      $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+      });
+    </script>
+</body>
+
+</html>
