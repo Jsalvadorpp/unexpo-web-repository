@@ -13,11 +13,11 @@
 
     <div class='container'>
 
-      <form class="col-lg-4 offset-lg-4" action="/addFile" method="POST">
+      <form class="col-lg-4 offset-lg-4" action="/upload" method="POST" enctype="multipart/form-data">
 
         <%- messages('partials/flash-messages', locals) %>
         <div class="custom-file">
-          <input type="file" class="custom-file-input" id="customFile">
+          <input type="file" class="custom-file-input" name='file'>
           <label class="custom-file-label" for="customFile">Choose file</label>
         </div><br>
 

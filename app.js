@@ -7,15 +7,14 @@ const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
+const database = require('./config/databaseConfig');
 
 //= passport config 
 require('./config/passport-config')(passport);
 
-//= database
-var databaseName = 'Unexpo_repository'
-mongoose.connect(`mongodb://localhost:27017/${databaseName}`, 
-{useNewUrlParser: true,useUnifiedTopology: true });
-mongoose.set('useCreateIndex', true);
+//= connect to database
+var databaseName = database.databaseName;
+database.connect;
 
 var db = mongoose.connection;
 
