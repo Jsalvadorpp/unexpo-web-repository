@@ -28,23 +28,75 @@ const storage = new GridFsStorage({
       filename: file.originalname,
       metadata: {
         createdBy: req.user.username,
-        //something : req.body.category
+        something : req.body.category
       },
       bucketName: 'uploads'
     }
   }
 });
-const upload = multer({ storage });
 
+//======================================================
+//== reminder to myself : clean this code PLEASEEEEEE
+//======================================================
 
-//= upload file 
-router.post('/', upload.single('file') , (req, res, next) => {
-  console.log(req.file);
-  const pageData = {
-    page: 'Upload'
-  };
+//= function to validate data from upload form
+const uploadValidation = (req,file,cb) => {
+  
+  var errors = [];
+  
+  if(typeof req.body.title === 'undefined' || req.body.title == '')  errors.push('title required');
+  if(typeof req.body.description === 'undefined' || req.body.description == '')  errors.push('description required');
 
-  res.json({file: req.file});
+  //= check if there's errors
+  if(errors.length > 0){
+
+    errors.forEach( error => {
+      req.flash('danger',error);
+    });
+    cb('fields required');
+
+  }else{
+    cb(null, true);
+  }
+
+};
+
+const megabyte = 1024*1024;
+const upload = multer({ 
+  storage , 
+  fileFilter: uploadValidation , 
+  limits: {fileSize: 100*megabyte} 
+}).single('file');
+
+//= getting data from upload form
+router.post('/', (req,res) => {
+
+  //= trying to upload the file
+  upload(req,res,(err) => {
+
+    if(err) {
+      
+      if(err.message == 'File too large') req.flash('danger',err.message);
+      res.redirect('upload');
+    
+    }else{
+
+      if(typeof req.file === 'undefined'){
+
+        req.flash('danger','file required');
+        res.redirect('upload');
+
+      }else{
+
+        //= handle request and response
+        const pageData = {
+          page: 'Upload'
+        };
+        res.json({file: req.file});
+
+      }
+    }
+  });
 
 });
 
