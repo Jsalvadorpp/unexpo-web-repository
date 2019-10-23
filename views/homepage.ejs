@@ -7,9 +7,10 @@
 <body>
   <% include partials/menu-navbar %>
 
-  <div class="container-fluid bg-3 text-center">    
+  <div class="container-fluid bg-3 text-center">   
+    <%- messages('partials/flash-messages', locals) %>
     <h3><%= page %></h3><br>
-     
+
     <% if(userIsLogged){ %>
       <h3>logged as <%= user.username %></h3><br>
     <% } %>
@@ -27,7 +28,8 @@
     </div>
 
   </div>
-
+  
+  <% include partials/frontend-scripts %>
 </body>
 
 </html>
