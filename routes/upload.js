@@ -103,8 +103,8 @@ router.post('/', (req,res) => {
       
       //= trying to create file data 
       }else{
-        //= check if there's a file with same size and mimetype in DB
-        uploads.findOne({size: req.file.size,mimetype: req.file.mimetype},(err,file) => {
+        //= check if there's a file with same size, mimetype and md5 in DB
+        uploads.findOne({size: req.file.size,mimetype: req.file.mimetype, md5: req.file.md5},(err,file) => {
           //= if there's a file then delete the file that was uploaded and return the upload page
           if(file){
 
@@ -124,6 +124,7 @@ router.post('/', (req,res) => {
             category: req.body.category,
             size: req.file.size,
             mimetype: req.file.mimetype,
+            md5: req.file.md5,
             fileId: req.file.id
             });
 

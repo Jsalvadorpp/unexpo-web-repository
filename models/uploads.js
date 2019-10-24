@@ -32,6 +32,10 @@ const UploadSchema = new Schema({
         type: String,
         required: true
     },
+    md5:{
+        type: String,
+        required: true
+    },
     fileId: {
         type: ObjectId,
         required: true
