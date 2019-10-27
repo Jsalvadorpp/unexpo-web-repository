@@ -4,6 +4,7 @@ var router = express.Router();
 //= getting data from upload database
 var files = require('../models/uploads');
 
+//= view all files by category
 router.get('/', (req, res, next) => {
 
   const category = req.query.category || 'general';
@@ -52,13 +53,23 @@ router.get('/', (req, res, next) => {
         }
       });
     });
-
-
-
-  
-  //res.render('homepage');
-
 });
 
+//= view indiviual file
+router.get('/viewFile', (req,res,next) => {
+
+  fileId = req.query.id;
+
+  files.findById(fileId).exec( (err,file) => {
+
+    if(!file) res.status(404).json({message : 'data not found'});
+
+
+    
+    res.render('view',{file,page: `${file.title}`});
+  });
+
+
+});
 
 module.exports = router;

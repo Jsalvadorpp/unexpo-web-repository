@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include partials/head %> 
+</head>
+
+<body>
+  <% include partials/menu-navbar %>
+
+  <div class="container-fluid bg-3 text-left">   
+    <%- messages('partials/flash-messages', locals) %>
+    
+    <hr>
+    <div class="col-md-12">
+        <h1>Title: <%= file.title %></h1>
+        <p class="card-subtitle mb-2 text-muted">Uploaded By: <%= file.createdBy %></p>
+        <p><%= file.description %></p>
+        <h4 class="badge badge-primary">Extension: <%= file.mimetype %></h4><br>
+        <h4 class="badge badge-primary">Size: <%= Math.round(file.size/Math.pow(10,6)) %> mb</h4><br>
+        <a href="#" class="btn btn-success">Download File</a>
+    </div><hr>
+
+  </div>
+  
+  <% include partials/frontend-scripts %>
+</body>
+
+</html>
