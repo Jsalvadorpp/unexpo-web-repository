@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include partials/head %> 
+</head>
+
+<body>
+  <% include partials/menu-navbar %>
+
+  <div class="container-fluid bg-3 text-left">   
+    <%- messages('partials/flash-messages', locals) %>
+    
+    
+    <% if (files) { %>
+
+      <br><div class="text-center">
+        <h2 >Category: <%= category %></h2>
+        <p class="card-subtitle mb-2 text-muted">Page <%=currentPage%> of <%=totalPages%> </p>
+      </div>
+    
+      <% files.forEach(file => { %>
+          <br>
+          <div class="card">
+              <div class="card-body">
+                  <h5>Title: <%= file.title %></h5>
+                  <p class="card-subtitle mb-2 text-muted">Uploaded By: <%= file.createdBy %></p>
+                  <p><%= file.description %></p>
+                  <a href="#" class="btn btn-primary">View File</a>
+              </div>
+          </div> 
+      <% }) %>
+    <% } %>
+
+    <br>
+    <ul class="pagination justify-content-center">
+
+      <% var pageButtonStatus = '' %>
+
+      <% pageButtonStatus = (previousPage)? 'enabled' : 'disabled'%>
+      <li class="page-item <%= pageButtonStatus %>">
+        <a class="page-link" href="/files?category=<%= category %>&page=<%= previousPage %>" tabindex="-1" aria-disabled="true">Previous</a>
+      </li>
+
+      <li class="page-item">
+        <a class="page-link" href="/files?category=<%= category %>&page=<%= currentPage %>"><%= currentPage %></a>
+      </li>
+
+      <% pageButtonStatus = (nextPage)? 'enabled' : 'disabled'%>
+      <li class="page-item <%= pageButtonStatus %>">
+        <a class="page-link" href="/files?category=<%= category %>&page=<%= nextPage %>" tabindex="-1" aria-disabled="true">Next</a>
+      </li>
+  </ul>
+
+   
+
+  </div>
+  
+  <% include partials/frontend-scripts %>
+</body>
+
+</html>

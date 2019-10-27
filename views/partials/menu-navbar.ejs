@@ -10,10 +10,10 @@
 
         <ul class="nav navbar-nav">
                 <li class="nav-item" id ="home"><a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item" id="general"><a class="nav-link" href="#">General</a></li>
-                <li class='nav-item' id='computacion'><a class="nav-link" href="#">Computacion</a></li>
-                <li class='nav-item' id='comunicaciones'><a class="nav-link" href="#">Comunicaciones</a></li>
-                <li class='nav-item' id='control'><a class="nav-link" href="#">Control</a></li>
+                <li class="nav-item" id="general"><a class="nav-link" href="/files?category=General&page=1">General</a></li>
+                <li class='nav-item' id='computacion'><a class="nav-link" href="/files?category=Computacion&page=1">Computacion</a></li>
+                <li class='nav-item' id='comunicaciones'><a class="nav-link" href="/files?category=Comunicaciones&page=1">Comunicaciones</a></li>
+                <li class='nav-item' id='control'><a class="nav-link" href="/files?category=Control&page=1">Control</a></li>
                 <% if(userIsLogged){ %>
                     <li class='nav-item' id='add-files'><a class="nav-link" href="/upload">Add File</a></li>
                 <% } %>
