@@ -17,7 +17,7 @@
         <p><%= file.description %></p>
         <h4 class="badge badge-primary">Extension: <%= file.mimetype %></h4><br>
         <h4 class="badge badge-primary">Size: <%= Math.round(file.size/Math.pow(10,6)) %> mb</h4><br>
-        <a href="#" class="btn btn-success">Download File</a>
+        <a href="/files/download?id=<%= file.id%>" class="btn btn-success">Download File</a>
     </div><hr>
 
   </div>
