@@ -14,7 +14,11 @@
     <% if (files) { %>
 
       <br><div class="text-center">
-        <h2 >Category: <%= category %></h2>
+        <% if(category){ %>
+          <h2 >Category: <%= category %></h2>
+        <% }else{ %>
+          <h2>"<%= searchKey %>" Results:</h2>
+        <% } %>
         <p class="card-subtitle mb-2 text-muted">Page <%=currentPage%> of <%=totalPages%> </p>
       </div>
     
@@ -35,23 +39,22 @@
     <ul class="pagination justify-content-center">
 
       <% var pageButtonStatus = '' %>
+      <% var href = (category)? `/files?category=${category}` : `/files/search?q=${searchKey}` %>
 
       <% pageButtonStatus = (previousPage)? 'enabled' : 'disabled'%>
       <li class="page-item <%= pageButtonStatus %>">
-        <a class="page-link" href="/files?category=<%= category %>&page=<%= previousPage %>" tabindex="-1" aria-disabled="true">Previous</a>
+        <a class="page-link" href="<%= href %>&page=<%= previousPage %>" tabindex="-1" aria-disabled="true">Previous</a>
       </li>
 
       <li class="page-item">
-        <a class="page-link" href="/files?category=<%= category %>&page=<%= currentPage %>"><%= currentPage %></a>
+        <a class="page-link" href="<%= href %>&page=<%= currentPage %>"><%= currentPage %></a>
       </li>
 
       <% pageButtonStatus = (nextPage)? 'enabled' : 'disabled'%>
       <li class="page-item <%= pageButtonStatus %>">
-        <a class="page-link" href="/files?category=<%= category %>&page=<%= nextPage %>" tabindex="-1" aria-disabled="true">Next</a>
+        <a class="page-link" href="<%= href %>&page=<%= nextPage %>" tabindex="-1" aria-disabled="true">Next</a>
       </li>
-  </ul>
-
-   
+    </ul>
 
   </div>
   
