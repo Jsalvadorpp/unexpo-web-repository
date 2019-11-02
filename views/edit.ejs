@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include partials/head %> 
+</head>
+
+<body>
+    <% include partials/menu-navbar %>
+
+    <div class="container-fluid bg-3 text-center">    
+        <h3>Edit file: <%= file.title %></h3><br>
+    </div>
+
+    <div class='container'>
+
+      <form class="col-lg-4 offset-lg-4" action="/files/edit?id=<%= file.id%>&_method=PUT" method="POST">
+
+        <%- messages('partials/flash-messages', locals) %>
+
+        <div class='form-group'>
+          <label for="titleInput">File Title</label>
+          <input type='text' class='form-control' value='<%= file.title %>' name="title" id="titleInput">
+        </div>
+
+        <div class='form-group'>
+          <label for="descriptionInput">File Description</label>
+          <textarea class='form-control' name="description" id="descriptionInput"><%= file.description %></textarea>
+        </div>
+
+        <div class='form-group'>
+          <label for="categoryInput">Choose a Category</label>
+          <select class="form-control" id="categoryInput" name='category' value='Control'>
+            <option value='General'>General</option>
+            <option value='Computacion'>Computacion</option>
+            <option value='Comunicaciones'>Comunicaciones</option>
+            <option value='Control'>Control</option>
+          </select>
+        </div>
+
+        <br><button type="submit" class="btn btn-primary btn-block">Update</button>
+      </form>
+    
+    </div>
+
+    <% include partials/frontend-scripts %>
+    <script src="/javascripts/edit-selectOption.js" id ='selectOption-script' data-category='<%= file.category %>'></script>
+
+    <script>
+      //= script to view the name of the file on select
+      $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+      });
+    </script>
+</body>
+
+</html>

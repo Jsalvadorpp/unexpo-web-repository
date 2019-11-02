@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
+const { check, validationResult } = require('express-validator');
 const limitPerPage = 5;
 
 //= getting data from upload database
@@ -131,6 +132,86 @@ router.get('/download', (req,res,next) => {
       readstream.pipe(res);
     }); 
   });
+});
+
+//= edit page 
+router.get('/edit', (req,res) => {
+
+  const id = req.query.id;
+
+  files.findById(id).exec( (err,file) => {
+    if(!file) return res.status(404).json({message : 'data not found'});
+
+    res.render('edit',{file,page: `${file.title}`});
+  });
+});
+
+//= update file data
+router.put('/edit',[
+  //= check user input
+  check('title')
+    .not().isEmpty().withMessage('title is required'),
+  check('description')
+    .not().isEmpty().withMessage('description is required')
+  ],
+  //= handle request and response
+  (req,res) => {
+
+    const id = req.query.id;
+    const updatedData = {
+      title : req.body.title,
+      description : req.body.description,
+      category : req.body.category
+    };
+
+    const errors = validationResult(req);
+    //= check errors
+    if (!errors.isEmpty()) {
+
+      errors.array().forEach( error => {
+        req.flash('danger',error.msg);
+      });
+      res.redirect(`edit?id=${id}`);
+  
+    //= if no errors then update data
+    }else{
+
+      files.findById(id).exec( (err,file) => {
+        if(!file) return res.status(404).json({message : 'data not found'});
+
+        //= check if there's a file with the updated title in Db
+        files.findOne({title: updatedData.title},(err,doc) => {
+
+          file.title = updatedData.title;
+          file.description = updatedData.description;
+          file.category = updatedData.category;
+          
+          if(doc){
+
+            //= the found file is the same file that is being edited
+            if(doc._id == id){
+              //= save updated data
+              file.save( (err,updateFile) => {
+                req.flash('success','file updated!');
+                res.render('view',{file,page: `${file.title}`});
+              });
+
+            //= there's already a title with the new information in the Db
+            }else{
+              req.flash('danger','title is already in use');
+              res.redirect(`edit?id=${id}`);
+            }
+            
+          }else{
+            //= save updated data
+            file.save( (err,updateFile) => {
+              req.flash('success','file updated!');
+              res.render('view',{file,page: `${file.title}`});
+            });
+          }
+        });
+      });
+    }
 });
 
 //= pagination function

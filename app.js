@@ -8,6 +8,7 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 const database = require('./config/databaseConfig');
+const methodOverride = require('method-override')
 
 //= passport config 
 require('./config/passport-config')(passport);
@@ -62,6 +63,8 @@ app.use( (req,res,next) => {
   res.locals.user = req.user;
   next();
 });
+//= middleware for method Override
+app.use(methodOverride('_method'))
 
 //= use routes
 app.use('/', homepageRouter);
