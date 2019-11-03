@@ -12,6 +12,7 @@
     
     <hr>
     <div class="col-md-12">
+
         <h1>Title: <%= file.title %></h1>
         <p class="card-subtitle mb-2 text-muted">Uploaded By: <%= file.createdBy %></p>
         <p><%= file.description %></p>
@@ -19,6 +20,12 @@
         <h4 class="badge badge-primary">Size: <%= Math.round(file.size/Math.pow(10,6)) %> mb</h4><br>
         <a href="/files/download?id=<%= file.id%>" class="btn btn-success">Download File</a>
         <a href="/files/edit?id=<%= file.id%>" class="btn btn-primary">Edit File</a>
+        
+        <form method="POST" action='/files/delete?id=<%= file.id%>&_method=DELETE' 
+          onsubmit="return confirm('Do you really want to delete this file?');">
+          <br><button type='submit' class="btn btn-danger">Delete File</button>
+        </form>
+
     </div><hr>
 
   </div>

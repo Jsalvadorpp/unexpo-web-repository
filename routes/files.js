@@ -214,6 +214,29 @@ router.put('/edit',[
     }
 });
 
+//= delete file
+router.delete('/delete',(req,res)=>{
+
+  const id = req.query.id;
+
+  files.findById(id).exec( (err,data) => {
+    if(!data) return res.status(404).json({message : 'data not found'});
+
+    const fileTitle = data.title;
+
+    //= remove file
+    gfs.remove({_id: data.fileId , root: 'uploads'});
+
+    //= remove file data
+    files.findByIdAndRemove(id).exec( (err) => {
+      if(err) return res.status(404).json({message : 'unknow error'});
+
+      req.flash('success',`file "${fileTitle}" deleted`);
+      res.render('homepage', {page: 'home'});
+    });
+  });
+});
+
 //= pagination function
 function pagination(req,res,searchData){
 
