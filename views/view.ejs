@@ -20,8 +20,8 @@
         <h4 class="badge badge-primary">Size: <%= Math.round(file.size/Math.pow(10,6)) %> mb</h4><br>
         <a href="/files/download?id=<%= file.id%>" class="btn btn-success">Download File</a>
 
-        <% if(userIsLogged && user.username == file.createdBy){ %>
-
+        <% if((userIsLogged && user.username == file.createdBy) || (userIsLogged && user.role == 'admin')){ %>
+  
           <a href="/files/edit?id=<%= file.id%>" class="btn btn-primary">Edit File</a>
           <form method="POST" action='/files/delete?id=<%= file.id%>&_method=DELETE' 
             onsubmit="return confirm('Do you really want to delete this file?');">
