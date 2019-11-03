@@ -90,16 +90,9 @@ router.post('/register', [
     //= go back to the login page
     req.flash('success','now you can login');
     res.render('login', {page: 'login'});
-
   }
-
 });
-
-
-
-
 //==============================
-
 //= user/login route
 router.get('/login', function(req, res) {
 
