@@ -3,6 +3,7 @@ var router = express.Router();
 const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
 const { check, validationResult } = require('express-validator');
+const userAuth = require('../config/userAuth');
 const limitPerPage = 5;
 
 //= getting data from upload database
@@ -135,7 +136,7 @@ router.get('/download', (req,res,next) => {
 });
 
 //= edit page 
-router.get('/edit', (req,res) => {
+router.get('/edit', userAuth , (req,res) => {
 
   const id = req.query.id;
 
@@ -147,7 +148,7 @@ router.get('/edit', (req,res) => {
 });
 
 //= update file data
-router.put('/edit',[
+router.put('/edit', userAuth ,[
   //= check user input
   check('title')
     .not().isEmpty().withMessage('title is required'),
@@ -215,7 +216,7 @@ router.put('/edit',[
 });
 
 //= delete file
-router.delete('/delete',(req,res)=>{
+router.delete('/delete', userAuth ,(req,res)=>{
 
   const id = req.query.id;
 
