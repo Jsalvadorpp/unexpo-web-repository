@@ -19,10 +19,6 @@ conn.once('open', () => {
 //= view all files by category
 router.get('/', (req, res, next) => {
 
-  console.log("*****************************************************");
-  console.log(`*********  URI = ${process.env.MONGODB_URI}  ********`);
-  console.log("*****************************************************");
-
   const category = req.query.category || 'general';
   //= page starts with index 0
   const page = parseInt(req.query.page || '1');
@@ -61,7 +57,6 @@ router.get('/viewFile', (req,res,next) => {
 
     res.render('view',{file,page: `${file.title}`});
   });
-
 });
 
 //= view all files using the search box
