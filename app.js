@@ -27,7 +27,7 @@ db.once('open', function() {
 
 //= set routes
 var homepageRouter = require('./routes/homepage');
-var usersRouter = require('./routes/users');
+var authRouter = require('./routes/auth');
 var uploadRouter = require('./routes/upload');
 var filesRouter = require('./routes/files');
 
@@ -68,7 +68,7 @@ app.use(methodOverride('_method'))
 
 //= use routes
 app.use('/', homepageRouter);
-app.use('/user', usersRouter);
+app.use('/auth', authRouter);
 app.use('/upload',uploadRouter);
 app.use('/files',filesRouter);
 

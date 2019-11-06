@@ -1,38 +1,44 @@
-const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcryptjs');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+require('dotenv').config()
 
 //= getting data from users database
 var users = require('../models/users');
 
 module.exports = function(passport){
-    
-    passport.use(new LocalStrategy(
-        { usernameField: 'email'},
-        (email,password,done) => {
-            //= match user
-            users.findOne({ email: email }, function (err, user) {
-                if (err) console.log(err);
 
-                //= if email not found
-                if (!user) {
-                  return done(null, false, { type: 'danger', message: 'you are not registered' });
-                }
+    passport.use(new GoogleStrategy({
+        clientID: process.env.GOOGLE_clientID,
+        clientSecret: process.env.GOOGLE_clientSecret,
+        callbackURL: process.env.GOOGLE_callbackURL
+      },
+      function(accessToken, refreshToken, profile, done) {
 
-                //= if email found
-                //= match password
-                bcrypt.compare(password,user.password, (err,isMatch) => {
-                    if (err) console.log(err);
+        users.findOne({googleId : profile.id}, (err,user) => {
+            
+            if(user){
+               return done(null,user);
+            }else{
+                //= build username from the profile data
+                const name = profile.name.givenName.split(" ");
+                const lastName = profile.name.familyName.split(" ");
+                const username = name[1] + ' ' + lastName[0];
 
-                    if(isMatch){
-                        return done(null, user);
-                    }else{
-                        return done(null, false, { type: 'danger', message: 'invalid password' });
-                    }
-                }); 
-            });
-        }
+                //= create new user
+                const newProfile = new users({
+                    username: username,
+                    email: profile.emails[0].value,
+                    googleId: profile.id
+                });
+
+                newProfile.save( (err,savedUser) => {
+                    if (err)  return console.error(err);
+                    return done(null, savedUser);
+                });
+            }
+        });
+      }
     ));
-    
+
     //= passport session
     passport.serializeUser( (user, done) => {
         done(null, user._id);
@@ -42,7 +48,6 @@ module.exports = function(passport){
         users.findById(_id, (err, user) => {
           done(err, user);
         });
-    });
-
+    });   
 }
 
