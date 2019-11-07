@@ -13,22 +13,12 @@
 
     <div class='container'>
 
-      <form class="col-lg-4 offset-lg-4" action="/user/login" method="POST">
+      <form class="col-lg-4 offset-lg-4">
 
         <%- messages('partials/flash-messages', locals) %>
+        <a href= '/auth/login/student' class="btn btn-info btn-block">Login as Student</a>
+        <a href='/auth/login/professor' class="btn btn-secondary btn-block">Login as Professor</a>
 
-          <div class="form-group">
-            <label for="emailInput">Email</label>
-            <input type="email" class="form-control"aria-describedby="emailHelp" placeholder="Enter email" name="email" id='emailInput'>
-            <small class="form-text text-muted">We'll never share your email with anyone else.</small>
-          </div>
-
-          <div class="form-group">
-            <label for="passwordInput1">Password</label>
-            <input type="password" class="form-control" placeholder="Password" name='password' id="passwordInput1">
-          </div>
-    
-          <button type="submit" class="btn btn-primary">Login</button>
       </form>
     
     </div>

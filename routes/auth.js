@@ -5,14 +5,30 @@ const passport = require('passport');
 //= getting data from users database
 var users = require('../models/users');
 
-//= auth/login route
-router.get('/login',
-  passport.authenticate('google',{ 
+//= dispaly login page
+router.get('/login', (req,res) => {
+  res.render('login',{page: 'login'})
+});
+
+//= login for students
+router.get('/login/student',
+  passport.authenticate('google',{
+    hd: "estudiante.unexpo.edu.ve",
+    prompt: 'select_account',
     scope: ['email','profile'],
-    hd: "estudiante.unexpo.edu.ve"
   })
 );
 
+//= login for professors
+router.get('/login/professor',
+  passport.authenticate('google',{ 
+    hd: "unexpo.edu.ve",
+    prompt: 'select_account',
+    scope: ['email','profile'], 
+  })
+);
+
+//= redirect after login
 router.get('/google/redirect', 
     passport.authenticate( 'google', { 
       successRedirect: '/dashboard',

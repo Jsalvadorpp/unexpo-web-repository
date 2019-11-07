@@ -15,8 +15,11 @@ module.exports = function(passport){
 
         users.findOne({googleId : profile.id}, (err,user) => {
             
+            //= if user is saved in the Db then login 
             if(user){
                return done(null,user);
+               
+            //= if no user is found then create a new entry in the Db
             }else{
                 //= build username from the profile data
                 const name = profile.name.givenName.split(" ");
@@ -30,6 +33,7 @@ module.exports = function(passport){
                     googleId: profile.id
                 });
 
+                //= save user
                 newProfile.save( (err,savedUser) => {
                     if (err)  return console.error(err);
                     return done(null, savedUser);
