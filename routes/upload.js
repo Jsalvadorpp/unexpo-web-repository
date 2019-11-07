@@ -117,15 +117,16 @@ router.post('/', (req,res) => {
           }else{
             //= insert file data into database (file not included - the file saves in uploads.files)
             const file = new uploads({
-            createdBy: req.user.username,
-            title: req.body.title,
-            filename: req.file.filename,
-            description: req.body.description,
-            category: req.body.category,
-            size: req.file.size,
-            mimetype: req.file.mimetype,
-            md5: req.file.md5,
-            fileId: req.file.id
+              createdBy: req.user.username,
+              userId: req.user.googleId,
+              title: req.body.title,
+              filename: req.file.filename,
+              description: req.body.description,
+              category: req.body.category,
+              size: req.file.size,
+              mimetype: req.file.mimetype,
+              md5: req.file.md5,
+              fileId: req.file.id
             });
 
             //= save file data
