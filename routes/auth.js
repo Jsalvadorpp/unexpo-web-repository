@@ -32,7 +32,7 @@ router.get('/login/professor',
 router.get('/google/redirect', 
     passport.authenticate( 'google', { 
       successRedirect: '/dashboard',
-      failureRedirect: '/home',
+      failureRedirect: '/',
       failureFlash: true 
 }));
 
