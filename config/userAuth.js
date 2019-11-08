@@ -8,8 +8,8 @@ module.exports = (req,res,next) => {
 
         files.findById(fileId).exec( (err,file) => {
             if(!file) return res.status(404).json({message : 'data not found'});
-          
-            if(req.user.googleId == file.userID || req.user.role == 'admin'){
+        
+            if(req.user.googleId == file.userId || req.user.role == 'admin'){
                 return next();
             }else{
                 req.flash('danger',`you don't have permission`);
