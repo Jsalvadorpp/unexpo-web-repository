@@ -9,6 +9,9 @@ const limitPerPage = 5;
 //= getting data from upload database
 var files = require('../models/uploads');
 
+//= getting tags from database
+var tagList = require('../models/tags');
+
 //= database instance and gfs config
 var gfs;
 const conn = mongoose.connection;
@@ -157,6 +160,9 @@ router.put('/edit', userAuth ,[
   //= handle request and response
   (req,res) => {
 
+    const tags = (req.body.tags == '')? null : (req.body.tags).split(',');
+    if(tags != null) addTags(tags);
+
     const id = req.query.id;
     const updatedData = {
       title : req.body.title,
@@ -279,6 +285,25 @@ function pagination(req,res,searchData){
 
         res.render('files',dataObtained);
       }
+}
+
+//= add tags to the database function
+function addTags(tags){
+
+  tags.forEach( tag => {
+
+    const newTag = new tagList({
+      name: tag
+    });
+
+    tagList.findOne({name: tag},(err,doc)=>{
+      if(!doc){
+        newTag.save( (err,saveTag)=> {if(err) console.log(err)});
+      }
+    });
+
+  });
+
 }
 
 module.exports = router;

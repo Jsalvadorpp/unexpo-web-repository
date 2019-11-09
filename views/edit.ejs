@@ -13,7 +13,7 @@
 
     <div class='container'>
 
-      <form class="col-lg-4 offset-lg-4" action="/files/edit?id=<%= file.id%>&_method=PUT" method="POST">
+      <form class="col-lg-6 offset-lg-3" action="/files/edit?id=<%= file.id%>&_method=PUT" method="POST">
 
         <%- messages('partials/flash-messages', locals) %>
 
@@ -37,12 +37,19 @@
           </select>
         </div>
 
+        <div class='form-group'>
+          <input type="text" name='tags' id='tagsInput'>
+          <small class="form-text text-muted">separate tags with commas</small>
+        </div>
+
         <br><button type="submit" class="btn btn-primary btn-block">Update</button>
       </form>
     
     </div>
 
+
     <% include partials/frontend-scripts %>
+    <script src='/javascripts/tagsinput.js'></script>
     <script src="/javascripts/edit-selectOption.js" id ='selectOption-script' data-category='<%= file.category %>'></script>
 
     <script>
