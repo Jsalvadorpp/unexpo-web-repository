@@ -126,6 +126,7 @@ router.post('/', (req,res) => {
               size: req.file.size,
               mimetype: req.file.mimetype,
               md5: req.file.md5,
+              tags: (req.body.tags == '')? null : (req.body.tags).split(','),
               fileId: req.file.id
             });
 

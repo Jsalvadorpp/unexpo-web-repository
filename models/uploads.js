@@ -40,6 +40,10 @@ const UploadSchema = new Schema({
         type: String,
         required: true
     },
+    tags:{
+        type: [String],
+        default: null
+    },
     fileId: {
         type: ObjectId,
         required: true

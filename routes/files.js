@@ -161,7 +161,6 @@ router.put('/edit', userAuth ,[
   (req,res) => {
 
     const tags = (req.body.tags == '')? null : (req.body.tags).split(',');
-    if(tags != null) addTags(tags);
 
     const id = req.query.id;
     const updatedData = {
@@ -169,6 +168,13 @@ router.put('/edit', userAuth ,[
       description : req.body.description,
       category : req.body.category
     };
+
+    if(tags != null){
+      addTags(tags);
+      updatedData.tags = tags;
+    }else{
+      updatedData.tags = null;
+    }
 
     const errors = validationResult(req);
     //= check errors
@@ -191,6 +197,7 @@ router.put('/edit', userAuth ,[
           file.title = updatedData.title;
           file.description = updatedData.description;
           file.category = updatedData.category;
+          file.tags = updatedData.tags;
           
           if(doc){
 

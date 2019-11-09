@@ -43,6 +43,12 @@
           <small class="form-text text-muted">File not greater than 100mb.</small>
         </div><br>
 
+        <br><div class='form-group'>
+          <label for="tagsInput">Add Tags (optional)</label>
+          <input type="text" name='tags' id='tagsInput'>
+          <small class="form-text text-muted">separate tags with commas</small>
+        </div>
+
        
 
         <br><button type="submit" class="btn btn-primary btn-block">Upload</button>
@@ -52,6 +58,7 @@
 
     
     <% include partials/frontend-scripts %>
+    <script src='/javascripts/tagsinput.js'></script>
 
     <script>
       //= script to view the name of the file on select
