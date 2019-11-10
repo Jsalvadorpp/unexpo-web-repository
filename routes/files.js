@@ -3,9 +3,9 @@ var router = express.Router();
 const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
 const { check, validationResult } = require('express-validator');
-const pagination = require('../config/pagination');
 const userAuth = require('../config/userAuth');
-const limitPerPage = pagination.limitPerPage;
+const pagination = require('../config/pagination').pagination;
+const limitPerPage = require('../config/pagination').limitPerPage;
 
 //= getting data from upload database
 var files = require('../models/uploads');

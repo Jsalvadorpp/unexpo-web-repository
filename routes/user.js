@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const pagination = require('../config/pagination');
-const limitPerPage = pagination.limitPerPage;
+const pagination = require('../config/pagination').pagination;
+const limitPerPage = require('../config/pagination').limitPerPage;
 
 //= getting data from upload database
 var files = require('../models/uploads');
@@ -15,6 +15,7 @@ router.get('/files', (req,res)=>{
     const page = parseInt(req.query.page || '1');
     const url = `/user/files?id=${userId}`
     const search = {userId};
+    console.log(limitPerPage);
 
     files.countDocuments(search,(err,count)=>{
         files.find(search)

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const pagination = require('../config/pagination');
-const limitPerPage = pagination.limitPerPage;
+const pagination = require('../config/pagination').pagination;
+const limitPerPage = require('../config/pagination').limitPerPage;
 
 //= getting tags from database
 var tags = require('../models/tags');

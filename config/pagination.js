@@ -1,5 +1,4 @@
 const limitPerPage = 5;
-module.exports.limitPerPage = limitPerPage;
 
 function pagination(req,res,searchData){
 
@@ -44,4 +43,5 @@ function pagination(req,res,searchData){
       }
 }
 
-module.exports = pagination;
+module.exports.pagination = pagination;
+module.exports.limitPerPage = limitPerPage;
