@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const limitPerPage = 5;
+const pagination = require('../config/pagination');
+const limitPerPage = pagination.limitPerPage;
 
 //= getting data from upload database
 var files = require('../models/uploads');
@@ -12,6 +13,7 @@ router.get('/files', (req,res)=>{
 
     const userId = req.query.id;
     const page = parseInt(req.query.page || '1');
+    const url = `/user/files?id=${userId}`
     const search = {userId};
 
     files.countDocuments(search,(err,count)=>{
@@ -21,15 +23,14 @@ router.get('/files', (req,res)=>{
         .sort({_id: -1})
         .exec((err,docs)=>{
             if(docs){
-                console.log(docs);
                 users.findOne({googleId: userId},(err,userFound)=>{
 
                     if(userFound){
                         const searchData = {
                             page,
+                            resultsTitle: `${userFound.username} files`,
                             count,
-                            category: null,
-                            query: userFound.username,
+                            url,
                             err,
                             docs
                         }
@@ -44,49 +45,5 @@ router.get('/files', (req,res)=>{
         })
     });
 });
-
-//= pagination function
-function pagination(req,res,searchData){
-
-    const count = searchData.count;
-    const page = searchData.page;
-    const docs = searchData.docs;
-    const category = searchData.category;
-    const query = searchData.query+' files';
-        
-      if(searchData.err){
-        return console.log(err); 
-  
-      }else if(count == 0){
-  
-        var response = { message : 'data not found'};
-        return res.status(404).json(response);
-  
-      }else{
-  
-          var nextPage = page+1;
-          var previousPage = page-1;
-          const totalPages = Math.ceil(count/limitPerPage);
-  
-          if(page>totalPages) res.status(404).json({message : 'data not found'});
-      
-          if(page==1) previousPage = null;
-          if(page==totalPages) nextPage = null; 
-            
-          let dataObtained = {
-            files : docs,
-            category: category,
-            searchKey: query,
-            currentPage: page,
-            totalPages : totalPages,
-            totalFiles: count,
-            nextPage: nextPage,
-            previousPage: previousPage,
-            page: 'files'
-          }
-  
-          res.render('files',dataObtained);
-        }
-  }
 
 module.exports = router;

@@ -14,11 +14,7 @@
     <% if (files) { %>
 
       <br><div class="text-center">
-        <% if(category){ %>
-          <h2 >Category: <%= category %></h2>
-        <% }else{ %>
-          <h2>"<%= searchKey %>" Results:</h2>
-        <% } %>
+        <h2><%= resultsTitle %></h2>
         <p class="card-subtitle mb-2 text-muted">Page <%=currentPage%> of <%=totalPages%> </p>
       </div>
     
@@ -46,7 +42,7 @@
     <ul class="pagination justify-content-center">
 
       <% var pageButtonStatus = '' %>
-      <% var href = (category)? `/files?category=${category}` : `/files/search?q=${searchKey}` %>
+      <% var href = url %>
 
       <% pageButtonStatus = (previousPage)? 'enabled' : 'disabled'%>
       <li class="page-item <%= pageButtonStatus %>">

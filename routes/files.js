@@ -3,8 +3,9 @@ var router = express.Router();
 const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
 const { check, validationResult } = require('express-validator');
+const pagination = require('../config/pagination');
 const userAuth = require('../config/userAuth');
-const limitPerPage = 5;
+const limitPerPage = pagination.limitPerPage;
 
 //= getting data from upload database
 var files = require('../models/uploads');
@@ -25,6 +26,8 @@ router.get('/', (req, res, next) => {
   const category = req.query.category || 'general';
   //= page starts with index 0
   const page = parseInt(req.query.page || '1');
+  const url = `/files?category=${category}`;
+  const resultsTitle = `Category: ${category}`
   const searchOption = { category };
   
   files.countDocuments(searchOption,(err,count) => {
@@ -35,10 +38,10 @@ router.get('/', (req, res, next) => {
     .exec( (err,docs)=>{
 
       const searchData = {
+        resultsTitle,
         page,
         count,
-        category,
-        query: null,
+        url,
         err,
         docs
       }
@@ -67,6 +70,8 @@ router.get('/search',(req,res) => {
 
   const page = parseInt(req.query.page || '1');
   const query = req.query.q;
+  const url = `/files/search?q=${query}`
+  const resultsTitle = `"${query}" Results:`
   var regex = new RegExp(query, "i");
 
   const searchOptions = {
@@ -85,9 +90,9 @@ router.get('/search',(req,res) => {
 
       const searchData = {
         page,
+        resultsTitle,
         count,
-        category: null,
-        query,
+        url,
         err,
         docs
       }
@@ -249,50 +254,6 @@ router.delete('/delete', userAuth ,(req,res)=>{
     });
   });
 });
-
-//= pagination function
-function pagination(req,res,searchData){
-
-  const count = searchData.count;
-  const page = searchData.page;
-  const docs = searchData.docs;
-  const category = searchData.category;
-  const query = searchData.query;
-      
-    if(searchData.err){
-      return console.log(err); 
-
-    }else if(count == 0){
-
-      var response = { message : 'data not found'};
-      return res.status(404).json(response);
-
-    }else{
-
-        var nextPage = page+1;
-        var previousPage = page-1;
-        const totalPages = Math.ceil(count/limitPerPage);
-
-        if(page>totalPages) res.status(404).json({message : 'data not found'});
-    
-        if(page==1) previousPage = null;
-        if(page==totalPages) nextPage = null; 
-          
-        let dataObtained = {
-          files : docs,
-          category: category,
-          searchKey: query,
-          currentPage: page,
-          totalPages : totalPages,
-          totalFiles: count,
-          nextPage: nextPage,
-          previousPage: previousPage,
-          page: 'files'
-        }
-
-        res.render('files',dataObtained);
-      }
-}
 
 //= add tags to the database function
 function addTags(tags){
