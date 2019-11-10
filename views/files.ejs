@@ -32,7 +32,7 @@
                   <% if(file.tags!= null && file.tags.length > 0){%>
                     <div class='tags'>Tags: 
                       <% file.tags.forEach(tag => { %>
-                        <a href="#" class="badge badge-secondary"><%= tag %></a>
+                        <a href="/tags/files?tag=<%= tag %>" class="badge badge-secondary"><%= tag %></a>
                     <% }); %>
                     </div><br>
                   <% } %>
