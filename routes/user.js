@@ -15,7 +15,6 @@ router.get('/files', (req,res)=>{
     const page = parseInt(req.query.page || '1');
     const url = `/user/files?id=${userId}`
     const search = {userId};
-    console.log(limitPerPage);
 
     files.countDocuments(search,(err,count)=>{
         files.find(search)
