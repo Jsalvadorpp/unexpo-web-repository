@@ -14,7 +14,7 @@
     <div class="col-md-12">
 
         <h1>Title: <%= file.title %></h1>
-        <p class="card-subtitle mb-2 text-muted">Uploaded By: <%= file.createdBy %></p>
+        <p class="card-subtitle mb-2 text-muted">Uploaded By: <a href="/user/files?id=<%= file.userId %>"><%= file.createdBy %></a></p>
         <p><%= file.description %></p>
         <h4 class="badge badge-primary">Extension: <%= file.mimetype %></h4><br>
         <h4 class="badge badge-primary">Size: <%= Math.round(file.size/Math.pow(10,6)) %> mb</h4><br>
