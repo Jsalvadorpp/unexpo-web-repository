@@ -29,9 +29,12 @@
                 </form>
                 
                 <% if(!userIsLogged){ %>
-                    <li class="nav-item" id="login"><a class="nav-link" href="/auth/login">Login</a></li>
+                     <li class="nav-item" id="login"><a class="nav-link" href="/auth/login">Login</a></li>
                 <% }else{ %>
+                    
                     <li class="nav-item" id="logout"><a class="nav-link" href="/auth/logout">Logout</a></li>
+                    <li class='nav-item' id='profile'><a class="nav-link" href="/files/profile">Profile</a></li>
+                    
                 <% } %>
         </ul>
 
