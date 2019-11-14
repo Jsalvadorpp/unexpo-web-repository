@@ -25,6 +25,7 @@
                   <h5>Title: <%= file.title %></h5>
                   <p class="card-subtitle mb-2 text-muted">Uploaded By: <a href="/user/files?id=<%= file.userId %>"><%= file.createdBy %></a></p>
                   <p><%= file.description %></p>
+                  
                   <% if(file.tags!= null && file.tags.length > 0){%>
                     <div class='tags'>Tags: 
                       <% file.tags.forEach(tag => { %>

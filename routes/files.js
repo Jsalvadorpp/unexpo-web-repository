@@ -260,6 +260,7 @@ router.delete('/delete', userAuth ,(req,res)=>{
 
   const page = parseInt(req.query.page || '1');
   const url = `/files/profile?id=${req.user.googleId}`
+
   files.countDocuments({userId:req.user.googleId}, (err,count) => { 
     files.find({userId: req.user.googleId})
     .limit(limitPerPage)
