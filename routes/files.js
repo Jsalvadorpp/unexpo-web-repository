@@ -256,36 +256,19 @@ router.delete('/delete', userAuth ,(req,res)=>{
   });
 });
 
-
-+router.get('/profile', ensureAuth, (req,res) => { 
+//= user profile
+router.get('/profile', ensureAuth, (req,res) => { 
 
   const page = parseInt(req.query.page || '1');
   const url = `/files/profile?id=${req.user.googleId}`
-
   files.countDocuments({userId:req.user.googleId}, (err,count) => { 
-
-+router.get('/profile',(req,res) => {
-
-  const page = parseInt(req.query.page || '1');
-  const query = req.query.q;
-  var regex = new RegExp(query, "i");
-
-  const searchOptions = {
-    $or: [
-      {title: {$regex: regex}},
-      {description: {$regex: regex}}
-         ]
-  };
-  files.countDocuments(searchOptions, (err,count) => {
-
     files.find({userId: req.user.googleId})
     .limit(limitPerPage)
     .skip((page-1)*limitPerPage)
     .sort({_id: -1})
-
     .exec( (err,docs)=>{  
-    
-        if (docs) {
+
+        if (docs){
           const searchData = {
             page,
             count,
@@ -293,28 +276,13 @@ router.delete('/delete', userAuth ,(req,res)=>{
             err,
             docs
           }
-      pagination(req,res,searchData);
-         }
-      else
-      res.status(404).json({message : 'data not found'});
-    });
-  }
-  );
+          pagination(req,res,searchData);
 
-    .exec( (err,docs)=>{
-
-      const searchData = {
-        page,
-        count,
-        category: null,
-        query,
-        err,
-        docs
-      }
-      pagination(req,res,searchData);
+        }else{
+          res.status(404).json({message : 'data not found'});
+        }
     });
   });
-
 });
 
 //= add tags to the database function
@@ -331,9 +299,7 @@ function addTags(tags){
         newTag.save( (err,saveTag)=> {if(err) console.log(err)});
       }
     });
-
   });
-
 }
 
 module.exports = router;
