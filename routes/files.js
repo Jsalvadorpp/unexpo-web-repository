@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
+const ensureAuth = require('../config/ensureAuth');
 const Grid = require('gridfs-stream');
 const { check, validationResult } = require('express-validator');
 const userAuth = require('../config/userAuth');
@@ -255,6 +256,14 @@ router.delete('/delete', userAuth ,(req,res)=>{
   });
 });
 
+
++router.get('/profile', ensureAuth, (req,res) => { 
+
+  const page = parseInt(req.query.page || '1');
+  const url = `/files/profile?id=${req.user.googleId}`
+
+  files.countDocuments({userId:req.user.googleId}, (err,count) => { 
+
 +router.get('/profile',(req,res) => {
 
   const page = parseInt(req.query.page || '1');
@@ -268,10 +277,30 @@ router.delete('/delete', userAuth ,(req,res)=>{
          ]
   };
   files.countDocuments(searchOptions, (err,count) => {
+
     files.find({userId: req.user.googleId})
     .limit(limitPerPage)
     .skip((page-1)*limitPerPage)
     .sort({_id: -1})
+
+    .exec( (err,docs)=>{  
+    
+        if (docs) {
+          const searchData = {
+            page,
+            count,
+            url,
+            err,
+            docs
+          }
+      pagination(req,res,searchData);
+         }
+      else
+      res.status(404).json({message : 'data not found'});
+    });
+  }
+  );
+
     .exec( (err,docs)=>{
 
       const searchData = {
@@ -285,6 +314,7 @@ router.delete('/delete', userAuth ,(req,res)=>{
       pagination(req,res,searchData);
     });
   });
+
 });
 
 //= add tags to the database function
