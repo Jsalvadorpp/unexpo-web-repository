@@ -156,19 +156,9 @@
             
         </form>
           
-       <!--
-        <div class="row">     
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" id="CustomFileLang" lang="es" name='file'>
-            <label class="custom-file-label" for="customFileLang">Selecciona el archivo</label>
-            <small class="form-text text-muted">El tamaño no puede ser mayor a 100MB.</small>
-          </div><br>
-        </div>
-        -->
         <div class="row">  
         </div>
-            
-        
+         
          <div class="file-loading">
                 <input id="archivo_entrante" name="archivo_entrante[]" type="file" class="file" data-browse-on-zone-click="true">
         </div> 
@@ -285,7 +275,14 @@
     <!--$ Scripts -->
     <!--$ -------------------------------------------------- -->
     <script src="/javascripts/scrollreveal.min.js" type="text/javascript" ></script>
-   
+    <script>
+        //= script to view the name of the file on select
+        $("#archivo_entrante").on("change", function() {
+          var fileName = $(this).val().split("\\").pop();
+          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+      </script>
+
    <script>
         ScrollReveal().reveal('#welcomeText .container', {
             origin: 'right',
