@@ -1,0 +1,55 @@
+.nav-link{
+    font-size: 18px;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color:  #1d963b;
+}
+.dropdown-item:hover {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #1d963b;
+}
+#welcomeText{
+    color: white;
+    background: url('/images/background.jpg') center center fixed;
+    background-size: cover;
+    padding: 10% 0;
+}
+.carousel-indicators li {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: #40474e7a;
+    border: 3px solid #1d963b;
+}
+.carousel-indicators .active{
+    background-color: black;
+}
+.carousel-control-prev,
+.carousel-control-next{
+    font-size: 40px;
+    color: black;
+
+}
+.carousel-control-next{
+    left: 94%;
+}
+.carousel-control-prev{
+    left: -9%;
+}
+.carousel-control-prev:hover,
+.carousel-control-next:hover,
+.carousel-control-prev:focus,
+.carousel-control-next:focus{
+    color: black;
+    opacity: 1;
+}
+.jumbotron{
+    padding: 32px 32px;
+}
+#footer-copyright{
+    background-color: black;
+}
+footer p{
+    margin-bottom: 5px;
+}
