@@ -11,7 +11,7 @@
     <!-- bootstrap 4.x is supported. You can also use the bootstrap css 3.3.x versions -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.6/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> 
 <link href="/themes/explorer-fas/theme.css" rel="stylesheet">
  
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -40,6 +40,7 @@
     <!--@ font awesome icons -->
     <script src='/javascripts/all.min.js'></script>
     <script src='/themes/fas/theme.js'></script>
+    
 
 </head>
 
@@ -155,17 +156,20 @@
         </div>
          
          <div class="file-loading">
-                <input id="file" name="file[]" type="file" class="file" data-browse-on-zone-click="true">
-        </div> 
+            <input id="file" name="file" type="file" class="file" data-browse-on-zone-click="true">
+         </div> 
 
         <script>
         $("#file").fileinput({
             theme: "fas",
+            showUploadStats: true,
+
             //uploadUrl: "/upload",
+            //layoutTemplates: {progress: percent},
             uploadAsync: false,
             dropZoneTitle: "Arrastra un archivo",
             dropZoneClickTitle: "\r\n(también puedes hacer click)",
-            maxFileSize: 50000,
+            maxFileSize: 100000,
             browseClass: "btn btn-success",
             browseLabel: "Seleccionar",
             browseTitle: "Arrastra y arroja tu archivo o haz click",

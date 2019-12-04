@@ -46,8 +46,8 @@ const uploadValidation = (req,file,cb) => {
   var errors = [];
 
   //= check form inputs
-  if(typeof req.body.title === 'undefined' || req.body.title == '')  errors.push('title required');
-  if(typeof req.body.description === 'undefined' || req.body.description == '')  errors.push('description required');
+  if(typeof req.body.title === 'undefined' || req.body.title == '')  errors.push('Se requiere el titulo');
+  if(typeof req.body.description === 'undefined' || req.body.description == '')  errors.push('Se requiere la descripción');
 
   //= check if there's errors
   if(errors.length > 0){
@@ -62,7 +62,7 @@ const uploadValidation = (req,file,cb) => {
     //= check if the title is already saved in Db
     uploads.findOne( {title: req.body.title}, (err,file) => {
       if(file){
-        req.flash('danger','use another title');
+        req.flash('danger','Usa otro título');
         cb('error uploading');
       }else{
         //= upload file 
@@ -90,6 +90,8 @@ router.post('/', (req,res) => {
     if(err) {
       
       if(err.message == 'File too large') req.flash('danger',err.message);
+      //console.log('Estamos aqui compadre');
+      //console.log(err);
       res.redirect('upload');
     
     //= file uploaded
@@ -98,7 +100,7 @@ router.post('/', (req,res) => {
       //= if no file was submitted then return to upload page
       if(typeof req.file === 'undefined'){
 
-        req.flash('danger','file required');
+        req.flash('danger','Se necesita un archivo para subir');
         res.redirect('upload');
       
       //= trying to create file data 
@@ -108,7 +110,7 @@ router.post('/', (req,res) => {
           //= if there's a file then delete the file that was uploaded and return the upload page
           if(file){
 
-            req.flash('danger','file is already into database , please upload another file');
+            req.flash('danger','El archivo ya está en la base de datos, por favor sube otro archivo');
             //= remove duplicate file
             gfs.remove({_id: req.file.id , root: 'uploads'});
             res.redirect('upload');
@@ -134,8 +136,8 @@ router.post('/', (req,res) => {
             file.save( (err,savedFile) => {
               if (err)  return console.error(err);
             });
-            
-            req.flash('success','file uploaded!');
+            console.log(file.category);
+            req.flash('success','Archivo subido!');
             res.render('homepage',{page: 'home'});
           }
         });
