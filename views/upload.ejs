@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/stylesheets/bootstrap-4-navbar.min.css">
-    <link rel="stylesheet" href="/stylesheets/styles.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
     
     <!-- bootstrap 4.x is supported. You can also use the bootstrap css 3.3.x versions -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -35,7 +35,7 @@
 <!-- optionally if you need a theme like font awesome theme you can include it as mentioned below -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.6/themes/fa/theme.js"></script>
 <!-- optionally if you need translation for your language then include  locale file as mentioned below -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.6/js/locales/(lang).js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.6/js/locales/(lang).js"></script> -->
 
     <!--@ font awesome icons -->
     <script src='/javascripts/all.min.js'></script>
@@ -92,16 +92,11 @@
     <!--$ -------------------------------------------------- -->
     <div class='container'>
 
-        <div class='jumbotron text-center'>
-            <h1>Publicar</h2>
-            <hr>
-            <p>Al momento de colaborar con el repositorio trata de que la información del archivo
-                sea lo mas precisa y concisa posible, para hacer más facil que otros usuarios aprovechen esta herramienta
-            </p>
-        </div>
+
     
 <!--<form class="col-lg-4 offset-lg-4" action="/upload" method="POST" enctype="multipart/form-data"> -->
     <form  action="/upload" method="POST" enctype="multipart/form-data">
+        <%- messages('partials/flash-messages', locals) %>
         <div class="input-group mb-3">
             <div class="input-group-prepend"> <!-- Campo de titulo -->
               <span class="input-group-text" id="inputGroup-sizing-default">Título</span>
@@ -160,11 +155,11 @@
         </div>
          
          <div class="file-loading">
-                <input id="archivo_entrante" name="archivo_entrante[]" type="file" class="file" data-browse-on-zone-click="true">
+                <input id="file" name="file[]" type="file" class="file" data-browse-on-zone-click="true">
         </div> 
 
         <script>
-        $("#archivo_entrante").fileinput({
+        $("#file").fileinput({
             theme: "fas",
             //uploadUrl: "/upload",
             uploadAsync: false,
