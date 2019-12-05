@@ -5,7 +5,44 @@
 </head>
 
 <body>
-  <% include partials/menu-navbar %>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+
+    <a class="navbar-brand" href="#"><img src='/images/Unexpo-Logo2.png' width="55px" height="45px">Unexpo</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-toggler">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id='navbar-toggler'>
+        <ul class='navbar-nav nav-pills'>
+            <li><a href='#' class='nav-link'><i class="fa fa-home mx-1" style="font-size: 20px"></i>Inicio</a></li>
+    
+            
+         </ul>
+
+        <ul class='navbar-nav ml-auto nav-pills'></ul>
+
+            <li><a href="#" class="nav-link"><i class="fa fa-search mx-1" style="font-size: 20px"></i>Buscar</a></li>
+            <li><a href="#" class="nav-link"><i class="fas fa-sign-in-alt mx-1" style="font-size: 20px"></i>Entrar</a></li>
+        </ul>
+    </div>     
+</nav>
+<!--$ Welcome Text-->
+<!--$ -------------------------------------------------- -->
+
+<!-- <div id='welcomeText'>  <--! THIS IS THE BACKGROUND 
+
+</div> -->
+
+<div class='container'>
+  <h1 class="display-2 text-center"><strong>Perfil de <%=user.username %></strong> </h1>
+  <p class = "display-2 text-center">1337</p>                    
+  <p class="lead text-center"><strong>Contribuciones</strong></p>
+  <p class="lead text-center"><strong>Correo institucional: <%=user.email%></strong></p>
+
+  <!-- ><p class="lead"><strong>Al momento de colaborar con el repositorio trata de que la información del archivo
+      sea lo mas precisa y concisa posible, para hacer más facil que otros usuarios aprovechen esta herramienta </strong></p> -->
+</div>
 
   <div class="container-fluid bg-3 text-left">   
     <%- messages('partials/flash-messages', locals) %>
