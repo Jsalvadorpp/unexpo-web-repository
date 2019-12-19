@@ -168,8 +168,10 @@
             //layoutTemplates: {progress: percent},
             uploadAsync: false,
             dropZoneTitle: "Arrastra un archivo",
-            dropZoneClickTitle: "\r\n(también puedes hacer click)",
+            dropZoneClickTitle: "(también puedes hacer click)",
             maxFileSize: 100000,
+            maxFilePreviewSize: 100000,
+            allowedPreviewTypes: ['image','html','video','text','audio','gdocs','pdf'],
             browseClass: "btn btn-success",
             browseLabel: "Seleccionar",
             browseTitle: "Arrastra y arroja tu archivo o haz click",
@@ -178,6 +180,7 @@
             uploadLabel: "Subir",
             uploadTitle: "Sube el archivo seleccionado",
             initialCaption: "Selecciona el archivo que deseas publicar",
+            initialPreviewAsData: true, //???????
             previewFileIcon: '<i class="fas fa-file"></i>',
             preferIconicPreview: false, 
             previewFileIconSettings: { // configure your icon file extensions
@@ -220,8 +223,10 @@
                 'mp3': function(ext) {
                     return ext.match(/(mp3|wav)$/i);
                 },
+                
             }
         })
+        
         </script>
        
   
