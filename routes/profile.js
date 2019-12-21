@@ -22,31 +22,30 @@ conn.once('open', () => {
 });
 
 //= view all files by category
-router.get('/', (req, res, next) => {
-
-  const category = req.query.category || 'general';
-  //= page starts with index 0
+router.get('/', ensureAuth, (req,res) => { 
+  
   const page = parseInt(req.query.page || '1');
-  const url = `/files?category=${category}`;
-  const resultsTitle = `Category: ${category}`
-  const searchOption = { category };
-  files.countDocuments(searchOption,(err,count) => {
-    files.find(searchOption)
-    .limit(limitPerPage)
-    .skip((page-1)*limitPerPage)
-    .sort({_id: -1})
-    .exec( (err,docs)=>{
+  const url = `/profile?id=${req.user.googleId}`;
+  files.countDocuments({userId:req.user.googleId}, (err,count) => { 
+  files.find({userId: req.user.googleId})
+  .limit(limitPerPage)
+  .skip((page-1)*limitPerPage)
+  .sort({_id: -1})
+  .exec( (err,docs)=>{  
 
-      const searchData = {
-        resultsTitle,
-        page,
-        count,
-        url,
-        err,
-        docs
-      }
+        if (docs){
+          const searchData = {
+            page,
+            count,
+            url,
+            err,
+            docs
+          }
+          pagination(req,res,searchData);
 
-      pagination(req,res,searchData);
+        }else{
+          res.status(404).json({message : 'data not found'});
+        }
     });
   });
 });
@@ -65,42 +64,6 @@ router.get('/viewFile', (req,res,next) => {
   });
 });
 
-//= view all files using the search box
-router.get('/search',(req,res) => {
-
-  const page = parseInt(req.query.page || '1');
-  const query = req.query.q;
-  const url = `/files/search?q=${query}`
-  const resultsTitle = `"${query}" Results:`
-  var regex = new RegExp(query, "i");
-
-  const searchOptions = {
-    $or: [
-      {title: {$regex: regex}},
-      {description: {$regex: regex}}
-    ]
-  };
-
-  files.countDocuments(searchOptions, (err,count) => {
-    files.find(searchOptions)
-    .limit(limitPerPage)
-    .skip((page-1)*limitPerPage)
-    .sort({_id: -1})
-    .exec( (err,docs)=>{
-
-      const searchData = {
-        page,
-        resultsTitle,
-        count,
-        url,
-        err,
-        docs
-      }
-
-      pagination(req,res,searchData);
-    });
-  });
-});
 
 //= download file
 router.get('/download', (req,res,next) => {
@@ -254,6 +217,7 @@ router.delete('/delete', userAuth ,(req,res)=>{
     });
   });
 });
+
 //= add tags to the database function
 function addTags(tags){
 

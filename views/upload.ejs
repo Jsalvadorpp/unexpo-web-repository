@@ -2,11 +2,9 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <% include partials/head %> 
+   
     <link rel="stylesheet" href="/stylesheets/bootstrap-4-navbar.min.css">
-    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
     
     <!-- bootstrap 4.x is supported. You can also use the bootstrap css 3.3.x versions -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -40,38 +38,10 @@
     <!--@ font awesome icons -->
     <script src='/javascripts/all.min.js'></script>
     <script src='/themes/fas/theme.js'></script>
-    
-
 </head>
 
 <body>
-
-    <!--$ navigation Bar -->
-    <!--$ -------------------------------------------------- -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-
-            <a class="navbar-brand" href="#"><img src='/images/Unexpo-Logo2.png' width="55px" height="45px">Unexpo</a>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-toggler">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id='navbar-toggler'>
-                <ul class='navbar-nav nav-pills'>
-                    <li><a href='#' class='nav-link'><i class="fa fa-home mx-1" style="font-size: 20px"></i>Inicio</a></li>
-            
-                    
-                 </ul>
-
-                <ul class='navbar-nav ml-auto nav-pills'></ul>
-
-                    <li><a href="#" class="nav-link"><i class="fa fa-search mx-1" style="font-size: 20px"></i>Buscar</a></li>
-                    <li><a href="#" class="nav-link"><i class="fas fa-sign-in-alt mx-1" style="font-size: 20px"></i>Entrar</a></li>
-                </ul>
-            </div>     
-    </nav>
-    <!--$ Welcome Text-->
-    <!--$ -------------------------------------------------- -->
+    <% include partials/menu-navbar %>
     <div id='welcomeText'>
         <div class='container'>
             <h1 class="display-2 text-center">Publicar un archivo</h1>
