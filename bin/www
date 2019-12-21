@@ -13,6 +13,7 @@ var http = require('http');
  */
 
 var port = normalizePort(process.env.PORT || '3000');
+var hostname = '127.0.0.1';
 app.set('port', port);
 
 /**
@@ -25,7 +26,7 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port,'192.168.137.123', () => console.log(`website url: http://0.0.0.0:${port}/`) );
+server.listen(port, hostname, () => console.log(`website url: http://localhost:${port}/`) );
 server.on('error', onError);
 server.on('listening', onListening);
 

@@ -30,21 +30,23 @@
 <!--$ Welcome Text-->
 <!--$ -------------------------------------------------- -->
 
-<!-- <div id='welcomeText'>  <--! THIS IS THE BACKGROUND 
+<!-- <div id='welcomeText'> THIS IS THE BACKGROUND  </div> -->
 
-</div> -->
 
-<div class='container'>
+
+ <script>
+ console.log('From front-end');
+ </script>
+
+  <div class='container'>
   <h1 class="display-2 text-center"><strong>Perfil de <%=user.username %></strong> </h1>
   <p class = "display-2 text-center">1337</p>                    
   <p class="lead text-center"><strong>Contribuciones</strong></p>
   <p class="lead text-center"><strong>Correo institucional: <%=user.email%></strong></p>
+  </div>
 
-  <!-- ><p class="lead"><strong>Al momento de colaborar con el repositorio trata de que la información del archivo
-      sea lo mas precisa y concisa posible, para hacer más facil que otros usuarios aprovechen esta herramienta </strong></p> -->
-</div>
 
-  <div class="container-fluid bg-3 text-left">   
+<div class="container-fluid bg-3 text-left">   
     <%- messages('partials/flash-messages', locals) %>
     
     
