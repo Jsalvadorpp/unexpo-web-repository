@@ -31,7 +31,7 @@ router.get('/login/professor',
 //= redirect after login
 router.get('/google/redirect', 
     passport.authenticate( 'google', { 
-      successRedirect: '/dashboard',
+      successRedirect: '/', // changed this from /dashboard to / cus dashboard is shit
       failureRedirect: '/',
       failureFlash: true 
 }));
@@ -39,7 +39,7 @@ router.get('/google/redirect',
 //= logout route
 router.get('/logout', (req,res) => {
   req.logout();
-  req.flash('success','you are logged out');
+  req.flash('success','Has cerrado sesión');
   res.redirect('/');
 });
 

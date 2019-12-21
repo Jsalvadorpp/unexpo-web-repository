@@ -1,11 +1,10 @@
 
-
 <!-- font awesome icons -->
 <script src='/javascripts/all.min.js'></script>
 <script src='/themes/fas/theme.js'></script>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 
-    <a class="navbar-brand" href="#"><img src='images/Unexpo-Logo2.png' width="55px" height="45px">Unexpo</a>
+    <a class="navbar-brand" href="/"><img src='/images/Unexpo-Logo4.png' width="95px" height="85px"></a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-toggler">
         <span class="navbar-toggler-icon"></span>
@@ -13,7 +12,7 @@
 
     <div class="collapse navbar-collapse" id='navbar-toggler'>
         <ul class='navbar-nav nav-pills'>
-            <li><a href='#' class='nav-link'><i class="fa fa-home mx-1" style="font-size: 20px"></i>Inicio</a></li>
+            <li><a href='/' class='nav-link'><i class="fa fa-home mx-1" style="font-size: 20px"></i>Inicio</a></li>
     
             <li class='nav-item dropdown'>
                 <a href='#' class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book mx-1" style="font-size: 20px"></i>Biblioteca</a>
@@ -22,10 +21,10 @@
 
                         <a class="dropdown-item dropdown-toggle" href="#">Por Mencion</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">General</a>
-                            <a class="dropdown-item" href="#">Computacion</a>
-                            <a class="dropdown-item" href="#">Comunicaciones</a>
-                            <a class="dropdown-item" href="#">Control</a>
+                            <a class="dropdown-item" href="/files?category=General&page=1">General</a>
+                            <a class="dropdown-item" href="/files?category=Computacion&page=1">Computacion</a>
+                            <a class="dropdown-item" href="/files?category=Comunicaciones&page=1">Comunicaciones</a>
+                            <a class="dropdown-item" href="/files?category=Control&page=1">Control</a>
                         </div>
 
                         <a class="dropdown-item dropdown-toggle" href="#">Por Semestre</a>
@@ -42,32 +41,15 @@
          </ul>
 
         <ul class='navbar-nav ml-auto nav-pills'>
-
-            <!--
-            <form class='form-inline'>
-                <div class='input-group'>
-                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                    <div class='input-group-append'>
-                        <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
-                    </div>
-                </div>
-            </form>
-            -->
-
-            <li><a href="#" class="nav-link"><i class="fa fa-search mx-1" style="font-size: 20px"></i>Buscar</a></li>
-            
-        
-            <!--# -------------------------------------------------- -->
-            <!--# nav-bar with login -->
+        <li><a href="/files/search?q" class="nav-link"><i class="fa fa-search mx-1" style="font-size: 20px"></i>Buscar</a></li>
+        <!--# nav-bar with login -->
                   <% if(userIsLogged){ %>
                 <li><a href="/upload" class="nav-link"><i class="fa fa-upload mx-1" style="font-size: 20px"></i>Subir</a></li>
                 <li><a href="/profile" class="nav-link"><i class="fa fa-user mx-1" style="font-size: 20px"></i>Perfil</a></li>
                 <li><a href="/auth/logout" class="nav-link"><i class="fas fa-sign-out-alt mx-1" style="font-size: 20px"></i>Salir</a></li>
             <% }else{ %>
-                <li><a href="#" class="nav-link"><i class="fas fa-sign-in-alt mx-1" style="font-size: 20px"></i>Entrar</a></li>
+                <li><a href="/auth/login" class="nav-link"><i class="fas fa-sign-in-alt mx-1" style="font-size: 20px"></i>Entrar</a></li>
                 <% } %>
-            <!--# -------------------------------------------------- -->
-
         </ul>
     </div>     
 </nav>

@@ -8,16 +8,16 @@
     <% include partials/menu-navbar %>
 
     <div class="container-fluid bg-3 text-center">    
-        <h3>Login</h3><br>
+      <h1 class="display-2 text-center">Inicia sesión</h1>
     </div>
 
     <div class='container'>
 
       <form class="col-lg-4 offset-lg-4">
-
+        <br>
         <%- messages('partials/flash-messages', locals) %>
-        <a href= '/auth/login/student' class="btn btn-info btn-block">Login as Student</a>
-        <a href='/auth/login/professor' class="btn btn-secondary btn-block">Login as Professor</a>
+        <a href= '/auth/login/student' class="btn btn-info btn-block">Entrar como estudiante</a>
+        <a href='/auth/login/professor' class="btn btn-secondary btn-block">Entrar como profesor</a>
 
       </form>
     
@@ -25,5 +25,4 @@
     
     <% include partials/frontend-scripts %>
 </body>
-
 </html>
