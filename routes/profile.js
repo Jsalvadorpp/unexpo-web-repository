@@ -23,7 +23,8 @@ conn.once('open', () => {
 
 //= view all files by category
 router.get('/', ensureAuth, (req,res) => { 
-  
+  var a=files.countDocuments({userId:req.user.googleId});
+  console.log(a);
   const page = parseInt(req.query.page || '1');
   const url = `/profile?id=${req.user.googleId}`;
   files.countDocuments({userId:req.user.googleId}, (err,count) => { 

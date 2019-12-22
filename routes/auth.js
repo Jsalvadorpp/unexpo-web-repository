@@ -5,7 +5,7 @@ const passport = require('passport');
 //= getting data from users database
 var users = require('../models/users');
 
-//= dispaly login page
+//= display login page
 router.get('/login', (req,res) => {
   res.render('login',{page: 'login'})
 });

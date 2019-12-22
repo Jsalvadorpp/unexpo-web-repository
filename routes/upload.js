@@ -132,8 +132,8 @@ router.post('/', (req,res) => {
               mimetype: req.file.mimetype,
               md5: req.file.md5,
               tags: (req.body.tags == '')? null : (req.body.tags).split(','),
-              fileId: req.file.id
-            });
+              fileId: req.file.id,
+         });
 
             //= save file data
             file.save( (err,savedFile) => {
