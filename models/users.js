@@ -6,7 +6,8 @@ const UserSchema = new Schema({
     username: {type: String,required: true,unique: true},
     email: {type: String,required: true},
     googleId: {type: String,required: true},
-    role: {type: String, default: 'user'}
+    role: {type: String, default: 'user'},
+    contributions: {type: Number},
 });
 
 const User = module.exports = mongoose.model('User',UserSchema)

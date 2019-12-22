@@ -120,11 +120,14 @@ router.post('/', (req,res) => {
             //= insert file data into database (file not included - the file saves in uploads.files)
             const file = new uploads({
               createdBy: req.user.username,
+              mention: req.body.mention,
+              semester: req.body.semester,
+              author: req.body.author,
               userId: req.user.googleId,
               title: req.body.title,
               filename: req.file.filename,
               description: req.body.description,
-              category: req.body.category,
+              //category: req.body.category, this was changed
               size: req.file.size,
               mimetype: req.file.mimetype,
               md5: req.file.md5,
@@ -136,7 +139,7 @@ router.post('/', (req,res) => {
             file.save( (err,savedFile) => {
               if (err)  return console.error(err);
             });
-            console.log(file.category);
+            console.log(file);
             req.flash('success','Archivo subido!');
             res.render('homepage',{page: 'home'});
           }
