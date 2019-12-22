@@ -1,28 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+  <style>
+    
+    </style>
 <head>
   <% include partials/head %> 
 </head>
 
 <body>
     <% include partials/menu-navbar %>
-
-    <div class="container-fluid bg-3 text-center">    
+  <!-- OLD BUTTONS -->
+   <!-- <div class="container-fluid bg-3 text-center">    
       <h1 class="display-2 text-center">Inicia sesión</h1>
     </div>
 
-    <div class='container'>
+     <div class='container'>
 
       <form class="col-lg-4 offset-lg-4">
         <br>
         <%- messages('partials/flash-messages', locals) %>
-        <a href= '/auth/login/student' class="btn btn-info btn-block">Entrar como estudiante</a>
-        <a href='/auth/login/professor' class="btn btn-secondary btn-block">Entrar como profesor</a>
-
+        <a href= '/auth/login/student' class="btn btn-outline-warning btn-block btn-lg"> <i class="fab fa-google mr-2"></i> 
+          Entrar como estudiante</a>
+        <a href= '/auth/login/professor' class="btn btn-outline-info btn-block btn-lg"> <i class="fab fa-google mr-2"></i> 
+          Entrar como profesor</a>
       </form>
-    
+    </div> -->
+  
+   <!-- <div class="row"> -->
+    <div class='container-fluid'>     
+    <div class="row d-flex justify-content-center">
+  
+    <div class='container1'>
+      <a href='/auth/login/student'><img src="/images/jedi.jpg" a href='/auth/login/student' alt="Jedis"
+         class="image1" style="width:100%"></a>
+      <div class="LogEst">
+        <div class="text">Acceder como estudiante</div>
     </div>
-    
-    <% include partials/frontend-scripts %>
+    </div>
+     <div class='container2'>
+      <a href='/auth/login/professor'><img src="/images/sith.jpg" alt="Siths" 
+        class="image2" style="width:100%"></a>
+      <div class="LogProf"> 
+        <div class="text">Acceder como profesor </div>
+      </div>
+    </div>
+  </div>
+   <% include partials/frontend-scripts %>
 </body>
 </html>
