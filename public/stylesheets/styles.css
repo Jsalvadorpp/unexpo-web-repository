@@ -1,0 +1,106 @@
+/** index.html */
+.nav-link{
+    font-size: 18px;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color:  #1d963b;
+}
+.dropdown-item:hover {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #1d963b;
+}
+#welcomeText{
+    color: white;
+    background: url('../images/background.jpg') center center fixed;
+    background-size: cover;
+    padding: 10% 0;
+}
+.carousel-indicators li {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: #40474e7a;
+    border: 3px solid #1d963b;
+}
+.carousel-indicators .active{
+    background-color: black;
+}
+.carousel-control-prev,
+.carousel-control-next{
+    font-size: 40px;
+    color: black;
+
+}
+.carousel-control-next{
+    left: 94%;
+}
+.carousel-control-prev{
+    left: -9%;
+}
+.carousel-control-prev:hover,
+.carousel-control-next:hover,
+.carousel-control-prev:focus,
+.carousel-control-next:focus{
+    color: black;
+    opacity: 1;
+}
+.jumbotron{
+    padding: 32px 32px;
+}
+#footer-copyright{
+    background-color: black;
+}
+footer p{
+    margin-bottom: 5px;
+}
+/** files.html */
+#files-title{
+    background-color: rgb(52, 58, 64);
+    color:white;
+}
+#filesResult td{
+    padding: 5px 5px;
+    border-color: gray;
+    background-color: #8080800f;
+}
+#filesResult .btn{
+    box-shadow: 0 1px 3px rgba(0,0,0,.3);
+    text-shadow: 2px 2px 3px rgba(0,0,0,.3);
+    color: white;
+}
+#filesResult .btn:hover{
+    opacity: 0.7;
+}
+.fileType-img{
+    border: 1px solid purple;
+    background: rgb(134,90,161);
+    background: radial-gradient(circle, rgba(134,90,161,1) 0%, rgba(111,13,135,1) 100%); 
+}
+.fileType-pdf{
+    border: 1px solid red;
+    background: rgb(222,114,114);
+    background: radial-gradient(circle, rgba(222,114,114,1) 0%, rgba(226,12,12,1) 100%);    
+}
+.fileType-word{
+    border: 1px solid blue;
+    background: rgb(143,129,226);
+    background: radial-gradient(circle, rgba(143,129,226,1) 0%, rgba(25,30,249,1) 100%);
+}
+.fileType-application{
+    border: 1px solid #1ad21a;
+    background: rgb(94,214,89);
+    background: radial-gradient(circle, rgba(94,214,89,1) 0%, rgba(56,222,9,1) 100%);
+}
+
+.fileType-powerpoint{
+    border: 1px solid orange;
+    background: rgb(214,165,72);
+    background: radial-gradient(circle, rgba(214,165,72,1) 0%, rgba(245,136,10,1) 100%);
+}
+.fileType-other{
+    border: 1px solid gray;
+    background: rgb(121,122,118);
+    background: radial-gradient(circle, rgba(121,122,118,1) 0%, rgba(97,94,92,1) 100%);
+}
+

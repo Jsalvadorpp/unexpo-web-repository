@@ -1,34 +1,180 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <% include partials/head %> 
-</head>
+<% include partials/head %> 
 
 <body>
   <% include partials/menu-navbar %>
+  <%- messages('partials/flash-messages', locals) %>
 
-  <div class="container-fluid bg-3 text-center">   
-    <%- messages('partials/flash-messages', locals) %>
-    <h3><%= page %></h3><br>
+  <!--$ Welcome Text-->
+    <!--$ -------------------------------------------------- -->
+    <div id='welcomeText'>
+      <div class='container'>
+          <h1 class="display-2 text-center">Bienvenido al Repositorio UNEXPO</h1>
+      <p class="lead">Para poder utilizar todas las funciones del sitio Web y para 
+        poder subir contenido usted debe utilizar su correo institucional UNEXPO 
+        para acceder a este sitio. Si no sabe como utilizarlo a continuación se 
+              explica gráficamente
+          </p>
+      </div>
+  </div>
+  <!--$ -------------------------------------------------- -->
+
+  <!--$ About the Website-->
+  <!--$ -------------------------------------------------- -->
+  <div class='container my-3'>
+
+      <div class='jumbotron'>
+          <h1 class='text-center'>Sobre La P&aacute;gina</h1><hr>
+          <p class='text-center'>"unexpo-repository" es una p&aacute;gina destinada al almacenamiento de
+              informacion relacionada con la ingiener&iacute;a electr&oacute;nica y afines,
+              para el uso de estudiantes,profesores u otros en la busqueda de conocimientos
+          </p>
+      </div>
+      <hr>
+
+      <div class='row my-5 py-2'>
+          <div class='col-md-8' id='about1-text'>
+              <h2>Informaci&oacute;n en solo lugar</h2>
+              <p>Toda la informaci&oacute;n que necesitas en un solo lugar,
+                  facil y rapida de conseguir...
+              </p>
+              <p>
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+                  Aenean commodo ligula eget dolor. Aenean massa. Cum sociis 
+                  natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
+                  Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim
+              </p>
+              <a href='#' class='btn btn-primary'>Ver Ahora</a>
+          </div>
+          <div class='col-md-4' id='about1-img'>
+              <image src='images/information.jpeg' class='img-fluid'></image>
+          </div>
+      </div>
+      <hr>
+
+      <div class='row my-5 py-2'>
+          <div class='col-md-4' id='about2-img'>
+              <image src='images/contribuye.jpg' class='img-fluid' height='320px'></image>
+          </div>
+          <div class='col-md-8' id='about2-text'>
+              <h2>Contribuye</h2>
+              <p>Si eres estudiante activo o profesor proveniente de la
+                  Universidad Nacional Experimental Politécnica "Antonio José de 
+                  Sucre" - UNEXPO puedes contribuir a esta gran comunidad Unexpista...
+              </p>
+              <p>
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. 
+                  Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus 
+              </p>
+              <a href='#' class='btn btn-primary'>Contribuye Ahora</a>
+          </div>
+      </div>
+      <hr>
+  </div>
+  <!--$ -------------------------------------------------- -->
+
+  <!--$ Website Instructions -->
+  <!--$ -------------------------------------------------- -->
+  <div class='container'>
+
+      <div class='jumbotron text-center'>
+          <h1>Como obtener el correo estudiantil</h2>
+          <hr>
+          <p>debes ser estudiante activo de la UNEXPO vicerectorado
+              Barquisimeto , ingresas a la pagina <a href='www.bqto.unexpo.edu.ve'>www.bqto.unexpo.edu.ve</a> , luego
+              ingresas al sistema como estudiante y sigue las instrucciones que se mostraran a continuación
+          </p>
+      </div>
+
+      
+
+      <!--% Instructions Carousel -->
+      <div class="carousel slide" data-ride="carousel" id='instructions'>
+          <!--% Indicators -->
+          <ul class="carousel-indicators">
+              <li data-target="#instructions" data-slide-to="0" class="active"></li>
+              <li data-target="#instructions" data-slide-to="1"></li>
+              <li data-target="#instructions" data-slide-to="2"></li>
+          </ul>
+
+          <!--% The slideshow -->
+          <div class="carousel-inner">
+              <div class="carousel-item active">
+                  <img src="images/Proceso1.jpg" class='img-fluid'>
+              </div>
+              <div class="carousel-item">
+                  <img src="images/Proceso2.jpg" class='img-fluid'>
+              </div>
+              <div class="carousel-item">
+                  <img src="images/Proceso3.jpg" class='img-fluid'>
+              </div>
+          </div>
+
+           <!--% Left and right controls -->
+          <a class="carousel-control-prev" href="#instructions" data-slide="prev">
+              <i class='fa fa-chevron-circle-left'></i>
+          </a>
+          <a class="carousel-control-next" href="#instructions" data-slide="next">
+                  <i class='fa fa-chevron-circle-right'></i>
+          </a>
+      </div>
+      <hr>
+      
+  </div>
+  <!--$ -------------------------------------------------- -->
+
+  <script>
+    ScrollReveal().reveal('#welcomeText .container', {
+        origin: 'right',
+        duration: 1100,
+        distance: '1000px',
+    });
+    ScrollReveal().reveal('#about1-text', {
+        origin: 'left',
+        duration: 1400,
+        distance: '200px'
+    });
+    ScrollReveal().reveal('#about1-img', {
+        origin: 'top',
+        duration: 1400,
+        distance: '200px'
+    });
+    ScrollReveal().reveal('#about2-img', {
+        delay: 200,
+        origin: 'bottom',
+        duration: 1400,
+        distance: '200px'
+    });
+    ScrollReveal().reveal('#about2-text', {
+        delay: 200,
+        origin: 'right',
+        duration: 1400,
+        distance: '200px'
+    });
+    ScrollReveal().reveal('.carousel', {
+        origin: 'right',
+        duration: 1100,
+        distance: '400px',
+        rotate: {
+            x: 20,
+            z: 40,
+         },
+         scale: 0.4
+    });
+  </script>
+
+
+
+
+
 
     <% if(userIsLogged){ %>
       <h3>logged as <%= user.username %></h3><br>
     <% } %>
 
-    <div class="row">
-      <div class="col-sm-4">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      </div>
-      <div class="col-sm-4"> 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      </div>
-      <div class="col-sm-4"> 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      </div>
-    </div>
+    
 
-  </div>
   
+  <% include partials/footer %>
   <% include partials/frontend-scripts %>
 </body>
 

@@ -1,0 +1,77 @@
+.kv-file-remove,
+.file-drag-handle{
+    display: none;
+}
+.file-drop-zone,
+.file-preview{
+    border: none !important;
+}
+.card-body{
+   padding-left: 30px;
+   padding-bottom: 10px;
+   
+}
+.kv-avatar .krajee-default.file-preview-frame,.kv-avatar .krajee-default.file-preview-frame:hover {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.card{
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #41484feb;
+    box-shadow:  2px 2px 6px rgb(0, 0, 0);
+    text-shadow: 2px 2px 3px rgba(0,0,0,.3);
+}
+.file-preview-frame{
+    background-color: #f2f2ea;
+    box-shadow:  4px 4px 10px rgba(9, 8, 8, 0.57) !important;
+}
+.text-color{
+    color: #0ff;
+    font-weight: bolder;
+}
+#details-box h1{
+    text-transform: uppercase;
+}
+.btn{
+    margin-right: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.3);
+}
+.btn-download{
+    font-weight: bolder;
+    border: 1px solid #0ff;
+    transition: transform .4s;
+}
+.btn-download:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    background-color: #0ff;
+    color: rgb(49, 48, 48) !important;
+}
+.btn-delete{
+    font-weight: bolder;
+    background: #e62727e3;
+    border: 1px solid #e61f1f;
+    transition: transform .4s;
+}
+.btn-delete:hover{
+    cursor: pointer;
+    opacity: 0.9;
+    transform: scale(1.05);
+    background-color: #e61f1f;
+}
+.btn-edit{
+    font-weight: bolder;
+    border: 1px solid #0cc60c;
+    background: #269326;
+    transition: transform .4s;
+}
+.btn-edit:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    background-color: #0cc60c;
+    color: rgb(49, 48, 48) !important;
+}
+
