@@ -6,40 +6,99 @@
 
 <body>
   <% include partials/menu-navbar %>
+  <%- messages('partials/flash-messages', locals) %>
 
-  <div class="container-fluid bg-3 text-left">   
-    <%- messages('partials/flash-messages', locals) %>
-    
-    
-    <% if (files) { %>
+  <% if(files){ %>
+  <!--$ fileFilters -->
+  <div class='container-fluid' id='fileFilters'>
 
-      <br><div class="text-center">
-        <h2><%= resultsTitle %></h2>
-        <p class="card-subtitle mb-2 text-muted">Page <%=currentPage%> of <%=totalPages%> </p>
-      </div>
+    <!--% fileFilters -->
+    <div class='row' id='fileFilters'>
+        <div class='col-md-4 text-center'>
+            <h4 class="d-block bg-dark text-white my-2">Semestre</h4>
+            <select name="fileSemester" class="custom-select">
+                <option selected value='todos'>Todos</option>
+                <option value="IV">IV</option>
+                <option value="V">V</option>
+                <option value="VII">VII</option>
+                <option value="VIII">VIII</option>
+                <option value="IX">IX</option>
+            </select>
+        </div>
+
+        <div class='col-md-4 text-center'>
+            <h4 class="d-block bg-dark text-white my-2">Menci&oacute;n</h4>
+            <select name="fileCategory" class="custom-select">
+                <option selected value='todos'>Todos</option>
+                <option value="general">General</option>
+                <option value="computacion">Computaci&oacute;n</option>
+                <option value="control">Control</option>
+                <option value="Comunicaciones">Comunicaciones</option>
+            </select>
+        </div>
+
+        <div class='col-md-4 text-center'>
+            <h4 class="d-block bg-dark text-white my-2">Tipo de archivo</h4>
+            <select name="fileType" class="custom-select">
+                <option selected value='todos'>Todos</option>
+                <option value="documentos">Documentos</option>
+                <option value="imagen">Imagen</option>
+                <option value="aplicacion">Aplicaci&oacute;n</option>
+            </select>
+        </div>
+    </div>
+    <!--% -------------------------------------------------- -->
     
+  </div>
+
+  <!--$ files result -->
+  <div class='container-fluid' id='filesResult'>
+    <div class='container-fluid text-center my-2' id='files-title'>
+        <h2>Documentos en: <%= resultsTitle %></h2>
+    </div>
+    <hr>
+    <h3 class='text-center'>p&aacute;gina <%=currentPage%> de <%=totalPages%> </h3>
+    <hr>
+
+    <table class='table-bordered' style="width:100%">
+
       <% files.forEach(file => { %>
-          <br>
-          <div class="card">
-              <div class="card-body">
-                  <h5>Title: <%= file.title %></h5>
-                  <p class="card-subtitle mb-2 text-muted">Uploaded By: <a href="/user/files?id=<%= file.userId %>"><%= file.createdBy %></a></p>
-                  <p><%= file.description %></p>
-                  
-                  <% if(file.tags!= null && file.tags.length > 0){%>
+        <!--+ file card -->
+        <tr>
+            <!--% file extension icon -->
+            <td style="width:5%" class='d-none d-sm-table-cell' >
+                <div class='text-center' >
+                    <a href="#" role="button" class='btn fileType-powerpoint d-block'>PowerPoint</a>
+                </div>
+            </td>
+            <!--% file details -->
+            <td style="width: 85%">
+                <h6 class='card-title font-weight-bold mb-0'><%= file.title %></h6>
+                <small class='card-subtitle text-muted'>Subido por: <a href="/user/files?id=<%= file.userId %>"><%= file.createdBy %></a></small>
+                <% if(file.tags!= null && file.tags.length > 0){%>
                     <div class='tags'>Tags: 
                       <% file.tags.forEach(tag => { %>
                         <a href="/tags/files?tag=<%= tag %>" class="badge badge-secondary"><%= tag %></a>
                     <% }); %>
-                    </div><br>
+                    </div>
                   <% } %>
-                  <a href="/files/viewFile?id=<%= file.id%>" class="btn btn-primary">View File</a>
-              </div>
-          </div> 
-      <% }) %>
-    <% } %>
+            </td>
+            <!--% view file -->
+            <td style="width:10%" class='text-center'>
 
-    <br>
+                <!--@ file extension icon for mobile-->
+                <div class='text-center' >
+                    <a href="#" role="button" class='btn fileType-powerpoint d-block d-sm-none'>PowerPoint</a>
+                </div>
+
+                <a href="/files/viewFile?id=<%= file.id%>" role="button" class="btn btn-dark d-block">Ver archivo</a>
+            </td>
+        </tr>
+      <% }) %>  
+      
+    </table><hr>
+
+    <!--+ pagination -->
     <ul class="pagination justify-content-center">
 
       <% var pageButtonStatus = '' %>
@@ -61,7 +120,10 @@
     </ul>
 
   </div>
-  
+
+<% } %>
+
+  <% include partials/footer %>
   <% include partials/frontend-scripts %>
 </body>
 
