@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include partials/head %> 
+</head>
+
+<body>
+  <% include partials/menu-navbar %>
+
+  <div class='container'>
+  <h1 class="display-2 text-center"><strong>Perfil de <%=user.username %></strong> </h1>
+  <p class = "display-2 text-center">1337</p>                    
+  <p class="lead text-center"><strong>Contribuciones</strong></p>
+  <p class="lead text-center"><strong>Correo institucional: <%=user.email%></strong></p>
+  </div>
+
+<div class="container-fluid bg-3 text-left">   
+    <%- messages('partials/flash-messages', locals) %>
+    
+    <% if (files) { %>
+      <br><div class="text-center">
+        <h2><%= resultsTitle %></h2>
+        <p class="card-subtitle mb-2 text-muted">Page <%=currentPage%> of <%=totalPages%> </p>
+      </div>
+    
+      <% files.forEach(file => { %>
+          <br>
+          <div class="card">
+              <div class="card-body">
+                  <h5>Title: <%= file.title %></h5>
+                  <p class="card-subtitle mb-2 text-muted">Uploaded By: <a href="/user/files?id=<%= file.userId %>"><%= file.createdBy %></a></p>
+                  <p><%= file.description %></p>
+                  
+                  <% if(file.tags!= null && file.tags.length > 0){%>
+                    <div class='tags'>Tags: 
+                      <% file.tags.forEach(tag => { %>
+                        <a href="/tags/files?tag=<%= tag %>" class="badge badge-secondary"><%= tag %></a>
+                    <% }); %>
+                    </div><br>
+                  <% } %>
+                  <a href="/files/viewFile?id=<%= file.id%>" class="btn btn-primary">View File</a>
+              </div>
+          </div> 
+      <% }) %>
+    <% } %>
+
+    <br>
+    <ul class="pagination justify-content-center">
+
+      <% var pageButtonStatus = '' %>
+      <% var href = url %>
+
+      <% pageButtonStatus = (previousPage)? 'enabled' : 'disabled'%>
+      <li class="page-item <%= pageButtonStatus %>">
+        <a class="page-link" href="<%= href %>&page=<%= previousPage %>" tabindex="-1" aria-disabled="true">Previous</a>
+      </li>
+
+      <li class="page-item">
+        <a class="page-link" href="<%= href %>&page=<%= currentPage %>"><%= currentPage %></a>
+      </li>
+
+      <% pageButtonStatus = (nextPage)? 'enabled' : 'disabled'%>
+      <li class="page-item <%= pageButtonStatus %>">
+        <a class="page-link" href="<%= href %>&page=<%= nextPage %>" tabindex="-1" aria-disabled="true">Next</a>
+      </li>
+    </ul>
+
+  </div>
+  
+  <% include partials/frontend-scripts %>
+</body>
+
+</html>

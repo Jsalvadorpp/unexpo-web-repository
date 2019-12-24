@@ -30,7 +30,6 @@ router.get('/', (req, res, next) => {
   const url = `/files?category=${category}`;
   const resultsTitle = `Category: ${category}`
   const searchOption = { category };
-  
   files.countDocuments(searchOption,(err,count) => {
     files.find(searchOption)
     .limit(limitPerPage)
@@ -255,36 +254,6 @@ router.delete('/delete', userAuth ,(req,res)=>{
     });
   });
 });
-
-//= user profile
-router.get('/profile', ensureAuth, (req,res) => { 
-
-  const page = parseInt(req.query.page || '1');
-  const url = `/files/profile?id=${req.user.googleId}`
-  files.countDocuments({userId:req.user.googleId}, (err,count) => { 
-    files.find({userId: req.user.googleId})
-    .limit(limitPerPage)
-    .skip((page-1)*limitPerPage)
-    .sort({_id: -1})
-    .exec( (err,docs)=>{  
-
-        if (docs){
-          const searchData = {
-            page,
-            count,
-            url,
-            err,
-            docs
-          }
-          pagination(req,res,searchData);
-
-        }else{
-          res.status(404).json({message : 'data not found'});
-        }
-    });
-  });
-});
-
 //= add tags to the database function
 function addTags(tags){
 

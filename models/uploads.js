@@ -8,6 +8,10 @@ const UploadSchema = new Schema({
         type: String,
         required: true
     },
+    author: {
+        type: String,
+        required: true
+    },
     userId: {
         type: String,
         required: true
@@ -24,7 +28,11 @@ const UploadSchema = new Schema({
         type: String,
         required: true
     },
-    category: {
+    mention: {
+        type: String,
+        required: true
+    },
+    semester: {
         type: String,
         required: true
     },

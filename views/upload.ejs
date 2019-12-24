@@ -2,11 +2,9 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <% include partials/head %> 
+   
     <link rel="stylesheet" href="/stylesheets/bootstrap-4-navbar.min.css">
-    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
     
     <!-- bootstrap 4.x is supported. You can also use the bootstrap css 3.3.x versions -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -40,38 +38,10 @@
     <!--@ font awesome icons -->
     <script src='/javascripts/all.min.js'></script>
     <script src='/themes/fas/theme.js'></script>
-    
-
 </head>
 
 <body>
-
-    <!--$ navigation Bar -->
-    <!--$ -------------------------------------------------- -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-
-            <a class="navbar-brand" href="#"><img src='/images/Unexpo-Logo2.png' width="55px" height="45px">Unexpo</a>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-toggler">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id='navbar-toggler'>
-                <ul class='navbar-nav nav-pills'>
-                    <li><a href='#' class='nav-link'><i class="fa fa-home mx-1" style="font-size: 20px"></i>Inicio</a></li>
-            
-                    
-                 </ul>
-
-                <ul class='navbar-nav ml-auto nav-pills'></ul>
-
-                    <li><a href="#" class="nav-link"><i class="fa fa-search mx-1" style="font-size: 20px"></i>Buscar</a></li>
-                    <li><a href="#" class="nav-link"><i class="fas fa-sign-in-alt mx-1" style="font-size: 20px"></i>Entrar</a></li>
-                </ul>
-            </div>     
-    </nav>
-    <!--$ Welcome Text-->
-    <!--$ -------------------------------------------------- -->
+    <% include partials/menu-navbar %>
     <div id='welcomeText'>
         <div class='container'>
             <h1 class="display-2 text-center">Publicar un archivo</h1>
@@ -123,32 +93,31 @@
         <div class="container">
             <div class="row">
                     <div class="form-row align-items-center">
-                        
-                        <div class="col-auto my-2"> <!-- Selector de semestre -->
+                       <div class="col-auto my-2"> <!-- Selector de semestre -->
                             <label class="mr-sm-2" for="inlineFormCustomSelect"></label>
-                            <select class="custom-select mr-sm-2" name="Semester" id="inlineFormCustomSelect">
+                            <select class="custom-select mr-sm-2" name="semester" id="inlineFormCustomSelect">
                             <option selected>Semestre</option>
-                            <option value="1">Cuarto</option>
-                            <option value="2">Quinto</option>
-                            <option value="3">Sexto</option>
-                            <option value="3">Septimo</option>
-                            <option value="3">Octavo</option>
-                            <option value="3">Noveno</option>
+                            <option value='IV'>Cuarto</option>
+                            <option value='V'>Quinto</option>
+                            <option value='VI'>Sexto</option>
+                            <option value='VII'>Septimo</option>
+                            <option value='VIII'>Octavo</option>
+                            <option value='IX'>Noveno</option>
 
                             </select>
                             </div>
-                         <div class="col-auto my-2"> <!-- Selector de mención -->
+                        <div class="col-auto my-2"> <!-- Selector de mención -->
                                 <label class="mr-sm-2" for="inlineFormCustomSelect"></label>
-                                <select class="custom-select mr-sm-2" name="Mention" id="inlineFormCustomSelect">
+                                <select class="custom-select mr-sm-2" name="mention" id="inlineFormCustomSelect">
                                 <option selected>Mención</option>
-                                <option value="1">Computación</option>
-                                <option value="2">Comunicaciones</option>
-                                <option value="3">Control</option>
-                                <option value="3">General</option>
+                                <option value='Computación'>Computación</option>
+                                <option value='Comunicaciones'>Comunicaciones</option>
+                                <option value='Control'>Control</option>
+                                <option value='General'>General</option>
                                 </select>
                         </div>
-                        </div>    
-                        </div>
+                    </div>    
+                </div>
             
         </form>
           
@@ -163,13 +132,12 @@
         $("#file").fileinput({
             theme: "fas",
             showUploadStats: true,
-
-            //uploadUrl: "/upload",
-            //layoutTemplates: {progress: percent},
             uploadAsync: false,
             dropZoneTitle: "Arrastra un archivo",
-            dropZoneClickTitle: "\r\n(también puedes hacer click)",
+            dropZoneClickTitle: "(también puedes hacer click)",
             maxFileSize: 100000,
+            maxFilePreviewSize: 100000,
+            allowedPreviewTypes: ['image','html','video','text','audio','gdocs','pdf'],
             browseClass: "btn btn-success",
             browseLabel: "Seleccionar",
             browseTitle: "Arrastra y arroja tu archivo o haz click",
@@ -178,6 +146,7 @@
             uploadLabel: "Subir",
             uploadTitle: "Sube el archivo seleccionado",
             initialCaption: "Selecciona el archivo que deseas publicar",
+            initialPreviewAsData: true, //???????
             previewFileIcon: '<i class="fas fa-file"></i>',
             preferIconicPreview: false, 
             previewFileIconSettings: { // configure your icon file extensions
@@ -219,8 +188,10 @@
                 'mp3': function(ext) {
                     return ext.match(/(mp3|wav)$/i);
                 },
+                
             }
         })
+        
         </script>
        
   
