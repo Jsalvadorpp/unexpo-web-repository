@@ -181,7 +181,7 @@
             previewFileIcon: '<i class="fas fa-file"></i>',
             preferIconicPreview: false, 
             previewFileIconSettings: { // configure your icon file extensions
-                'doc': '<i class="fas fa-file-word text-primary"></i>',
+                'docx': '<i class="fas fa-file-word text-primary"></i>',
                 'xls': '<i class="fas fa-file-excel text-success"></i>',
                 'ppt': '<i class="fas fa-file-powerpoint text-danger"></i>',
                 'pdf': '<i class="fas fa-file-pdf text-danger"></i>',
@@ -195,7 +195,7 @@
                 'png': '<i class="fas fa-file-image text-primary"></i>'    
             },
              previewFileExtSettings: { // configure the logic for determining icon file extensions
-                'doc': function(ext) {
+                'docx': function(ext) {
                     return ext.match(/(doc|docx)$/i);
                 },
                 'xls': function(ext) {
