@@ -1,11 +1,11 @@
 .container1 {
       position: relative;
       width: 50%;
-    }
+ }
     .container2 {
       position: relative;
       width: 50%;
-    }
+ }
     
     .image1 {
       opacity: 1;
@@ -44,19 +44,21 @@
       -ms-transform: translate(-50%, -50%);
       text-align: center;
     }
-    .container1:hover .image1 {
-      -webkit-transform: scale(1.01);
-      -ms-transform: scale(1.01);
-      transform: scale(1.01);
+    .container1:hover 
+	.image1 {
+      -webkit-transform: scale(1.00);
+      -ms-transform: scale(1.00);
+      transform: scale(1.00);
       opacity: 0.8;
       filter:blur(4px);
     }
-    .container2:hover .image2 {
+    .container2:hover 
+	.image2 {
       opacity: 0.8;
-      -webkit-transform: scale(1.01);
-      -ms-transform: scale(1.01);
-      transform: scale(1.01);
-      filter:blur(4 px);
+      -webkit-transform: scale(1.00);
+      -ms-transform: scale(1.00);
+      transform: scale(1.00);
+      filter:blur(4px);
     }
     .container1:hover .LogEst {
       opacity: 1;
@@ -65,11 +67,37 @@
       opacity: 1;
     }
     
-    .text {
-      color: white;
-      font-size: 32px;
-      padding: 16px 32px;
-    }
+    .textoLogin {
+    color: white;
+    padding: 16px 32px;
+
+}
+
+
+@media (max-width: 1920px) {
+ 	.textoLogin {
+	font-size: 36px;
+	}
+}
+
+@media (max-width: 992px) {
+ 	.textoLogin {
+	font-size: 32px;
+	}
+}
+
+@media (max-width: 768px) {
+	.textoLogin {
+	font-size: 24px;
+	}
+}
+
+@media (max-width: 576px) {
+	.textoLogin {
+	font-size: 16px;
+	}
+}
+
 .nav-link{
     font-size: 18px;
 }

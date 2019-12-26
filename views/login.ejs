@@ -27,24 +27,36 @@
     </div> -->
   
    <!-- <div class="row"> -->
-    <div class='container-fluid'>     
+    <div class="container-fluid">     
     <div class="row d-flex justify-content-center">
   
-    <div class='container1'>
-      <a href='/auth/login/student'><img src="/images/jedi.jpg" a href='/auth/login/student' alt="Jedis"
-         class="image1" style="width:100%"></a>
+    <div class="container1">
+      <a href='/auth/login/student'> 
+        <picture>
+        <source srcset="/images/EstudiantesVert.png" media="(orientation: portrait)">
+        <source srcset="/images/Estudiantes.png">
+          <img srcset="/images/Estudiantes.png" a href='/auth/login/professor' class="image1" style="width:100%">
+      </picture></a>
       <div class="LogEst">
-        <div class="text">Acceder como estudiante</div>
+        <div class="textoLogin">Acceder como estudiante</div>
     </div>
     </div>
      <div class='container2'>
-      <a href='/auth/login/professor'><img src="/images/sith.jpg" alt="Siths" 
-        class="image2" style="width:100%"></a>
+      <a href='/auth/login/professor'><picture>
+        <source srcset="/images/ProfesoresVert.jpg" media="(orientation: portrait)">
+        <source srcset="/images/Profesores.jpg">
+        <img srcset="/images/Profesores.jpg" a href='/auth/login/professor' class="image2" style="width:100%">
+    </picture> </a>      
       <div class="LogProf"> 
-        <div class="text">Acceder como profesor </div>
+        <div class="textoLogin">Acceder como profesor </div>
       </div>
     </div>
   </div>
+</div>
+
    <% include partials/frontend-scripts %>
 </body>
+<footer>
+  <% include partials/footer %>
+</footer>
 </html>
