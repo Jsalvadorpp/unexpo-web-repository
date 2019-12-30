@@ -1,0 +1,9 @@
+.file-preview-thumbnails {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.file-preview-thumbnails:hover{
+  cursor: pointer;
+}
