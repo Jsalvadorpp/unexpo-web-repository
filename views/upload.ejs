@@ -2,6 +2,7 @@
 
 <body>
     <% include partials/menu-navbar %>
+    <%- messages('partials/flash-messages', locals) %>
 
     <br>
     <div class="container-fluid bg-3 text-center">    
@@ -9,8 +10,7 @@
     </div>
 
     <div class='container'>
-      <%- messages('partials/flash-messages', locals) %>
-
+    
       <form  action="/upload" method="POST" enctype="multipart/form-data">
 
         <div class="input-group mb-3">
