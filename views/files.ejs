@@ -13,48 +13,63 @@
   <div class='container-fluid' id='fileFilters'>
 
     <!--% fileFilters -->
-    <div class='row' id='fileFilters'>
-        <div class='col-md-4 text-center'>
-            <h4 class="d-block bg-dark text-white my-2">Semestre</h4>
-            <select name="fileSemester" class="custom-select">
-                <option selected value='todos'>Todos</option>
-                <option value="IV">IV</option>
-                <option value="V">V</option>
-                <option value="VII">VII</option>
-                <option value="VIII">VIII</option>
-                <option value="IX">IX</option>
-            </select>
-        </div>
+    <form id='filtersForm'>
+      <div class='row' id='fileFilters'>
+          <div class='col-md-4 text-center'>
+              <h4 class="d-block bg-dark text-white my-2">Semestre</h4>
+              <select name="semester" class="custom-select filter">
+                  <option selected value=''>Todos</option>
+                  <option value="IV">IV</option>
+                  <option value="V">V</option>
+                  <option value="VII">VII</option>
+                  <option value="VIII">VIII</option>
+                  <option value="IX">IX</option>
+              </select>
+          </div>
 
-        <div class='col-md-4 text-center'>
-            <h4 class="d-block bg-dark text-white my-2">Menci&oacute;n</h4>
-            <select name="fileCategory" class="custom-select">
-                <option selected value='todos'>Todos</option>
-                <option value="general">General</option>
-                <option value="computacion">Computaci&oacute;n</option>
-                <option value="control">Control</option>
-                <option value="Comunicaciones">Comunicaciones</option>
-            </select>
-        </div>
+          <div class='col-md-4 text-center'>
+              <h4 class="d-block bg-dark text-white my-2">Menci&oacute;n</h4>
+              <select name="mention" class="custom-select filter">
+                  <option selected value=''>Todos</option>
+                  <option value="general">General</option>
+                  <option value="computación">Computaci&oacute;n</option>
+                  <option value="control">Control</option>
+                  <option value="comunicaciones">Comunicaciones</option>
+              </select>
+          </div>
 
-        <div class='col-md-4 text-center'>
-            <h4 class="d-block bg-dark text-white my-2">Tipo de archivo</h4>
-            <select name="fileType" class="custom-select">
-                <option selected value='todos'>Todos</option>
-                <option value="documentos">Documentos</option>
-                <option value="imagen">Imagen</option>
-                <option value="aplicacion">Aplicaci&oacute;n</option>
-            </select>
-        </div>
-    </div>
+          <div class='col-md-4 text-center'>
+              <h4 class="d-block bg-dark text-white my-2">Tipo de archivo</h4>
+              <select name="fileType" class="custom-select filter">
+                  <option selected value=''>Todos</option>
+                  <option value="document">Documentos</option>
+                  <option value="image">Imagen</option>
+                  <option value="aplication">Aplicaci&oacute;n</option>
+                  <option value="video">Video</option>
+              </select>
+          </div>
+      </div>
+    </form>
     <!--% -------------------------------------------------- -->
+
+    <script>
+        $('.filter').on('change', ()=>{
+          $.ajax({
+            type: 'POST',
+            url: '<%= url %>',
+            data: $('#filtersForm').serialize()
+          }).done( (data)=>{
+              $('#filesResult').html(data);
+          });
+        });
+    </script>
     
   </div>
 
   <!--$ files result -->
   <div class='container-fluid' id='filesResult'>
     <div class='container-fluid text-center my-2' id='files-title'>
-        <h2>Documentos en: <%= resultsTitle %></h2>
+        <h2><%=resultsTitle%></h2>
     </div>
     <hr>
     <h3 class='text-center'>p&aacute;gina <%=currentPage%> de <%=totalPages%> </h3>
@@ -68,7 +83,7 @@
             <!--% file extension icon -->
             <td style="width:5%" class='d-none d-sm-table-cell' >
                 <div class='text-center' >
-                    <a href="#" role="button" class='btn fileType-powerpoint d-block'>PowerPoint</a>
+                    <a href="#" role="button" class='btn <%= file.elementClass.btnClass %> d-block'><%= file.elementClass.btnName %></a>
                 </div>
             </td>
             <!--% file details -->
@@ -88,7 +103,7 @@
 
                 <!--@ file extension icon for mobile-->
                 <div class='text-center' >
-                    <a href="#" role="button" class='btn fileType-powerpoint d-block d-sm-none'>PowerPoint</a>
+                    <a href="#" role="button" class='btn <%= file.elementClass.btnClass %> d-block d-sm-none'><%= file.elementClass.btnName %></a>
                 </div>
 
                 <a href="/files/viewFile?id=<%= file.id%>" role="button" class="btn btn-dark d-block">Ver archivo</a>
@@ -102,26 +117,40 @@
     <ul class="pagination justify-content-center">
 
       <% var pageButtonStatus = '' %>
-      <% var href = url %>
 
       <% pageButtonStatus = (previousPage)? 'enabled' : 'disabled'%>
       <li class="page-item <%= pageButtonStatus %>">
-        <a class="page-link" href="<%= href %>&page=<%= previousPage %>" tabindex="-1" aria-disabled="true">Previous</a>
+        <button class="page-link pageBtn" data-page="&page=<%= previousPage %>" >Previous</button>
       </li>
 
       <li class="page-item">
-        <a class="page-link" href="<%= href %>&page=<%= currentPage %>"><%= currentPage %></a>
+        <button class="page-link pageBtn" data-page="&page=<%= currentPage %>"><%= currentPage %></button>
       </li>
 
       <% pageButtonStatus = (nextPage)? 'enabled' : 'disabled'%>
       <li class="page-item <%= pageButtonStatus %>">
-        <a class="page-link" href="<%= href %>&page=<%= nextPage %>" tabindex="-1" aria-disabled="true">Next</a>
+        <button class="page-link pageBtn" data-page="&page=<%= nextPage %>">Next</button>
       </li>
     </ul>
 
   </div>
 
 <% } %>
+
+<script>
+  $('.pageBtn').on('click', (e)=>{
+    let page = e.target.dataset.page;
+  
+    $.ajax({
+      type: 'POST',
+      url: '<%= url %>',
+      data: $('#filtersForm').serialize()+page
+    }).done( (data)=>{
+        $('html, body').animate({ scrollTop: 0 }, '100');
+        $('#filesResult').html(data);
+    });
+  }); 
+</script>
 
   <% include partials/footer %>
   <% include partials/frontend-scripts %>
