@@ -10,6 +10,9 @@ const Grid = require('gridfs-stream');
 //= getting data from upload database
 var uploads = require('../models/uploads');
 
+//= getting tags from database
+var tagList = require('../models/tags');
+
 //= get upload page
 router.get('/', ensureAuth, (req, res, next) => {
 
@@ -124,6 +127,10 @@ router.post('/', (req,res) => {
             let btnClass = getFileTypeClass(extension).btnClass;
             let btnName = getFileTypeClass(extension).btnName; 
 
+            //= add new tags in to the database
+            let tags = (req.body.tags == '')? null : (req.body.tags).split(',');
+            if(tags !== null) addTags(tags);
+            
             const file = new uploads({
               createdBy: req.user.username,
               userId: req.user.googleId,
@@ -137,7 +144,7 @@ router.post('/', (req,res) => {
               size: req.file.size,
               mimetype: req.file.mimetype,
               md5: req.file.md5,
-              tags: (req.body.tags == '')? null : (req.body.tags).split(','),
+              tags: tags,
               fileId: req.file.id,
               elementClass:{
                 btnClass,
@@ -182,5 +189,21 @@ function getFileTypeClass(ext){
   return {btnClass:'fileType-other',btnName:'Otros'};
 }
 
+//= add tags to the database function
+function addTags(tags){
+
+  tags.forEach( tag => {
+
+    const newTag = new tagList({
+      name: tag
+    });
+
+    tagList.findOne({name: tag},(err,doc)=>{
+      if(!doc){
+        newTag.save( (err,saveTag)=> {if(err) console.log(err)});
+      }
+    });
+  });
+}
 
 module.exports = router;
