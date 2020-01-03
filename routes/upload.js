@@ -121,6 +121,8 @@ router.post('/', (req,res) => {
             //= get file extension
             const extension = req.file.filename.split('.').pop();
             let fileType = getFileType(extension);
+            let btnClass = getFileTypeClass(extension).btnClass;
+            let btnName = getFileTypeClass(extension).btnName; 
 
             const file = new uploads({
               createdBy: req.user.username,
@@ -136,7 +138,11 @@ router.post('/', (req,res) => {
               mimetype: req.file.mimetype,
               md5: req.file.md5,
               tags: (req.body.tags == '')? null : (req.body.tags).split(','),
-              fileId: req.file.id
+              fileId: req.file.id,
+              elementClass:{
+                btnClass,
+                btnName
+              }
             });
 
             //= save file data
@@ -163,5 +169,18 @@ function getFileType(ext){
   //= in case there's not match
   return 'other';
 }
+
+function getFileTypeClass(ext){
+
+  if(ext.match(/(jpg|png|gif|jpeg)$/i)) return {btnClass:'fileType-img', btnName:'Imagen'};
+  if(ext.match(/(pdf)$/i)) return {btnClass:'fileType-pdf', btnName: 'PDF'};
+  if(ext.match(/(doc|docx)$/i)) return {btnClass:'fileType-word', btnName:'Word'};
+  if(ext.match(/(zip|rar|tar|gzip|gz|exe)$/i)) return {btnClass:'fileType-application',btnName:'Aplicacion'};
+  if(ext.match(/(ppt|pptx)$/i)) return {btnClass: 'fileType-powerpoint', btnName: 'PowerPoint'};
+
+  //= in case there's not match
+  return {btnClass:'fileType-other',btnName:'Otros'};
+}
+
 
 module.exports = router;
