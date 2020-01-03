@@ -24,32 +24,78 @@ conn.once('open', () => {
 //= view all files by category
 router.get('/', (req, res, next) => {
 
-  const category = req.query.category || 'general';
   //= page starts with index 0
   const page = parseInt(req.query.page || '1');
-  const url = `/files?category=${category}`;
-  const resultsTitle = `Category: ${category}`
-  const searchOption = { category };
+  const url = `/files`;
+  const resultsTitle = 'documentos';
   
-  files.countDocuments(searchOption,(err,count) => {
-    files.find(searchOption)
+  files.countDocuments({},(err,count) => {
+    files.find({})
     .limit(limitPerPage)
     .skip((page-1)*limitPerPage)
     .sort({_id: -1})
     .exec( (err,docs)=>{
 
       const searchData = {
-        resultsTitle,
         page,
         count,
+        resultsTitle,
         url,
         err,
         docs
       }
 
-      pagination(req,res,searchData);
+      const ajaxStatus = false;
+
+      pagination(req,res,searchData,ajaxStatus);
     });
   });
+});
+
+//= ajax request 
+router.post('/', (req,res,next) => {
+
+    let semester = req.body.semester;
+    let mention = req.body.mention;
+    let fileType = req.body.fileType;
+    const page = parseInt(req.body.page || '1');
+    const resultsTitle = 'documentos';
+
+    let query = {}
+    
+    if(semester || semester!='') query.semester = semester;
+    if(mention || mention!='') query.mention = mention;
+    if(fileType || fileType!='') query.fileType = fileType;
+
+    let urlFilters = [];
+
+    if(semester || semester!='') urlFilters.push(`semester=${semester}`);
+    if(mention || mention!='') urlFilters.push(`mention=${mention}`);
+    if(fileType || fileType!='') urlFilters.push(`fileType=${fileType}`);
+
+    const url = (urlFilters.length >= 1) ? `/files?${urlFilters.join('&')}` : '/files';
+    let ajaxStatus = true;
+
+    files.countDocuments(query,(err,count) => {
+      files.find(query)
+      .limit(limitPerPage)
+      .skip((page-1)*limitPerPage)
+      .sort({_id: -1})
+      .exec( (err,docs)=>{
+        
+        const searchData = {
+          page,
+          resultsTitle,
+          count,
+          url,
+          err,
+          docs
+        }
+  
+        pagination(req,res,searchData,ajaxStatus);
+      });
+    });
+
 });
 
 //= view indiviual file

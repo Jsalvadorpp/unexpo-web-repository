@@ -28,13 +28,13 @@ router.get('/files', (req,res)=>{
                     if(userFound){
                         const searchData = {
                             page,
-                            resultsTitle: `${userFound.username} files`,
+                            resultsTitle: `Documentos Subidos por ${userFound.username}`,
                             count,
                             url,
                             err,
                             docs
                         }
-                        pagination(req,res,searchData);
+                        pagination(req,res,searchData,false);
                     }else{
                         res.status(404).json({message : 'data not found'});
                     }
@@ -45,5 +45,61 @@ router.get('/files', (req,res)=>{
         })
     });
 });
+
+//= ajax request 
+router.post('/files', (req,res,next) => {
+
+    let semester = req.body.semester;
+    let mention = req.body.mention;
+    let fileType = req.body.fileType;
+    let userId = req.query.id;
+    const page = parseInt(req.body.page || '1');
+
+    let query = {userId}
+    
+    if(semester || semester!='') query.semester = semester;
+    if(mention || mention!='') query.mention = mention;
+    if(fileType || fileType!='') query.fileType = fileType;
+
+    let urlFilters = [];
+
+    if(semester || semester!='') urlFilters.push(`semester=${semester}`);
+    if(mention || mention!='') urlFilters.push(`mention=${mention}`);
+    if(fileType || fileType!='') urlFilters.push(`fileType=${fileType}`);
+
+    const url = (urlFilters.length >= 1) ? `/user/files?id=${userId}&${urlFilters.join('&')}` : `/user/files?id=${userId}`;
+    let ajaxStatus = true;
+
+    files.countDocuments(query,(err,count) => {
+      files.find(query)
+      .limit(limitPerPage)
+      .skip((page-1)*limitPerPage)
+      .sort({_id: -1})
+      .exec( (err,docs)=>{
+        if(docs){
+            users.findOne({googleId: userId},(err,userFound)=>{
+
+                if(userFound){
+                    const searchData = {
+                        page,
+                        resultsTitle: `Documentos Subidos por ${userFound.username}`,
+                        count,
+                        url,
+                        err,
+                        docs
+                    }
+                    pagination(req,res,searchData,ajaxStatus);
+                }else{
+                    res.status(404).json({message : 'data not found'});
+                }
+            });
+        }else{
+            res.status(404).json({message : 'data not found'});
+        }
+      });
+    });
+
+});
+
 
 module.exports = router;
