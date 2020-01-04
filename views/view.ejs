@@ -2,47 +2,77 @@
 <html lang="en">
 <head>
   <% include partials/head %> 
+  <link rel="stylesheet" href="/stylesheets/filePreview.css">
 </head>
 
 <body>
   <% include partials/menu-navbar %>
+  <%- messages('partials/flash-messages', locals) %>
 
-  <div class="container-fluid bg-3 text-left">   
-    <%- messages('partials/flash-messages', locals) %>
-    
-    <hr>
-    <div class="col-md-12">
+  <div class='container-fluid'>
+    <div class='card'>
 
-        <h1>Title: <%= file.title %></h1>
-        <p class="card-subtitle mb-2 text-muted">Uploaded By: <a href="/user/files?id=<%= file.userId %>"><%= file.createdBy %></a></p>
-        <p><%= file.description %></p>
-        <h4 class="badge badge-primary">Extension: <%= file.mimetype %></h4><br>
-        <h4 class="badge badge-primary">Size: <%= Math.round(file.size/Math.pow(10,6)) %> mb</h4><br>
-        <% if(file.tags!= null && file.tags.length > 0){%>
-          <div class='tags'>Tags: 
-          <% file.tags.forEach(tag => { %>
-              <a href="/tags/files?tag=<%= tag %>" class="badge badge-secondary"><%= tag %></a>
-          <% }); %>
-          </div><br>
-        <% } %>
+      <div class='row'>
 
-        <a href="/files/download?id=<%= file.id%>" class="btn btn-success">Download File</a>
+        <div class='col-lg-3 text-center'>
+            <div class='kv-avatar'>
+                <div id="preview-box" 
+                  data-name="<%=file.filename%>" 
+                  data-size="<%=file.size%>" 
+                  data-id="<%= file.id%>"
+                  data-caption="<%=file.title%>"
+                  data-mimetype="<%=file.mimetype%>"
+                  type="file">
+                </div>
+            </div>
+        </div>
 
-        <% if((userIsLogged && user.googleId == file.userId) || (userIsLogged && user.role == 'admin')){ %>
-  
-          <a href="/files/edit?id=<%= file.id%>" class="btn btn-primary">Edit File</a>
-          <form method="POST" action='/files/delete?id=<%= file.id%>&_method=DELETE' 
-            onsubmit="return confirm('Do you really want to delete this file?');">
-            <br><button type='submit' class="btn btn-danger">Delete File</button>
-          </form>
+        <div class='col-lg-9 card-body' id='details-box'>
+            <h1><%= file.title %></h1>
+            <p><span class='text-color'>Subido por: <a href="/user/files?id=<%= file.userId %>"></span><%= file.createdBy %></p></a>
+            <p><span class='text-color'>Autor original: </span><%= file.author %></p>
+            <p><span class='text-color'>Fecha de subida: </span>05/03/2012</p>
+            <p><span class='text-color'>Semestre: </span><%= file.semester %><span class='text-color'> Mencion: </span><%= file.mention %></p>
+            <p><span class='text-color'>Extension: </span><%= file.filename.split('.').pop() %></p>
+        </div>
 
-        <% } %>
+      </div>
+
+      <div class='row'>
       
-    </div><hr>
+        <div class='col-12 card-body'>
 
-  </div>
+          <div>
+            <h4 class='text-color'>Descripcion: </h4>
+            <p><%= file.description %></p>
+          </div>
+
+          <% if(file.tags!= null && file.tags.length > 0){%>
+              <div class='tags text-color'>Tags: 
+                  <% file.tags.forEach(tag => { %>
+                      <a href="/tags/files?tag=<%= tag %>" class="badge badge-secondary"><%= tag %></a>
+                  <% }); %>
+              </div>
+          <% } %>
+        </div>
+        
+        <div class='col-12 card-body'>
+          <a href="/files/download?id=<%= file.id%>" class='btn btn-download'><i class="fas fa-file-download" style="margin-right: 10px;"></i>Descargar archivo</a>
+          <% if((userIsLogged && user.googleId == file.userId) || (userIsLogged && user.role == 'admin')){ %>
+            <a href="/files/edit?id=<%= file.id%>" class='btn btn-edit float-right'><i class="fas fa-edit" style="margin-right: 10px;"></i>Editar</a>
+            <form class="float-right" method="POST" action='/files/delete?id=<%= file.id%>&_method=DELETE' onsubmit="return confirm('Estas seguro que desear eliminar este archivo?');">
+                <button type='submit' class="btn btn-delete"><i class="fas fa-trash-alt" style="margin-right: 10px;"></i>Eliminar</button>
+            </form>
+          <% } %>
+        </div>
   
+      </div> 
+    </div>
+  </div>
+
+  <script src='/javascripts/preview-box.js'></script>
   <% include partials/frontend-scripts %>
+  <% include partials/footer %>
 </body>
 
 </html>
