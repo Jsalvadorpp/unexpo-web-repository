@@ -152,6 +152,8 @@ router.get('/search',(req,res) => {
 //= download file
 router.get('/download', (req,res,next) => {
 
+  let downloadStatus = (req.query.status || true);
+  
   //= file metadata id
   id = req.query.id;
 
@@ -171,7 +173,7 @@ router.get('/download', (req,res,next) => {
       //= set file type
       res.set('Content-Type', file.contentType);
       //= set filename
-      res.attachment(data.title.trim()+extension);
+      if (downloadStatus === true) res.attachment(data.title.trim()+extension);
 
       //= read file
       //! DeprecationWarning: GridStore is deprecated

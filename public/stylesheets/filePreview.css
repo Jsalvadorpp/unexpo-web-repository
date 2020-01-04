@@ -35,7 +35,7 @@
 #details-box h1{
     text-transform: uppercase;
 }
-.btns{
+.btn{
     margin-right: 10px;
     box-shadow: 0 1px 3px rgba(0,0,0,.3);
 }
@@ -43,6 +43,7 @@
     font-weight: bolder;
     border: 1px solid #0ff;
     transition: transform .4s;
+    color: white;
 }
 .btn-download:hover{
     cursor: pointer;
@@ -55,6 +56,7 @@
     background: #e62727e3;
     border: 1px solid #e61f1f;
     transition: transform .4s;
+    color: white;
 }
 .btn-delete:hover{
     cursor: pointer;
@@ -67,6 +69,7 @@
     border: 1px solid #0cc60c;
     background: #269326;
     transition: transform .4s;
+    color: white;
 }
 .btn-edit:hover{
     cursor: pointer;
@@ -74,4 +77,10 @@
     background-color: #0cc60c;
     color: rgb(49, 48, 48) !important;
 }
-
+button:focus,
+a:focus{
+    box-shadow: none !important;
+}
+.fa-file{
+    color: gray;
+}
