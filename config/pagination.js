@@ -101,7 +101,7 @@ function showFiles(data){
         <a href="#" role="button" class='btn ${btnClass} d-block d-sm-none'>${btnName}</a>
     </div>`;
 
-    output+=`<a href="/files/viewFile?id=${file.id}" role="button" class="btn btn-dark d-block">Ver archivo</a>
+    output+=`<a href="/files/viewFile?id=${file.id}" role="button" class="btn btn-dark d-block" style='width: 110px; margin: auto;'>Ver archivo</a>
     </td></tr>`;
   
   });
