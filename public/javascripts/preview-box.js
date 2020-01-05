@@ -79,10 +79,12 @@ function getPreviewType(filename){
 
     let ext = filename.split('.').pop();
 
-    if(ext.match(/(doc|docx|xls|xlsx|ppt|pptx|txt|pdf)$/i)) return 'office';
+    if(ext.match(/(doc|docx|xls|xlsx|ppt|pptx)$/i)) return 'office';
     if(ext.match(/(jpg|png|gif|jpeg)$/i)) return 'image';
     if(ext.match(/(avi|mpg|mkv|mov|mp4|3gp|webm|wmv)$/i)) return 'video';
     if(ext.match(/(pdf)$/i)) return 'pdf';
+    if(ext.match(/(mp3|wav)$/i)) return 'audio';
+    if(ext.match(/(txt)$/i)) return 'text';
 
     //= in case there's not match
     return false;
