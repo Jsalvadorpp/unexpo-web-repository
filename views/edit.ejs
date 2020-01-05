@@ -1,65 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <% include partials/head %> 
-</head>
+<% include partials/head %> 
 
 <body>
     <% include partials/menu-navbar %>
+    <%- messages('partials/flash-messages', locals) %>
 
+    <br>
     <div class="container-fluid bg-3 text-center">    
-        <h3>Edit file: <%= file.title %></h3><br>
+        <h3>Editar Documento</h3><br>
     </div>
 
     <div class='container'>
 
-      <form class="col-lg-6 offset-lg-3" action="/files/edit?id=<%= file.id%>&_method=PUT" method="POST">
+      <form  action="/files/edit?id=<%= file.id%>&_method=PUT" method="POST">
 
-        <%- messages('partials/flash-messages', locals) %>
-
-        <div class='form-group'>
-          <label for="titleInput">File Title</label>
-          <input type='text' class='form-control' value='<%= file.title %>' name="title" id="titleInput">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Título</span>
+          </div>
+          <input type="text" class="form-control" name="title" value='<%= file.title %>'>
         </div>
 
-        <div class='form-group'>
-          <label for="descriptionInput">File Description</label>
-          <textarea class='form-control' name="description" id="descriptionInput"><%= file.description %></textarea>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Autor</span>
+          </div>
+          <input type="text" class="form-control" name="author" value='<%= file.author %>'>
+        </div>
+  
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Descripción</span>
+          </div>
+          <textarea class="form-control"  name="description"><%= file.description %></textarea>
         </div>
 
-        <div class='form-group'>
-          <label for="categoryInput">Choose a Category</label>
-          <select class="form-control" id="categoryInput" name='category' value='Control'>
-            <option value='General'>General</option>
-            <option value='Computacion'>Computacion</option>
-            <option value='Comunicaciones'>Comunicaciones</option>
-            <option value='Control'>Control</option>
-          </select>
-        </div>
+        <div class='form-row'>
 
-        <div class='form-group'>
-          <label for="tagsInput">Add Tags (optional)</label>
+          <div class="col-6 my-3">
+            <label class="input-group-text" style="border-bottom: 0;">Semestre</label>
+            <select id='semester-options' class="custom-select mr-sm-2" name="semester">
+              <option value='ninguno'>Ninguno</option>
+              <option value='IV'>Cuarto</option>
+              <option value='V'>Quinto</option>
+              <option value='VI'>Sexto</option>
+              <option value='VII'>Septimo</option>
+              <option value='VIII'>Octavo</option>
+              <option value='IX'>Noveno</option>
+            </select>
+          </div>
+
+          <div class="col-6 my-3">
+            <label class="input-group-text" style="border-bottom: 0;">Mención</label>
+            <select id='mention-options' class="custom-select mr-sm-2" name="mention" id="inlineFormCustomSelect">
+              <option value='computación'>Computación</option>
+              <option value='comunicaciones'>Comunicaciones</option>
+              <option value='control'>Control</option>
+              <option value='general' selected>General</option>
+            </select>
+          </div>
+
+        </div>
+  
+        <div class='form-group'> 
+          <label for="tagsInput" class="input-group-text" style="border-bottom: 0;">Agrega etiquetas (opcional)</label>
           <input type="text" name='tags' id='tagsInput' value='<%= (file.tags == null)? null : file.tags.join(',') %>'>
-          <small class="form-text text-muted">separate tags with commas</small>
+          <small class="form-text text-muted">Separa las etiquetas con comas, por ejemplo: imagen, guia, ...</small>
         </div>
+  
+        <br><button type="submit" class="btn btn-primary btn-block">Actualizar</button>
+      </form>   
 
-        <br><button type="submit" class="btn btn-primary btn-block">Update</button>
-      </form>
-    
     </div>
 
-
+    <% include partials/footer %>
     <% include partials/frontend-scripts %>
     <script src='/javascripts/tagsinput.js'></script>
-    <script src="/javascripts/edit-selectOption.js" id ='selectOption-script' data-category='<%= file.category %>'></script>
-
-    <script>
-      //= script to view the name of the file on select
-      $(".custom-file-input").on("change", function() {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-      });
-    </script>
+    <script src="/javascripts/edit-selectOption.js" id ='selectOption-script' data-mention='<%= file.mention %>' data-semester='<%= file.semester %>'></script>
 </body>
 
 </html>
