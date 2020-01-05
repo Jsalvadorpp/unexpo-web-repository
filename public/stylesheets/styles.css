@@ -110,13 +110,18 @@ footer p{
     transition: .5s;
 }
 .login-box:hover,
-.login-box:focus,
-.login-box:active,
-.login-box:focus-within,
 .login-box:visited{
     opacity: 1;
     cursor: pointer;
     transform: scale(1.02);
+    text-decoration: none;
+    outline:none;
+}
+.login-box:focus,
+.login-box:active,
+.login-box:focus-within{
+    text-decoration: none;
+    outline:none;
 }
 .img-login{
     height: 55vh;
