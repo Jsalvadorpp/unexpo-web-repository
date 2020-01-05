@@ -209,7 +209,9 @@ router.put('/edit', userAuth ,[
   check('title')
     .not().isEmpty().withMessage('title is required'),
   check('description')
-    .not().isEmpty().withMessage('description is required')
+    .not().isEmpty().withMessage('description is required'),
+  check('author')
+    .not().isEmpty().withMessage('author is required')
   ],
   //= handle request and response
   (req,res) => {
@@ -220,7 +222,9 @@ router.put('/edit', userAuth ,[
     const updatedData = {
       title : req.body.title,
       description : req.body.description,
-      category : req.body.category
+      mention : req.body.mention,
+      semester: req.body.semester,
+      author: req.body.author
     };
 
     if(tags != null){
@@ -250,7 +254,9 @@ router.put('/edit', userAuth ,[
 
           file.title = updatedData.title;
           file.description = updatedData.description;
-          file.category = updatedData.category;
+          file.mention = updatedData.mention;
+          file.semester = updatedData.semester;
+          file.author = updatedData.author;
           file.tags = updatedData.tags;
           
           if(doc){
