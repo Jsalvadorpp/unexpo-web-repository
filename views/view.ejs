@@ -31,7 +31,18 @@
             <h1><%= file.title %></h1>
             <p><span class='text-color'>Subido por: <a href="/user/files?id=<%= file.userId %>"></span><%= file.createdBy %></p></a>
             <p><span class='text-color'>Autor original: </span><%= file.author %></p>
-            <p><span class='text-color'>Fecha de subida: </span>05/03/2012</p>
+            <p id='date'><span class='text-color' data-uploadDate='<%= file.uploadDate %>'>Fecha de subida: </span></p>
+            <script>
+              let date = new Date($('#date span').attr('data-uploadDate'));
+              const options = {
+                year:"numeric",
+                month:"2-digit",
+                day:"2-digit"
+              }
+              //format date
+              date = date.toLocaleDateString('en-US',options);
+              $('#date').append(date);
+            </script>
             <p><span class='text-color'>Semestre: </span><%= file.semester %><span class='text-color'> Mencion: </span><%= file.mention %></p>
             <p><span class='text-color'>Extension: </span><%= file.filename.split('.').pop() %></p>
         </div>
