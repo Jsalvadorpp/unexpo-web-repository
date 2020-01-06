@@ -20,7 +20,7 @@ module.exports = function(passport){
             
                 //= if user is saved in the Db then login 
                 if(user){
-                return done(null,user);
+                    return done(null,user,{type: 'success', message: `Bienvenido de vuelta ${user.username}` });
                
                 //= if no user is found then create a new entry in the Db
                 }else{
@@ -39,14 +39,14 @@ module.exports = function(passport){
                     //= save user
                     newProfile.save( (err,savedUser) => {
                         if (err)  return console.error(err);
-                        return done(null, savedUser);
+                        return done(null, savedUser,{ type: 'success', message: 'Te has registrado correctamente' });
                     });
                 }
             });
 
         //= invalid domain host
         }else{
-            return done(null, false, { type: 'danger', message: 'invalid domain' });
+            return done(null, false, { type: 'danger', message: 'Dominio de correo invalido' });
         }
       }
     ));

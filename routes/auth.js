@@ -31,9 +31,10 @@ router.get('/login/professor',
 //= redirect after login
 router.get('/google/redirect', 
     passport.authenticate( 'google', { 
-      successRedirect: '/dashboard',
+      successRedirect: '/',
       failureRedirect: '/',
-      failureFlash: true 
+      failureFlash: true,
+      successFlash: true,
 }));
 
 //= logout route
