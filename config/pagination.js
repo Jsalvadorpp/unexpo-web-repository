@@ -1,6 +1,6 @@
 const limitPerPage = 5;
 
-function pagination(req,res,searchData,ajaxStatus){
+function pagination(req,res,searchData,ajaxStatus,setFilters){
 
   const count = searchData.count;
   const page = searchData.page;
@@ -22,7 +22,6 @@ function pagination(req,res,searchData,ajaxStatus){
         return res.status(404).json(response);
       }
       
-
     }else{
 
         var nextPage = page+1;
@@ -47,7 +46,7 @@ function pagination(req,res,searchData,ajaxStatus){
         }
         
         if(ajaxStatus){
-          let output = showFiles(dataObtained);
+          let output = showFiles(dataObtained,setFilters);
           res.send(output);
         }else{
           res.render('files',dataObtained);
@@ -55,7 +54,7 @@ function pagination(req,res,searchData,ajaxStatus){
       }
 }
 
-function showFiles(data){
+function showFiles(data,setFilters){
 
   let files = data.files;
   let url = data.url;
@@ -125,6 +124,9 @@ function showFiles(data){
 
   output+=`</ul></div>`;
 
+  let ajaxData;
+  ajaxData = (setFilters === false)? `$('#search').serialize()+page` : `$('#filtersForm').serialize()+page`;
+
   output+=`<script>
   $('.pageBtn').on('click', (e)=>{
     let page = e.target.dataset.page;
@@ -132,7 +134,7 @@ function showFiles(data){
     $.ajax({
       type: 'POST',
       url: '${url}',
-      data: $('#filtersForm').serialize()+page
+      data: ${ajaxData}
     }).done( (data)=>{
         $('html, body').animate({ scrollTop: 0 }, '100');
         $('#filesResult').html(data);

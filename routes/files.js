@@ -114,11 +114,16 @@ router.get('/viewFile', (req,res,next) => {
 
 //= view all files using the search box
 router.get('/search',(req,res) => {
+  res.render('search',{page: 'buscar'});
+});
 
-  const page = parseInt(req.query.page || '1');
-  const query = req.query.q;
-  const url = `/files/search?q=${query}`
-  const resultsTitle = `"${query}" Results:`
+//= ajax request for search box
+router.post('/search',(req,res) => {
+
+  const page = parseInt(req.body.page || '1');
+  const query = req.body.q;
+  const url = `/files/search?q=${query}`;
+  const resultsTitle = `resultados de la busqueda: ${query}`;
   var regex = new RegExp(query, "i");
 
   const searchOptions = {
@@ -127,6 +132,8 @@ router.get('/search',(req,res) => {
       {description: {$regex: regex}}
     ]
   };
+  let ajaxStatus = true;
+  let setfilters = false;
 
   files.countDocuments(searchOptions, (err,count) => {
     files.find(searchOptions)
@@ -144,7 +151,7 @@ router.get('/search',(req,res) => {
         docs
       }
 
-      pagination(req,res,searchData);
+      pagination(req,res,searchData,ajaxStatus,setfilters);
     });
   });
 });
