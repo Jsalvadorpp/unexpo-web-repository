@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include partials/head %> 
+</head>
+
+<body>
+  <% include partials/menu-navbar %>
+  <%- messages('partials/flash-messages', locals) %>
+
+  <div id='search-box' class='container text-center' style='min-height: 400px;'>
+    <div class="form text-center">
+        
+        <div class="input-group mb-3 mt-3" style="height: 50px;">
+            <div class="input-group-prepend">
+                <span class="input-group-text px-4"><i class="fas fa-search"></i></span>
+            </div>
+            <input id='search' type="text" class="form-control" name="q" placeholder="Buscar" style="height: 50px;">
+        </div>
+    </div>
+  </div>
+
+  <div class='container-fluid' id='filesResult'>
+
+  </div>
+
+  <script src='/javascripts/search.js'></script>
+  <% include partials/footer %>
+  <% include partials/frontend-scripts %>
+</body>
+
+</html>
