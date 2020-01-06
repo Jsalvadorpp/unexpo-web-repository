@@ -36,11 +36,11 @@ router.get('/files', (req,res)=>{
                         }
                         pagination(req,res,searchData,false);
                     }else{
-                        res.status(404).json({message : 'data not found'});
+                        res.status(404).json({message : 'error: informacion no encontrada'});
                     }
                 });
             }else{
-                res.status(404).json({message : 'data not found'});
+                res.status(404).json({message : 'error: informacion no encontrada'});
             }
         })
     });
@@ -90,11 +90,11 @@ router.post('/files', (req,res,next) => {
                     }
                     pagination(req,res,searchData,ajaxStatus);
                 }else{
-                    res.status(404).json({message : 'data not found'});
+                    res.status(404).json({message : 'error: informacion no encontrada'});
                 }
             });
         }else{
-            res.status(404).json({message : 'data not found'});
+            res.status(404).json({message : 'error: informacion no encontrada'});
         }
       });
     });

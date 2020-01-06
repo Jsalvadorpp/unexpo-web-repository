@@ -7,17 +7,17 @@ module.exports = (req,res,next) => {
         const fileId = req.query.id;
 
         files.findById(fileId).exec( (err,file) => {
-            if(!file) return res.status(404).json({message : 'data not found'});
+            if(!file) return res.status(404).json({message : 'error: informacion no encontrada'});
         
             if(req.user.googleId == file.userId || req.user.role == 'admin'){
                 return next();
             }else{
-                req.flash('danger',`you don't have permission`);
+                req.flash('danger',`no tienes permiso para ver esta página`);
                 res.redirect('/');
             }
         });
     }else{
-        req.flash('danger',`you don't have permission`);
+        req.flash('danger',`no tienes permiso para ver esta página`);
         res.redirect('/');
     }
 }

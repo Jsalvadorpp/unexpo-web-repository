@@ -18,7 +18,7 @@ function pagination(req,res,searchData,ajaxStatus,setFilters){
         res.send(response);
 
       }else{
-        var response = { message : 'data not found'};
+        var response = { message : 'error: informacion no encontrada'};
         return res.status(404).json(response);
       }
       
@@ -28,7 +28,7 @@ function pagination(req,res,searchData,ajaxStatus,setFilters){
         var previousPage = page-1;
         const totalPages = Math.ceil(count/limitPerPage);
 
-        if(page>totalPages) res.status(404).json({message : 'data not found'});
+        if(page>totalPages) res.status(404).json({message : 'error: informacion no encontrada'});
     
         if(page==1) previousPage = null;
         if(page==totalPages) nextPage = null; 
