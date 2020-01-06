@@ -8,11 +8,10 @@
     <!--$ -------------------------------------------------- -->
     <div id='welcomeText'>
       <div class='container'>
-          <h1 class="display-2 text-center">Bienvenido al Repositorio UNEXPO</h1>
-      <p class="lead">Para poder utilizar todas las funciones del sitio Web y para 
-        poder subir contenido usted debe utilizar su correo institucional UNEXPO 
-        para acceder a este sitio. Si no sabe como utilizarlo a continuación se 
-              explica gráficamente
+          <h1 class="display-1 text-center">Unexpo Cloud</h1>
+          <p class="lead text-center">Para poder utilizar todas las funciones del sitio Web y para 
+            poder subir contenido usted debe utilizar su correo institucional UNEXPO 
+            para acceder a este sitio. Si no sabe como utilizarlo, más abajo le explicamos como hacerlo
           </p>
       </div>
   </div>
@@ -23,49 +22,41 @@
   <div class='container my-3'>
 
       <div class='jumbotron'>
-          <h1 class='text-center'>Sobre La P&aacute;gina</h1><hr>
-          <p class='text-center'>"unexpo-repository" es una p&aacute;gina destinada al almacenamiento de
-              informacion relacionada con la ingiener&iacute;a electr&oacute;nica y afines,
-              para el uso de estudiantes,profesores u otros en la busqueda de conocimientos
+          <h1 class='text-center'>Sobre el sitio</h1><hr>
+          <p class='text-center'>"Unexpo cloud" es un sitio Web destinado al almacenamiento de
+            material de apoyo académico relacionado con la Ingenier&iacute;a Electr&oacute;nica para 
+            el uso libre de estudiantes y profesores especialmente de la UNEXPO VRBQTO pero también de
+            cualquier interesado
           </p>
       </div>
       <hr>
 
-      <div class='row my-5 py-2'>
-          <div class='col-md-8' id='about1-text'>
-              <h2>Informaci&oacute;n en solo lugar</h2>
-              <p>Toda la informaci&oacute;n que necesitas en un solo lugar,
-                  facil y rapida de conseguir...
+      <div class='row my-1'>
+          <div class='col-md-8 my-1' id='about1-text'>
+              <h1>Informaci&oacute;n en solo lugar</h1>
+              <p>Toda la informaci&oacute;n que necesitas disponibles para ti en un solo lugar. No te preocupes
+                más por conseguir el material en físico ni por sus costos de impresión.
               </p>
-              <p>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-                  Aenean commodo ligula eget dolor. Aenean massa. Cum sociis 
-                  natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
-                  Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim
-              </p>
-              <a href='#' class='btn btn-primary'>Ver Ahora</a>
+              <a href='/files' class='btn btn-primary'>Ver Ahora</a>
           </div>
-          <div class='col-md-4' id='about1-img'>
-              <image src='images/information.jpeg' class='img-fluid'></image>
+          <div class='col-md-4 my-1' id='about1-img'>
+              <image src='images/information.jpeg' class='img-fluid' height='280px' style="object-fit: cover;"></image>
           </div>
       </div>
       <hr>
 
-      <div class='row my-5 py-2'>
-          <div class='col-md-4' id='about2-img'>
-              <image src='images/contribuye.jpg' class='img-fluid' height='320px'></image>
+      <div class='row my-1'>
+          <div class='col-md-4 my-1' id='about2-img'>
+              <image src='images/contribuye.jpg' class='img-fluid' height='300px'></image>
           </div>
-          <div class='col-md-8' id='about2-text'>
-              <h2>Contribuye</h2>
-              <p>Si eres estudiante activo o profesor proveniente de la
-                  Universidad Nacional Experimental Politécnica "Antonio José de 
-                  Sucre" - UNEXPO puedes contribuir a esta gran comunidad Unexpista...
+          <div class='col-md-8 my-1' id='about2-text'>
+              <h1>Contribuye</h1>
+              <p>Si eres estudiante activo o profesor perteneciente a la
+                Universidad Nacional Experimental Politécnica "Antonio José de 
+                Sucre" Vicerrectorado Barquisimeto puedes publicar material de uso académico relacionado a las
+                asignaturas dictadas en el departamento y así apoyar a la comunidad universitaria
               </p>
-              <p>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. 
-                  Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus 
-              </p>
-              <a href='#' class='btn btn-primary'>Contribuye Ahora</a>
+              <a href='/auth/login' class='btn btn-primary'>Contribuye Ahora</a>
           </div>
       </div>
       <hr>
@@ -77,15 +68,13 @@
   <div class='container'>
 
       <div class='jumbotron text-center'>
-          <h1>Como obtener el correo estudiantil</h2>
+          <h1>Como utilizar el correo estudiantil</h2>
           <hr>
-          <p>debes ser estudiante activo de la UNEXPO vicerectorado
-              Barquisimeto , ingresas a la pagina <a href='www.bqto.unexpo.edu.ve'>www.bqto.unexpo.edu.ve</a> , luego
-              ingresas al sistema como estudiante y sigue las instrucciones que se mostraran a continuación
+          <p>El repositorio utiliza el correo institucional UNEXPO como mecanismo de autenticación.
+            Si no conoces tu correo institucional debes acceder a la <a href='http://www.bqto.unexpo.edu.ve'>página de la Universidad</a>
+            , entrar al sistema de servicios en linea y realizar los siguientes pasos
           </p>
       </div>
-
-      
 
       <!--% Instructions Carousel -->
       <div class="carousel slide" data-ride="carousel" id='instructions'>
@@ -162,18 +151,6 @@
     });
   </script>
 
-
-
-
-
-
-    <% if(userIsLogged){ %>
-      <h3>logged as <%= user.username %></h3><br>
-    <% } %>
-
-    
-
-  
   <% include partials/footer %>
   <% include partials/frontend-scripts %>
 </body>
