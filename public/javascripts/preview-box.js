@@ -78,6 +78,7 @@ $("#preview-box").fileinput({
 function getPreviewType(filename){
 
     let ext = filename.split('.').pop();
+    console.log(`extension = ${ext}`);
 
     if(ext.match(/(doc|docx|xls|xlsx|ppt|pptx)$/i)) return 'office';
     if(ext.match(/(jpg|png|gif|jpeg)$/i)) return 'image';
