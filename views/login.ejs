@@ -4,15 +4,19 @@
   <% include partials/menu-navbar %>
   <%- messages('partials/flash-messages', locals) %>
 
+  <audio autoplay loop>
+    <source src="/sounds/Counter-Strike Global Offensive Soundtrack - Team Selection.mp3" type="audio/mp3">
+  </audio> 
+
   <div class='container' >
     <div class='row'>
 
-      <a href='/auth/login/student' class='col-sm-6 login-box'>
+      <a id='student' class='col-sm-6 login-box'>
         <h3 style='color: #9fc2df'class='text-center'>Entrar Como Estudiante</h3>
         <image class='img-login' src="/images/student.jpeg"></image>
       </a>
 
-      <a href='/auth/login/professor' class='col-sm-6 login-box'>
+      <a id='professor'  class='col-sm-6 login-box'>
         <h3 style='color: #b89343;' class='text-center'>Entrar Como Profesor</h3>
         <image class='img-login' src="/images/profesor.jpg"></image>
       </a>
@@ -20,6 +24,31 @@
     </div>
 
   </div>
+
+  <script>
+    
+
+    $('#student').click(function(){
+        var audio = document.createElement('audio'); audio.id = 'audio';
+        audio.src = '/sounds/Counter Terrorist win - CSGO Sound Effect.mp3'; 
+        document.body.appendChild(audio);
+        audio.play();
+        audio.onended = function(){
+          window.location = window.location.protocol + '//' + window.location.host + '/auth/login/student';
+        }
+    });
+
+    $('#professor').click(function(){
+        var audio = document.createElement('audio'); audio.id = 'audio';
+        audio.src = '/sounds/Terrorists win - CSGO Sound Effect.mp3'; 
+        document.body.appendChild(audio); 
+        audio.play();
+        audio.onended = function(){
+          window.location = window.location.protocol + '//' + window.location.host + '/auth/login/professor';
+        }
+    });
+    
+  </script>
 
   <!--
   <a href= '/auth/login/student' class="btn btn-info btn-block">Login as Student</a>
