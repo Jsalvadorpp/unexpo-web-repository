@@ -10,15 +10,16 @@ var setPreview;
 
 if(previewType != false){
 
+  url =  window.location.protocol + '//' + window.location.host;
   setPreview = true;
-  url = (previewType == 'pdf')? `https://unexpo-web.herokuapp.com/files/download?id=${id}&status=false` : `https://unexpo-web.herokuapp.com/files/download?id=${id}`;
+  url += (previewType == 'pdf')? `/files/download?id=${id}&status=false` : `/files/download?id=${id}`;
 }else{
 
   url = "<h1 class='text-center' style='padding-top: 20%;'>No hay vista previa para este tipo de archivo</h1>";
   setPreview = false;
 }
 
-console.log(window.location.hostname);
+console.log(url);
 
 $("#preview-box").fileinput({
     language: 'es',
@@ -80,8 +81,7 @@ $("#preview-box").fileinput({
 function getPreviewType(filename){
 
     let ext = filename.split('.').pop();
-    console.log(`extension = ${ext}`);
-
+   
     if(ext.match(/(doc|docx|xls|xlsx|ppt|pptx)$/i)) return 'office';
     if(ext.match(/(jpg|png|gif|jpeg)$/i)) return 'image';
     if(ext.match(/(avi|mpg|mkv|mov|mp4|3gp|webm|wmv)$/i)) return 'video';
