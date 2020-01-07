@@ -19,8 +19,6 @@ if(previewType != false){
   setPreview = false;
 }
 
-console.log(url);
-
 $("#preview-box").fileinput({
     language: 'es',
     theme: "fas",
