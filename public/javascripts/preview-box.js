@@ -10,13 +10,15 @@ var setPreview;
 
 if(previewType != false){
 
-  url = `http://localhost:3000/files/download?id=${id}&status=false`;
   setPreview = true;
+  url = (previewType == 'pdf')? `https://unexpo-web.herokuapp.com/files/download?id=${id}&status=false` : `https://unexpo-web.herokuapp.com/files/download?id=${id}`;
 }else{
 
   url = "<h1 class='text-center' style='padding-top: 20%;'>No hay vista previa para este tipo de archivo</h1>";
   setPreview = false;
 }
+
+console.log(window.location.hostname);
 
 $("#preview-box").fileinput({
     language: 'es',
