@@ -5,7 +5,7 @@
   <%- messages('partials/flash-messages', locals) %>
 
   <audio autoplay loop>
-    <source src="/sounds/Counter-Strike Global Offensive Soundtrack - Team Selection.mp3" type="audio/mp3">
+    <source src="/sounds/Counter-Strike_Global_Offensive_Soundtrack_-_Team_Selection.mp3" type="audio/mp3">
   </audio> 
 
   <div class='container' >
@@ -16,7 +16,7 @@
         <image class='img-login' src="/images/student.jpeg"></image>
       </a>
 
-      <a id='professor'  class='col-sm-6 login-box'>
+      <a id='professor' href='/auth/login/professor' class='col-sm-6 login-box'>
         <h3 style='color: #b89343;' class='text-center'>Entrar Como Profesor</h3>
         <image class='img-login' src="/images/profesor.jpg"></image>
       </a>
@@ -30,7 +30,7 @@
 
     $('#student').click(function(){
         var audio = document.createElement('audio'); audio.id = 'audio';
-        audio.src = '/sounds/Counter Terrorist win - CSGO Sound Effect.mp3'; 
+        audio.src = '/sounds/Counter_Terrorist_win_-_CSGO_Sound_Effect.mp3'; 
         document.body.appendChild(audio);
         audio.play();
         audio.onended = function(){
@@ -40,7 +40,7 @@
 
     $('#professor').click(function(){
         var audio = document.createElement('audio'); audio.id = 'audio';
-        audio.src = '/sounds/Terrorists win - CSGO Sound Effect.mp3'; 
+        audio.src = '/sounds/Terrorists_win_-_CSGO_Sound_Effect.mp3'; 
         document.body.appendChild(audio); 
         audio.play();
         audio.onended = function(){
