@@ -317,35 +317,6 @@ router.delete('/delete', userAuth ,(req,res)=>{
   });
 });
 
-//= user profile
-router.get('/profile', ensureAuth, (req,res) => { 
-
-  const page = parseInt(req.query.page || '1');
-  const url = `/files/profile?id=${req.user.googleId}`
-  files.countDocuments({userId:req.user.googleId}, (err,count) => { 
-    files.find({userId: req.user.googleId})
-    .limit(limitPerPage)
-    .skip((page-1)*limitPerPage)
-    .sort({_id: -1})
-    .exec( (err,docs)=>{  
-
-        if (docs){
-          const searchData = {
-            page,
-            count,
-            url,
-            err,
-            docs
-          }
-          pagination(req,res,searchData);
-
-        }else{
-          res.render('data-notFound', {page: 'Informacion No Disponible'});
-        }
-    });
-  });
-});
-
 //= add tags to the database function
 function addTags(tags){
 
