@@ -78,7 +78,7 @@ function showFiles(data,setFilters){
     output+=` <tr>
     <td style="width:5%" class='d-none d-sm-table-cell' >
         <div class='text-center' >
-            <a href="#" role="button" class='btn ${btnClass} d-block'>${btnName}</a>
+            <a role="button" class='btn ${btnClass} d-block'>${btnName}</a>
         </div>
     </td>`;
     output+=` <td style="width: 85%">
@@ -96,7 +96,7 @@ function showFiles(data,setFilters){
 
     output+=` <td style="width:10%" class='text-center'>
     <div class='text-center' >
-        <a href="#" role="button" class='btn ${btnClass} d-block d-sm-none'>${btnName}</a>
+        <a role="button" class='btn ${btnClass} d-block d-sm-none'>${btnName}</a>
     </div>`;
 
     output+=`<a href="/files/viewFile?id=${file.id}" role="button" class="btn btn-dark d-block" style='width: 110px; margin: auto;'>Ver archivo</a>
