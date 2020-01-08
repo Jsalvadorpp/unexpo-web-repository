@@ -28,12 +28,15 @@ module.exports = function(passport){
                     const name = profile.name.givenName.split(" ");
                     const lastName = profile.name.familyName.split(" ");
                     const username = name[1] + ' ' + lastName[0];
+                    //= if the user enter as professor , then add the admin role
+                    let role = profile._json.hd == 'unexpo.edu.ve'? 'admin' : 'user';
 
                     //= create new user
                     const newProfile = new users({
                         username: username,
                         email: profile.emails[0].value,
-                        googleId: profile.id
+                        googleId: profile.id,
+                        role: role
                     });
 
                     //= save user
