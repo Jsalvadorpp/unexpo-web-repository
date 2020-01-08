@@ -1,5 +1,11 @@
 <% if(userIsLogged){ %>
-    <div id='welcome-user' class='container-fluid'><span >Conectado como: </span><%= user.username %></div>
+    <div id='welcome-user' class='container-fluid'>
+        <% if(user.role == 'admin'){ %>
+            <span >Conectado como: </span><%= user.username %><span> - Admin</span> 
+        <% }else{ %>
+            <span >Conectado como: </span><%= user.username %>
+        <% } %>
+    </div>
 <% } %>
 
 <!--$ navigation Bar -->
@@ -26,7 +32,7 @@
                 <li><a href="/auth/login" class="nav-link"><i class="fas fa-sign-in-alt mx-1" style="font-size: 20px"></i>Entrar</a></li>
             <% }else{ %>
                 <li><a href="/upload" class="nav-link"><i class="fa fa-upload mx-1" style="font-size: 20px"></i>Subir</a></li>
-                <li><a href="/files/profile" class="nav-link"><i class="fa fa-user mx-1" style="font-size: 20px"></i>Perfil</a></li>
+                <li><a href="/user/files?id=<%= user.googleId %>" class="nav-link"><i class="fa fa-user mx-1" style="font-size: 20px"></i>Perfil</a></li>
                 <li><a href="/auth/logout" class="nav-link"><i class="fas fa-sign-out-alt mx-1" style="font-size: 20px"></i>Salir</a></li>
             <% } %>
             
