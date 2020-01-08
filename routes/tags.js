@@ -54,7 +54,7 @@ router.get('/files', (req,res)=>{
                 });
             });
         }else{
-            res.status(404).json({message : 'datass not found'});
+            res.render('data-notFound', {page: 'Informacion No Disponible'});
         }
     });
 });

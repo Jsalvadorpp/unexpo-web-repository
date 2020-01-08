@@ -309,7 +309,7 @@ router.delete('/delete', userAuth ,(req,res)=>{
 
     //= remove file data
     files.findByIdAndRemove(id).exec( (err) => {
-      if(err) return res.status(404).json({message : 'unknow error'});
+      if(err) return res.render('data-notFound', {page: 'Informacion No Disponible'})
 
       req.flash('success',`archivo: "${fileTitle}" ha sido eliminado`);
       res.render('homepage', {page: 'home'});
