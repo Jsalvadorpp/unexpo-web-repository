@@ -18,8 +18,7 @@ function pagination(req,res,searchData,ajaxStatus,setFilters){
         res.send(response);
 
       }else{
-        var response = { message : 'error: informacion no encontrada'};
-        return res.status(404).json(response);
+        res.render('data-notFound', {page: 'Informacion No Disponible'});
       }
       
     }else{
@@ -28,7 +27,7 @@ function pagination(req,res,searchData,ajaxStatus,setFilters){
         var previousPage = page-1;
         const totalPages = Math.ceil(count/limitPerPage);
 
-        if(page>totalPages) res.status(404).json({message : 'error: informacion no encontrada'});
+        if(page>totalPages) res.render('data-notFound', {page: 'Informacion No Disponible'});
     
         if(page==1) previousPage = null;
         if(page==totalPages) nextPage = null; 

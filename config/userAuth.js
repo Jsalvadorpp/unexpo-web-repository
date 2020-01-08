@@ -7,7 +7,7 @@ module.exports = (req,res,next) => {
         const fileId = req.query.id;
 
         files.findById(fileId).exec( (err,file) => {
-            if(!file) return res.status(404).json({message : 'error: informacion no encontrada'});
+            if(!file) return res.render('data-notFound', {page: 'Informacion No Disponible'});
         
             if(req.user.googleId == file.userId || req.user.role == 'admin'){
                 return next();

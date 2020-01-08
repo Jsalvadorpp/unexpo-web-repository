@@ -106,7 +106,7 @@ router.get('/viewFile', (req,res,next) => {
 
   files.findById(fileId).exec( (err,file) => {
 
-    if(!file) res.status(404).json({message : 'error: informacion no encontrada'});
+    if(!file) res.render('data-notFound', {page: 'Informacion No Disponible'});
 
     res.render('view',{file,page: `${file.title}`});
   });
@@ -167,7 +167,7 @@ router.get('/download', (req,res,next) => {
   //= look for file data by id
   files.findById(id).exec( (err,data) => {
 
-    if(!data) res.status(404).json({message : 'error: informacion no encontrada'});
+    if(!data) res.render('data-notFound', {page: 'Informacion No Disponible'});
 
     gfs.collection('uploads');
 
@@ -204,7 +204,7 @@ router.get('/edit', userAuth , (req,res) => {
   const id = req.query.id;
 
   files.findById(id).exec( (err,file) => {
-    if(!file) return res.status(404).json({message : 'error: informacion no encontrada'});
+    if(!file) return res.render('data-notFound', {page: 'Informacion No Disponible'});
 
     res.render('edit',{file,page: `${file.title}`});
   });
@@ -254,7 +254,7 @@ router.put('/edit', userAuth ,[
     }else{
 
       files.findById(id).exec( (err,file) => {
-        if(!file) return res.status(404).json({message : 'error: informacion no encontrada'});
+        if(!file) res.render('data-notFound', {page: 'Informacion No Disponible'});
 
         //= check if there's a file with the updated title in Db
         files.findOne({title: updatedData.title},(err,doc) => {
@@ -300,7 +300,7 @@ router.delete('/delete', userAuth ,(req,res)=>{
   const id = req.query.id;
 
   files.findById(id).exec( (err,data) => {
-    if(!data) return res.status(404).json({message : 'error: informacion no encontrada'});
+    if(!data) return res.render('data-notFound', {page: 'Informacion No Disponible'});
 
     const fileTitle = data.title;
 
@@ -340,7 +340,7 @@ router.get('/profile', ensureAuth, (req,res) => {
           pagination(req,res,searchData);
 
         }else{
-          res.status(404).json({message : 'error: informacion no encontrada'});
+          res.render('data-notFound', {page: 'Informacion No Disponible'});
         }
     });
   });
