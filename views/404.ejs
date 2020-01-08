@@ -1,0 +1,21 @@
+<% include partials/head %> 
+
+<body>
+  <% include partials/menu-navbar %>
+  <%- messages('partials/flash-messages', locals) %>
+
+    <div id='error404' style='height: 420px;' class='align-items-center'>
+        <h1 class='mx-auto display-4'>UPS! Has llegado al lugar equivocado</h1>
+    </div>
+    
+    <style>
+      #error404{
+        display: flex;
+      }
+    </style>
+
+  <% include partials/footer %>
+  <% include partials/frontend-scripts %>
+</body>
+
+</html>
