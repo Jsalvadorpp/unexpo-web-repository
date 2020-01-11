@@ -114,7 +114,7 @@ router.get('/viewFile', (req,res,next) => {
 
 //= view all files using the search box
 router.get('/search',(req,res) => {
-  res.render('search',{page: 'buscar'});
+  res.render('search',{page: 'Buscar en nuestra biblioteca de archivos'});
 });
 
 //= ajax request for search box

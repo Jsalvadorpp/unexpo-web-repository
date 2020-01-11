@@ -6,8 +6,7 @@ const ensureAuth = require('../config/ensureAuth');
 router.get('/', (req, res, next) => {
 
   const pageData = {
-    page: 'home',
-    menuId: 'home'
+    page: 'Material relacionado con la Ingeniería Electrónica',
   };
 
   res.render('homepage', pageData);

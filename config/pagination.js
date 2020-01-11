@@ -41,7 +41,7 @@ function pagination(req,res,searchData,ajaxStatus,setFilters){
           totalFiles: count,
           nextPage: nextPage,
           previousPage: previousPage,
-          page: 'files'
+          page: 'Biblioteca de archivos'
         }
         
         if(ajaxStatus){

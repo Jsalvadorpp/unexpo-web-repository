@@ -7,7 +7,13 @@ var users = require('../models/users');
 
 //= dispaly login page
 router.get('/login', (req,res) => {
-  res.render('login',{page: 'login'})
+
+  const pageData = {
+    page: `Entrar`
+  }
+
+
+  res.render('login',pageData)
 });
 
 //= login for students

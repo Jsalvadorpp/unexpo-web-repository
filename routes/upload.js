@@ -17,7 +17,7 @@ var tagList = require('../models/tags');
 router.get('/', ensureAuth, (req, res, next) => {
 
   const pageData = {
-    page: 'Upload'
+    page: 'Subir Archivo'
   };
 
   res.render('upload', pageData);
