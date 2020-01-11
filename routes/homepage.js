@@ -13,15 +13,4 @@ router.get('/', (req, res, next) => {
 
 });
 
-//= get dashboard
-router.get('/dashboard', ensureAuth , (req, res, next) => {
-
-  const pageData = {
-    page: 'dashboard',
-  };
-
-  res.render('dashboard', pageData);
-
-});
-
 module.exports = router;
