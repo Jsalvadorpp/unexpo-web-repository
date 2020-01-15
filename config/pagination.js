@@ -67,7 +67,7 @@ function showFiles(data,setFilters){
   let output = '';
   output+=`<div class='container-fluid text-center my-2' id='files-title'>`;
   output+=` <h2>${resultsTitle}</h2></div><hr>`;
-  output+=`<h3 class='text-center'>p&aacute;gina ${currentPage} de ${totalPages} </h3><hr>`;
+  output+=`<h3 class='text-center'>P&aacute;gina ${currentPage} de ${totalPages} </h3><hr>`;
   output+=`<table class='table-bordered' style="width:100%">`;
   
   files.forEach(file => {
@@ -109,7 +109,7 @@ function showFiles(data,setFilters){
   var pageButtonStatus = (previousPage)? 'enabled' : 'disabled';
 
   output+=`<li class="page-item ${pageButtonStatus}">
-    <button class="page-link pageBtn" data-page="&page=${previousPage}">Previous</button>
+    <button class="page-link pageBtn" data-page="&page=${previousPage}">Anterior</button>
   </li>`;
 
   output+=` <li class="page-item">
@@ -118,7 +118,7 @@ function showFiles(data,setFilters){
 
   pageButtonStatus = (nextPage)? 'enabled' : 'disabled';
   output+=`<li class="page-item ${pageButtonStatus}">
-    <button  class="page-link pageBtn" data-page="&page=${nextPage}">Next</button>
+    <button  class="page-link pageBtn" data-page="&page=${nextPage}">Siguiente</button>
   </li>`;
 
   output+=`</ul></div>`;

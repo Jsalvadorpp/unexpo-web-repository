@@ -28,7 +28,7 @@ router.get('/files', (req,res)=>{
                     if(userFound){
                         const searchData = {
                             page,
-                            resultsTitle: `Documentos Subidos por ${userFound.username}`,
+                            resultsTitle: `Documentos subidos por : ${userFound.username}`,
                             count,
                             url,
                             err,
