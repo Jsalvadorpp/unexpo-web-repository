@@ -1,4 +1,4 @@
-const limitPerPage = 5;
+const limitPerPage = 10;
 
 function pagination(req,res,searchData,ajaxStatus,setFilters){
 
