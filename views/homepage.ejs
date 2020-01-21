@@ -56,7 +56,12 @@
                 Sucre" Vicerrectorado Barquisimeto puedes publicar material de uso académico relacionado a las
                 asignaturas dictadas en el departamento y así apoyar a la comunidad universitaria
               </p>
-              <a href='/auth/login' class='btn btn-primary'>Contribuye Ahora</a>
+              <% if(userIsLogged){ %>
+                    <a href='/upload' class='btn btn-primary'>Contribuye Ahora</a>
+                    
+              <% }else{%>
+                    <a href='/auth/login' class='btn btn-primary'>Contribuye Ahora</a>
+              <% } %>
           </div>
       </div>
       <hr>
