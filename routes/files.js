@@ -233,7 +233,8 @@ router.put('/edit', userAuth ,[
       description : req.body.description,
       mention : req.body.mention,
       semester: req.body.semester,
-      author: req.body.author
+      author: req.body.author,
+      publicationDate : req.body.publicationDate
     };
 
     if(tags != null){
@@ -267,6 +268,9 @@ router.put('/edit', userAuth ,[
           file.semester = updatedData.semester;
           file.author = updatedData.author;
           file.tags = updatedData.tags;
+          file.publicationDate = updatedData.publicationDate;
+          //update date
+          file.updateDate = Date.now();
           
           if(doc){
 

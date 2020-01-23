@@ -130,6 +130,10 @@ router.post('/', (req,res) => {
             //= add new tags in to the database
             let tags = (req.body.tags == '')? null : (req.body.tags).split(',');
             if(tags !== null) addTags(tags);
+
+            //= publication date
+            let publicationDate = req.body.publicationDate;
+            if(typeof req.body.publicationDate === 'undefined' || req.body.publicationDate== '') publicationDate = 'desconocido';
             
             const file = new uploads({
               createdBy: req.user.username,
@@ -146,6 +150,7 @@ router.post('/', (req,res) => {
               md5: req.file.md5,
               tags: tags,
               fileId: req.file.id,
+              publicationDate: publicationDate,
               elementClass:{
                 btnClass,
                 btnName

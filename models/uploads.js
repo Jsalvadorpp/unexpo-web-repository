@@ -65,6 +65,15 @@ const UploadSchema = new Schema({
         require: true,
         default: Date.now
     },
+    updateDate: {
+        type: Date,
+        default: Date.now
+
+    },
+    publicationDate: {
+        type: String,
+        default: 'desconocido'
+    },
     elementClass: {
         type: Object,
         require: true,
