@@ -39,13 +39,14 @@ body{
 .carousel-control-next{
     font-size: 40px;
     color: black;
+    width: 8%;
 
 }
 .carousel-control-next{
-    left: 94%;
+    left: 95%;
 }
 .carousel-control-prev{
-    left: -9%;
+    left: -4%;
 }
 .carousel-control-prev:hover,
 .carousel-control-next:hover,
