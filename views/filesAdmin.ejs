@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include partials/head %> 
+</head>
+
+<body>
+  <% include partials/menu-navbar %>
+  <%- messages('partials/flash-messages', locals) %>
+
+  <% if(files){ %>
+  <!--$ fileFilters -->
+  <div class='container-fluid' id='fileFilters'>
+
+    <!--% fileFilters -->
+    <form id='filtersForm'>
+      <div class='row' id='fileFilters'>
+          <div class='col-md-4 text-center'>
+              <h4 class="d-block bg-dark text-white my-2">Semestre</h4>
+              <select name="semester" class="custom-select filter">
+                  <option selected value=''>Todos</option>
+                  <option value="IV">IV</option>
+                  <option value="V">V</option>
+                  <option value="VII">VII</option>
+                  <option value="VIII">VIII</option>
+                  <option value="IX">IX</option>
+                  <option value="any">Ninguno</option>
+              </select>
+          </div>
+
+          <div class='col-md-4 text-center'>
+              <h4 class="d-block bg-dark text-white my-2">Menci&oacute;n</h4>
+              <select name="mention" class="custom-select filter">
+                  <option selected value=''>Todos</option>
+                  <option value="general">General</option>
+                  <option value="computación">Computaci&oacute;n</option>
+                  <option value="control">Control</option>
+                  <option value="comunicaciones">Comunicaciones</option>
+              </select>
+          </div>
+
+          <div class='col-md-4 text-center'>
+              <h4 class="d-block bg-dark text-white my-2">Tipo de archivo</h4>
+              <select name="fileType" class="custom-select filter">
+                  <option selected value=''>Todos</option>
+                  <option value="document">Documentos</option>
+                  <option value="image">Imagen</option>
+                  <option value="aplication">Aplicaci&oacute;n</option>
+                  <option value="video">Video</option>
+                  <option value="other">Otros</option>
+              </select>
+          </div>
+      </div>
+    </form>
+    <!--% -------------------------------------------------- -->
+
+    <script>
+        $('.filter').on('change', ()=>{
+          $.ajax({
+            type: 'POST',
+            url: '<%= url %>',
+            data: $('#filtersForm').serialize()
+          }).done( (data)=>{
+              $('#filesResult').html(data);
+          });
+        });
+    </script>
+    
+  </div>
+
+  <!--$ files result -->
+  <div class='container-fluid' id='filesResult'>
+    <div class='container-fluid text-center my-2' id='files-title'>
+        <h2><%=resultsTitle%></h2>
+    </div>
+    <hr>
+    <h3 class='text-center'>P&aacute;gina <%=currentPage%> de <%=totalPages%> </h3>
+    <hr>
+
+    <table class='table-bordered' style="width:100%">
+    
+        <tr style="color: white;">
+            <td style="background-color: #020202eb" width='30%'>Titulo</td>
+            <td style="background-color: #020202eb" width='15%'>autor original</td>
+            <td style="background-color: #020202eb" width='15%'>ultima actualizacion</td>
+            <td style="background-color: #020202eb" width='15%'>fecha del archivo</td>
+            <td style="background-color: #020202eb" width='15%'>subido por</td>
+            <td style="background-color: #020202eb" width='5%'>extension</td>
+            <td colspan="3" style="background-color: #020202eb" width='5%'></td>
+        </tr>
+
+      <% files.forEach(file => { %>
+        <!--+ file card -->
+        <tr>
+            <!--% file title -->
+            <td>
+                <p class='card-title font-weight-bold mb-0'><%= file.title %></p>
+            </td>
+
+            <!--% file autor-->
+            <td>
+                <p class='card-title font-weight-bold mb-0'><%= file.author %></p>
+            </td>
+
+            <!--% file update time -->
+            <%
+                var date = '';
+                const options = {
+                  year:"numeric",
+                  month:"2-digit",
+                  day:"2-digit"
+                }
+                date = file.uploadDate.toLocaleDateString('en-US',options);
+            %>
+
+            <td>
+                <p class='card-title font-weight-bold mb-0'><%= date %></p>
+            </td>
+
+            <td>
+                <p class='card-title font-weight-bold mb-0'><%= file.publicationDate %></p>
+            </td>
+
+            <!--% created by -->
+            <td>
+                <p class='card-title font-weight-bold mb-0'><%= file.createdBy %></p>
+            </td>
+
+            <!--% file autor-->
+            <td>
+                <p class='card-title font-weight-bold mb-0'><%= file.filename.split('.').pop() %></p>
+            </td>
+
+            <!--% view file -->
+            <td class='text-center'>
+                <a  href="/files/viewFile?id=<%= file.id%>" class="btn btn-dark d-block" style=' margin: auto;'>ver</a>
+            </td>
+
+            <!--% edit -->
+            <td class='text-center'>
+                <a  href="/files/edit?id=<%= file.id%>" class="btn btn-success d-block" style=' margin: auto;'>editar</a>
+            </td>
+
+            <!--% delete -->
+            <td class='text-center'>
+
+                <form method="POST" action='/files/delete?id=<%= file.id%>&_method=DELETE' onsubmit="return confirm('Estas seguro que desear eliminar este archivo?');">
+                    <button type='submit' class="btn btn-danger d-block" style='width: 100%; margin: auto;'>Borrar</button>
+                </form>
+                
+            </td>
+
+
+        </tr>
+      <% }) %>  
+      
+    </table><hr>
+
+    <!--+ pagination -->
+    <ul class="pagination justify-content-center">
+
+      <% var pageButtonStatus = '' %>
+
+      <% pageButtonStatus = (previousPage)? 'enabled' : 'disabled'%>
+      <li class="page-item <%= pageButtonStatus %>">
+        <button class="page-link pageBtn" data-page="&page=<%= previousPage %>" >Anterior</button>
+      </li>
+
+      <li class="page-item">
+        <button class="page-link pageBtn" data-page="&page=<%= currentPage %>"><%= currentPage %></button>
+      </li>
+
+      <% pageButtonStatus = (nextPage)? 'enabled' : 'disabled'%>
+      <li class="page-item <%= pageButtonStatus %>">
+        <button class="page-link pageBtn" data-page="&page=<%= nextPage %>">Siguiente</button>
+      </li>
+    </ul>
+
+  </div>
+
+<% } %>
+
+<style>
+.table-bordered .btn{
+    padding: 0px 6px;
+}
+#filesResult td{
+    padding: 3px 6px;
+}
+</style>
+
+<script>
+  $('.pageBtn').on('click', (e)=>{
+    let page = e.target.dataset.page;
+  
+    $.ajax({
+      type: 'POST',
+      url: '<%= url %>',
+      data: $('#filtersForm').serialize()+page
+    }).done( (data)=>{
+        $('html, body').animate({ scrollTop: 0 }, '100');
+        $('#filesResult').html(data);
+    });
+  }); 
+</script>
+
+  <% include partials/footer %>
+  <% include partials/frontend-scripts %>
+</body>
+
+</html>

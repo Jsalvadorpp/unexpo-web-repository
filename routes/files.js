@@ -7,6 +7,8 @@ const { check, validationResult } = require('express-validator');
 const userAuth = require('../config/userAuth');
 const pagination = require('../config/pagination').pagination;
 const limitPerPage = require('../config/pagination').limitPerPage;
+const paginationAdmin = require('../config/paginationAdmin').pagination;
+const limitPerPage_admin = require('../config/paginationAdmin').limitPerPage;
 
 //= getting data from upload database
 var files = require('../models/uploads');
@@ -316,6 +318,87 @@ router.delete('/delete', userAuth ,(req,res)=>{
     });
   });
 });
+
+//###########################################
+//##########  Admin Panel ###################
+//###########################################
+//= view all files by category
+router.get('/admin', userAuth ,(req, res, next) => {
+
+  //= page starts with index 0
+  const page = parseInt(req.query.page || '1');
+  const url = `/files/admin`;
+  const resultsTitle = 'Documentos';
+  
+  files.countDocuments({},(err,count) => {
+    files.find({})
+    .limit(limitPerPage_admin)
+    .skip((page-1)*limitPerPage_admin)
+    .sort({_id: -1})
+    .exec( (err,docs)=>{
+
+      const searchData = {
+        page,
+        count,
+        resultsTitle,
+        url,
+        err,
+        docs
+      }
+
+      const ajaxStatus = false;
+
+      paginationAdmin(req,res,searchData,ajaxStatus);
+    });
+  });
+});
+
+//= ajax request 
+router.post('/admin', userAuth, (req,res,next) => {
+
+  let semester = req.body.semester;
+  let mention = req.body.mention;
+  let fileType = req.body.fileType;
+  const page = parseInt(req.body.page || '1');
+  const resultsTitle = 'Documentos';
+
+  let query = {}
+  
+  if(semester || semester!='') query.semester = semester;
+  if(mention || mention!='') query.mention = mention;
+  if(fileType || fileType!='') query.fileType = fileType;
+
+  let urlFilters = [];
+
+  if(semester || semester!='') urlFilters.push(`semester=${semester}`);
+  if(mention || mention!='') urlFilters.push(`mention=${mention}`);
+  if(fileType || fileType!='') urlFilters.push(`fileType=${fileType}`);
+
+  const url = (urlFilters.length >= 1) ? `/files/admin?${urlFilters.join('&')}` : '/files/admin';
+  let ajaxStatus = true;
+
+  files.countDocuments(query,(err,count) => {
+    files.find(query)
+    .limit(limitPerPage_admin)
+    .skip((page-1)*limitPerPage_admin)
+    .sort({_id: -1})
+    .exec( (err,docs)=>{
+      
+      const searchData = {
+        page,
+        resultsTitle,
+        count,
+        url,
+        err,
+        docs
+      }
+
+      paginationAdmin(req,res,searchData,ajaxStatus);
+    });
+  });
+
+});
+//###########################################
 
 //= add tags to the database function
 function addTags(tags){
