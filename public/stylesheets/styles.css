@@ -21,9 +21,10 @@ body{
 }
 #welcomeText{
     color: white;
-    background: url('../images/background.jpg') center center fixed;
+    background: url('../images/Homepage_bg3.jpg') center center fixed;
     background-size: cover;
     padding: 10% 0;
+    text-shadow: -3px 3px 4px rgb(0, 0, 0);
 }
 .carousel-indicators li {
     width: 20px;
