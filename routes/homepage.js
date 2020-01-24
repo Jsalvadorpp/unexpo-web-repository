@@ -13,4 +13,14 @@ router.get('/', (req, res, next) => {
 
 });
 
+router.get('/faq', (req, res, next) => {
+
+  const pageData = {
+    page: 'FAQ / AYUDA',
+  };
+
+  res.render('faq', pageData);
+
+});
+
 module.exports = router;
