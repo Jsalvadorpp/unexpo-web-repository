@@ -108,7 +108,7 @@ router.get('/viewFile', (req,res,next) => {
 
   files.findById(fileId).exec( (err,file) => {
 
-    if(!file) res.render('data-notFound', {page: 'Informacion No Disponible'});
+    if(!file) res.render('data-notFound', {page: 'Información no disponible'});
 
     res.render('view',{file,page: `${file.title}`});
   });
@@ -169,7 +169,7 @@ router.get('/download', (req,res,next) => {
   //= look for file data by id
   files.findById(id).exec( (err,data) => {
 
-    if(!data) res.render('data-notFound', {page: 'Informacion No Disponible'});
+    if(!data) res.render('data-notFound', {page: 'Información no disponible'});
 
     gfs.collection('uploads');
 
@@ -206,7 +206,7 @@ router.get('/edit', userAuth , (req,res) => {
   const id = req.query.id;
 
   files.findById(id).exec( (err,file) => {
-    if(!file) return res.render('data-notFound', {page: 'Informacion No Disponible'});
+    if(!file) return res.render('data-notFound', {page: 'Información no disponible'});
 
     res.render('edit',{file,page: `${file.title}`});
   });
@@ -218,9 +218,9 @@ router.put('/edit', userAuth ,[
   check('title')
     .not().isEmpty().withMessage('Se necesita el titulo'),
   check('description')
-    .not().isEmpty().withMessage('se necesita la descripcion'),
+    .not().isEmpty().withMessage('Se necesita la descripcion'),
   check('author')
-    .not().isEmpty().withMessage('el autor es necesario')
+    .not().isEmpty().withMessage('El autor es necesario')
   ],
   //= handle request and response
   (req,res) => {
@@ -257,7 +257,7 @@ router.put('/edit', userAuth ,[
     }else{
 
       files.findById(id).exec( (err,file) => {
-        if(!file) res.render('data-notFound', {page: 'Informacion No Disponible'});
+        if(!file) res.render('data-notFound', {page: 'Información no disponible'});
 
         //= check if there's a file with the updated title in Db
         files.findOne({title: updatedData.title},(err,doc) => {
@@ -278,20 +278,20 @@ router.put('/edit', userAuth ,[
             if(doc._id == id){
               //= save updated data
               file.save( (err,updateFile) => {
-                req.flash('success','archivo actualizado!');
+                req.flash('success','Archivo actualizado!');
                 res.render('view',{file,page: `${file.title}`});
               });
 
             //= there's already a title with the new information in the Db
             }else{
-              req.flash('danger','el titulo ya esta en uso');
+              req.flash('danger','El titulo ya esta en uso');
               res.redirect(`edit?id=${id}`);
             }
             
           }else{
             //= save updated data
             file.save( (err,updateFile) => {
-              req.flash('success','archivo actualizado!');
+              req.flash('success','Archivo actualizado!');
               res.render('view',{file,page: `${file.title}`});
             });
           }
@@ -306,7 +306,7 @@ router.delete('/delete', userAuth ,(req,res)=>{
   const id = req.query.id;
 
   files.findById(id).exec( (err,data) => {
-    if(!data) return res.render('data-notFound', {page: 'Informacion No Disponible'});
+    if(!data) return res.render('data-notFound', {page: 'Información no disponible'});
 
     const fileTitle = data.title;
 
@@ -315,9 +315,9 @@ router.delete('/delete', userAuth ,(req,res)=>{
 
     //= remove file data
     files.findByIdAndRemove(id).exec( (err) => {
-      if(err) return res.render('data-notFound', {page: 'Informacion No Disponible'})
+      if(err) return res.render('data-notFound', {page: 'Información no disponible'})
 
-      req.flash('success',`archivo: "${fileTitle}" ha sido eliminado`);
+      req.flash('success',`Archivo: "${fileTitle}" ha sido eliminado`);
       res.render('homepage', {page: 'home'});
     });
   });

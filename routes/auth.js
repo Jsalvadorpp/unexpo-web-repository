@@ -46,7 +46,7 @@ router.get('/google/redirect',
 //= logout route
 router.get('/logout', (req,res) => {
   req.logout();
-  req.flash('success','te has desconectado');
+  req.flash('success','Te has desconectado');
   res.redirect('/');
 });
 

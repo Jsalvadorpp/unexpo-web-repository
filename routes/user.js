@@ -36,11 +36,11 @@ router.get('/files', (req,res)=>{
                         }
                         pagination(req,res,searchData,false);
                     }else{
-                        res.render('data-notFound', {page: 'Informacion No Disponible'});
+                        res.render('data-notFound', {page: 'Información no disponible'});
                     }
                 });
             }else{
-                res.render('data-notFound', {page: 'Informacion No Disponible'});
+                res.render('data-notFound', {page: 'Información no disponible'});
             }
         })
     });
@@ -90,11 +90,11 @@ router.post('/files', (req,res,next) => {
                     }
                     pagination(req,res,searchData,ajaxStatus);
                 }else{
-                    res.render('data-notFound', {page: 'Informacion No Disponible'});
+                    res.render('data-notFound', {page: 'Información no disponible'});
                 }
             });
         }else{
-            res.render('data-notFound', {page: 'Informacion No Disponible'});
+            res.render('data-notFound', {page: 'Información no disponible'});
         }
       });
     });

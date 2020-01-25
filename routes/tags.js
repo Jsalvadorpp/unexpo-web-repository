@@ -54,7 +54,7 @@ router.get('/files', (req,res)=>{
                 });
             });
         }else{
-            res.render('data-notFound', {page: 'Informacion No Disponible'});
+            res.render('data-notFound', {page: 'Información no disponible'});
         }
     });
 });
