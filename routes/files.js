@@ -9,6 +9,7 @@ const pagination = require('../config/pagination').pagination;
 const limitPerPage = require('../config/pagination').limitPerPage;
 const paginationAdmin = require('../config/paginationAdmin').pagination;
 const limitPerPage_admin = require('../config/paginationAdmin').limitPerPage;
+const adminAuth = require('../config/adminAuth');
 
 //= getting data from upload database
 var files = require('../models/uploads');
@@ -327,7 +328,7 @@ router.delete('/delete', userAuth ,(req,res)=>{
 //##########  Admin Panel ###################
 //###########################################
 //= view all files by category
-router.get('/admin', userAuth ,(req, res, next) => {
+router.get('/admin', adminAuth ,(req, res, next) => {
 
   //= page starts with index 0
   const page = parseInt(req.query.page || '1');
@@ -358,7 +359,7 @@ router.get('/admin', userAuth ,(req, res, next) => {
 });
 
 //= ajax request 
-router.post('/admin', userAuth, (req,res,next) => {
+router.post('/admin',adminAuth , (req,res,next) => {
 
   let semester = req.body.semester;
   let mention = req.body.mention;
