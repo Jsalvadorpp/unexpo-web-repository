@@ -70,12 +70,12 @@ function showFiles(data,setFilters){
   output+=`<h3 class='text-center'>P&aacute;gina ${currentPage} de ${totalPages} </h3><hr>`;
   output+=`<table class='table-bordered' style="width:100%">`;
   output+=`<tr style="color: white;">
-    <td style="background-color: #020202eb" width='30%'>Titulo</td>
-    <td style="background-color: #020202eb" width='15%'>autor original</td>
-    <td style="background-color: #020202eb" width='15%'>ultima actualizacion</td>
-    <td style="background-color: #020202eb" width='15%'>fecha del archivo</td>
-    <td style="background-color: #020202eb" width='15%'>subido por</td>
-    <td style="background-color: #020202eb" width='5%'>extension</td>
+    <td style="background-color: #020202eb" width='30%'>Título</td>
+    <td style="background-color: #020202eb" width='15%'>Autor original</td>
+    <td style="background-color: #020202eb" width='15%'>Ultima actualización</td>
+    <td style="background-color: #020202eb" width='15%'>Fecha del material</td>
+    <td style="background-color: #020202eb" width='15%'>Subido por</td>
+    <td style="background-color: #020202eb" width='5%'>Extensión</td>
     <td colspan="3" style="background-color: #020202eb" width='5%'></td>
     </tr>`;
   
