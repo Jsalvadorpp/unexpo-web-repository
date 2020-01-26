@@ -123,7 +123,7 @@ function showFiles(data,setFilters){
     </td>`;
 
     output+=`<td class='text-center'>
-    <form method="POST" action='/files/delete?id=${file.id}&_method=DELETE' onsubmit="return confirm('Estas seguro que desear eliminar este archivo?');">
+    <form method="POST" action='/files/delete?id=${file.id}&_method=DELETE' onsubmit="return confirm('Estas seguro que deseas eliminar este archivo?');">
         <button type='submit' class="btn btn-danger d-block" style='width: 100%; margin: auto;'>Borrar</button>
     </form>
     </td>`;
