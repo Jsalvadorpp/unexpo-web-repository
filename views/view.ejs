@@ -31,7 +31,7 @@
             <h1><%= file.title %></h1>
             <p><span class='text-color'>Subido por: <a href="/user/files?id=<%= file.userId %>"></span><%= file.createdBy %></p></a>
             <p><span class='text-color'>Autor original: </span><%= file.author %></p>
-            <p id='date'><span class='text-color' data-uploadDate='<%= file.updateDate %>'>ultima actualizacion: </span></p>
+            <p id='date'><span class='text-color' data-uploadDate='<%= file.updateDate %>'>Ultima actualización: </span></p>
             <script>
               let date = new Date($('#date span').attr('data-uploadDate'));
               const options = {
@@ -43,9 +43,9 @@
               date = date.toLocaleDateString('en-US',options);
               $('#date').append(date);
             </script>
-            <p><span class='text-color'>Fecha de publicacion: </span><%= file.publicationDate %></p>
-            <p><span class='text-color'>Semestre: </span><%= file.semester %><span class='text-color'> Mencion: </span><%= file.mention %></p>
-            <p><span class='text-color'>Extension: </span><%= file.filename.split('.').pop() %></p>
+            <p><span class='text-color'>Fecha del material: </span><%= file.publicationDate %></p>
+            <p><span class='text-color'>Semestre: </span><%= file.semester %><span class='text-color'> Mención: </span><%= file.mention %></p>
+            <p><span class='text-color'>Extensión: </span><%= file.filename.split('.').pop() %></p>
         </div>
 
       </div>
