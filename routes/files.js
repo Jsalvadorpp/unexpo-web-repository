@@ -219,7 +219,7 @@ router.put('/edit', userAuth ,[
   check('title')
     .not().isEmpty().withMessage('Se necesita el titulo'),
   check('description')
-    .not().isEmpty().withMessage('Se necesita la descripcion'),
+    .not().isEmpty().withMessage('Se necesita la descripción'),
   check('author')
     .not().isEmpty().withMessage('El autor es necesario')
   ],
