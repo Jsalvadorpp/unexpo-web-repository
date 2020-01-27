@@ -60,7 +60,7 @@
           </div>
 
           <% if(file.tags!= null && file.tags.length > 0){%>
-              <div class='tags text-color'>Tags: 
+              <div class='tags text-color'>Etiquetas: 
                   <% file.tags.forEach(tag => { %>
                       <a href="/tags/files?tag=<%= tag %>" class="badge badge-secondary"><%= tag %></a>
                   <% }); %>

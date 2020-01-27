@@ -30,7 +30,7 @@ router.get('/', (req, res, next) => {
   //= page starts with index 0
   const page = parseInt(req.query.page || '1');
   const url = `/files`;
-  const resultsTitle = 'Documentos';
+  const resultsTitle = 'Publicaciones';
   
   files.countDocuments({},(err,count) => {
     files.find({})
@@ -62,7 +62,7 @@ router.post('/', (req,res,next) => {
     let mention = req.body.mention;
     let fileType = req.body.fileType;
     const page = parseInt(req.body.page || '1');
-    const resultsTitle = 'Documentos';
+    const resultsTitle = 'Publicaciones';
 
     let query = {}
     
@@ -126,7 +126,7 @@ router.post('/search',(req,res) => {
   const page = parseInt(req.body.page || '1');
   const query = req.body.q;
   const url = `/files/search?q=${query}`;
-  const resultsTitle = `Resultados de la busqueda: ${query}`;
+  const resultsTitle = `Resultados de la búsqueda: ${query}`;
   var regex = new RegExp(query, "i");
 
   const searchOptions = {
@@ -333,7 +333,7 @@ router.get('/admin', adminAuth ,(req, res, next) => {
   //= page starts with index 0
   const page = parseInt(req.query.page || '1');
   const url = `/files/admin`;
-  const resultsTitle = 'Documentos';
+  const resultsTitle = 'Publicaciones';
   
   files.countDocuments({},(err,count) => {
     files.find({})
@@ -365,7 +365,7 @@ router.post('/admin',adminAuth , (req,res,next) => {
   let mention = req.body.mention;
   let fileType = req.body.fileType;
   const page = parseInt(req.body.page || '1');
-  const resultsTitle = 'Documentos';
+  const resultsTitle = 'Publicaciones';
 
   let query = {}
   
