@@ -50,7 +50,7 @@ const uploadValidation = (req,file,cb) => {
 
   //= check form inputs
   if(typeof req.body.title === 'undefined' || req.body.title == '')  errors.push('Se necesita el titulo');
-  if(typeof req.body.description === 'undefined' || req.body.description == '')  errors.push('Se necesita la descripciÃ³n');
+  if(typeof req.body.description === 'undefined' || req.body.description == '')  errors.push('Se necesita la descripción');
   if(typeof req.body.author === 'undefined' || req.body.author == '') errors.push('El autor es necesario');
 
   //= check if there's errors
@@ -112,7 +112,7 @@ router.post('/', (req,res) => {
           //= if there's a file then delete the file that was uploaded and return the upload page
           if(file){
 
-            req.flash('danger','El archivo ya se encuentra en la base de datos , porfavor use otro');
+            req.flash('danger','El archivo ya se encuentra en la base de datos');
             //= remove duplicate file
             gfs.remove({_id: req.file.id , root: 'uploads'});
             res.redirect('upload');

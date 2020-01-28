@@ -63,6 +63,19 @@
           </div>
       </div>
       <hr>
+      <div class='row my-1'>
+        <div class='col-md-8 my-1' id='about3-text'>
+            <h1>No sabes por donde comenzar?</h1>
+            <p>Tenemos una página en la que hay respuestas a las preguntas más frecuentes 
+                realizadas por los usuarios
+            </p>
+            <a href='/faq' class='btn btn-primary'>Preguntas frecuentes</a>
+        </div>
+        <div class='col-md-4 my-1' id='about3-img'>
+            <image src='images/Qmark.png' class='img-fluid' height='280px' style="object-fit: cover;" alt='Unexpo Cloud - Preguntas frecuentes'></image>
+        </div>
+    </div>
+      <hr>
   </div>
   <!--$ -------------------------------------------------- -->
 
@@ -75,8 +88,7 @@
           <hr>
           <p>Este sitio Web utiliza el correo institucional UNEXPO como mecanismo de autenticación.
             Si no conoces tu correo institucional debes acceder a la <a href='http://www.bqto.unexpo.edu.ve'>página de la Universidad</a>
-            , entrar al sistema de servicios en linea y realizar los siguientes pasos, si necesitas mas ayuda ingresa en nuestra
-            <a href='faq'>página de ayuda</a>
+           , entrar al sistema de servicios en linea y realizar los siguientes pasos.</a>
           </p>
       </div>
 
@@ -140,6 +152,18 @@
     ScrollReveal().reveal('#about2-text', {
         delay: 200,
         origin: 'right',
+        duration: 1400,
+        distance: '200px'
+    });
+    ScrollReveal().reveal('#about3-img', {
+        delay: 200,
+        origin: 'left',
+        duration: 1400,
+        distance: '200px'
+    });
+    ScrollReveal().reveal('#about3-text', {
+        delay: 200,
+        origin: 'top',
         duration: 1400,
         distance: '200px'
     });
