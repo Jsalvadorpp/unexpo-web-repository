@@ -1,7 +1,41 @@
+
 /** general */
 body{
     text-shadow: 2px 2px 3px rgba(98, 95, 95, 0.2);
     background-color: #fbf7f7;
+}
+
+/** faq page */   
+/* Comentar o quitar comentario para tener fondo de tarjeta o transparente respectivamente
+.faqcard{
+    background-color: #d0d0d4a3;
+ } */
+.accordion-section .panel-default > .panel-heading {
+    border: 0;
+    background: rgb(204, 208, 212);
+    padding: 0;
+}
+.accordion-section .panel-default .panel-title a {
+    display: block;
+    font-style: italic;
+    font-size: 1.5rem;
+}
+.accordion-section .panel-default .panel-title a:after {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-style: normal;
+    font-size: 3rem;
+    content: "\f106";
+    color: #1f7de2;
+    float: right;
+    margin-top: -12px;
+}
+.accordion-section .panel-default .panel-title a.collapsed:after {
+    content: "\f107"; 
+}
+.accordion-section .panel-default .panel-body {
+    font-style: bold;
+    font-size: 1.2rem;
 }
 
 /** index.html */
