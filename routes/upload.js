@@ -21,7 +21,7 @@ router.get('/', ensureAuth, (req, res, next) => {
   };
 
   res.render('upload', pageData);
-});
+  });
 
 //= database instance and gfs config
 var gfs;
@@ -50,7 +50,7 @@ const uploadValidation = (req,file,cb) => {
 
   //= check form inputs
   if(typeof req.body.title === 'undefined' || req.body.title == '')  errors.push('Se necesita el titulo');
-  if(typeof req.body.description === 'undefined' || req.body.description == '')  errors.push('Se necesita la descripción');
+  if(typeof req.body.description === 'undefined' || req.body.description == '')  errors.push('Se necesita la descripcion');
   if(typeof req.body.author === 'undefined' || req.body.author == '') errors.push('El autor es necesario');
 
   //= check if there's errors

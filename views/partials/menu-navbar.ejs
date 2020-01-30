@@ -1,7 +1,7 @@
 <% if(userIsLogged){ %>
     <div id='welcome-user' class='container-fluid'>
         <% if(user.role == 'admin'){ %>
-            <span >Conectado como: </span><%= user.username %><span> - Admin</span> 
+            <span >Conectado como: </span><%= user.username %><span> - Administrador</span> 
         <% }else{ %>
             <span >Conectado como: </span><%= user.username %>
         <% } %>
