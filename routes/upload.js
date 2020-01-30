@@ -20,6 +20,8 @@ router.get('/', ensureAuth, (req, res, next) => {
     page: 'Subir Archivo'
   };
 
+  req.flash('warning','Ten cuidado con el material que publicas.Más informacion en la sección de preguntas')
+
   res.render('upload', pageData);
   });
 
