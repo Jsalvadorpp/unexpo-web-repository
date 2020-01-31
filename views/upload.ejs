@@ -11,7 +11,7 @@
 
     <div class='container'>
     
-      <form  action="/upload" method="POST" enctype="multipart/form-data">
+      <form id='form' action="/upload" method="POST" enctype="multipart/form-data">
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
@@ -81,12 +81,27 @@
         </div>
   
         <br><button type="submit" class="btn btn-primary btn-block">Publicar</button>
+
+        <div id="pageloader">
+          <img src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="processing..." />
+        </div>
+       
       </form>   
     
     </div>
 
+    
+
     <% include partials/footer %>
     <% include partials/frontend-scripts %>
+
+    <script>
+      $(document).ready(function () {
+        $("#form").on("submit", function () {
+          $("#pageloader").fadeIn();
+        }); //submit
+      });
+    </script>
     <link rel="stylesheet" href="/stylesheets/uploadFile.css">
     <script src='/javascripts/uploadFile.js'></script>
     <script src='/javascripts/tagsinput.js'></script>
