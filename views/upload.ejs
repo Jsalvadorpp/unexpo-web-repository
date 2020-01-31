@@ -89,14 +89,11 @@
       $(document).ready(function() {
         $("#uploadForm").submit(function(e) {
 
-          e.preventDefault();
-          
           let loadingForm = `<span class="spinner-border spinner-border-sm" 
             role="status" aria-hidden="true"></span>
             Subiendo...`;
         
           $("#submitButton").html(loadingForm);
-          $("#uploadForm").submit();
         });
       });
     </script>
