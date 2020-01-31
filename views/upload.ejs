@@ -11,7 +11,7 @@
 
     <div class='container'>
     
-      <form id='form' action="/upload" method="POST" enctype="multipart/form-data">
+      <form id='uploadForm' action="/upload" method="POST" enctype="multipart/form-data">
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
@@ -80,28 +80,27 @@
           <small class="form-text text-muted">Separa las etiquetas con comas, por ejemplo: imagen, guia, ...</small>
         </div>
   
-        <br><button type="submit" class="btn btn-primary btn-block">Publicar</button>
-
-        <div id="pageloader">
-          <img src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="processing..." />
-        </div>
-       
+        <br><button id='submitButton' type="submit" class="btn btn-primary btn-block">Publicar</button>
       </form>   
     
     </div>
 
-    
-
-    <% include partials/footer %>
-    <% include partials/frontend-scripts %>
-
     <script>
-      $(document).ready(function () {
-        $("#form").on("submit", function () {
-          $("#pageloader").fadeIn();
-        }); //submit
+      $(document).ready(function() {
+        $("#uploadForm").submit(function() {
+
+          let loadingForm = `<span class="spinner-border spinner-border-sm" 
+            role="status" aria-hidden="true"></span>
+            Subiendo...`;
+        
+          $("#submitButton").html(loadingForm);
+        });
       });
     </script>
+
+    
+    <% include partials/footer %>
+    <% include partials/frontend-scripts %>
     <link rel="stylesheet" href="/stylesheets/uploadFile.css">
     <script src='/javascripts/uploadFile.js'></script>
     <script src='/javascripts/tagsinput.js'></script>
