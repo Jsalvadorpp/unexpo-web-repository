@@ -81,7 +81,6 @@ app.use('/user',userRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   res.render('404',{page: 'Not Found'});
-  next(createError(404));
 });
 
 // error handler
@@ -92,7 +91,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  return res.render('error');
 });
 
 module.exports = app;
