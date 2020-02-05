@@ -17,7 +17,7 @@ var tagList = require('../models/tags');
 router.get('/', ensureAuth, (req, res, next) => {
 
   const pageData = {
-    page: 'Subir Archivo'
+    page: 'Publicar archivo'
   };
 
   req.flash('warning','Ten cuidado con el material que publicas.Más informacion en la sección de preguntas')
