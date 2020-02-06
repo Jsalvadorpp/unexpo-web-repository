@@ -4,9 +4,9 @@
   <% include partials/menu-navbar %>
   <%- messages('partials/flash-messages', locals) %>
 
-  <audio autoplay loop>
+  <!-- <audio autoplay loop>
     <source src="/sounds/Counter-Strike_Global_Offensive_Soundtrack_-_Team_Selection.mp3" type="audio/mp3">
-  </audio> 
+  </audio>  -->
 
   <div class='container' >
     <div class='row'>
@@ -29,31 +29,28 @@
     
 
     $('#student').click(function(){
-        var audio = document.createElement('audio'); audio.id = 'audio';
-        audio.src = '/sounds/Counter_Terrorist_win_-_CSGO_Sound_Effect.mp3'; 
-        document.body.appendChild(audio);
-        audio.play();
-        audio.onended = function(){
-          window.location = window.location.protocol + '//' + window.location.host + '/auth/login/student';
-        }
+        // var audio = document.createElement('audio'); audio.id = 'audio';
+        // audio.src = '/sounds/Counter_Terrorist_win_-_CSGO_Sound_Effect.mp3'; 
+        // document.body.appendChild(audio);
+        // audio.play();
+        // audio.onended = function(){
+        //   window.location = window.location.protocol + '//' + window.location.host + '/auth/login/student';
+        // }
+        window.location = window.location.protocol + '//' + window.location.host + '/auth/login/student';
     });
 
     $('#professor').click(function(){
-        var audio = document.createElement('audio'); audio.id = 'audio';
-        audio.src = '/sounds/Terrorists_win_-_CSGO_Sound_Effect.mp3'; 
-        document.body.appendChild(audio); 
-        audio.play();
-        audio.onended = function(){
-          window.location = window.location.protocol + '//' + window.location.host + '/auth/login/professor';
-        }
+        // var audio = document.createElement('audio'); audio.id = 'audio';
+        // audio.src = '/sounds/Terrorists_win_-_CSGO_Sound_Effect.mp3'; 
+        // document.body.appendChild(audio); 
+        // audio.play();
+        // audio.onended = function(){
+        //   window.location = window.location.protocol + '//' + window.location.host + '/auth/login/professor';
+        // }
+        window.location = window.location.protocol + '//' + window.location.host + '/auth/login/professor';
     });
     
   </script>
-
-  <!--
-  <a href= '/auth/login/student' class="btn btn-info btn-block">Login as Student</a>
-  <a href='/auth/login/professor' class="btn btn-secondary btn-block">Login as Professor</a>
-  -->
       
   <% include partials/footer %>
   <% include partials/frontend-scripts %>

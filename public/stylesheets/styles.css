@@ -6,10 +6,6 @@ body{
 }
 
 /** faq page */   
-/* Comentar o quitar comentario para tener fondo de tarjeta o transparente respectivamente
-.faqcard{
-    background-color: #d0d0d4a3;
- } */
 .accordion-section .panel-default > .panel-heading {
     border: 0;
     background: rgb(204, 208, 212);
