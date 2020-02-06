@@ -91,7 +91,7 @@
             <!--% file details -->
             <td style="width: 85%">
                 <h6 class='card-title font-weight-bold mb-0'><%= file.title %></h6>
-                <small class='card-subtitle text-muted'>Subido por: <a href="/user/files?id=<%= file.userId %>"><%= file.createdBy %></a></small>
+                <small class='card-subtitle text-muted'>Publicado por: <a href="/user/files?id=<%= file.userId %>"><%= file.createdBy %></a></small>
                 <% if(file.tags!= null && file.tags.length > 0){%>
                     <div class='tags'>Etiquetas: 
                       <% file.tags.forEach(tag => { %>
@@ -108,7 +108,7 @@
                     <a role="button" class='btn <%= file.elementClass.btnClass %> d-block d-sm-none'><%= file.elementClass.btnName %></a>
                 </div>
 
-                <a  href="/files/viewFile?id=<%= file.id%>" class="btn btn-dark d-block" style='width: 110px; margin: auto;'>ver archivo</a>
+                <a  href="/files/viewFile?id=<%= file.id%>" class="btn btn-dark d-block" style='width: 110px; margin: auto;'>Ver archivo</a>
             </td>
         </tr>
       <% }) %>  
