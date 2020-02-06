@@ -29,7 +29,7 @@
 
         <div class='col-lg-9 card-body' id='details-box'>
             <h1><%= file.title %></h1>
-            <p><span class='text-color'>Subido por: <a href="/user/files?id=<%= file.userId %>"></span><%= file.createdBy %></p></a>
+            <p><span class='text-color'>Publicado por: <a href="/user/files?id=<%= file.userId %>"></span><%= file.createdBy %></p></a>
             <p><span class='text-color'>Autor original: </span><%= file.author %></p>
             <p id='date'><span class='text-color' data-uploadDate='<%= file.updateDate %>'>Ultima actualización: </span></p>
             <script>
