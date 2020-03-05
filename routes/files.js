@@ -125,9 +125,13 @@ router.post('/search',(req,res) => {
 
   const page = parseInt(req.body.page || '1');
   const query = req.body.q;
-  const url = `/files/search?q=${query}`;
-  const resultsTitle = `Resultados de la búsqueda: ${query}`;
-  var regex = new RegExp(query, "i");
+
+  //@ remove special characters from search query
+  querySanitized = escape(query);
+
+  const url = `/files/search?q=${querySanitized}`;
+  const resultsTitle = `Resultados de la búsqueda: ${querySanitized}`;
+  var regex = new RegExp(querySanitized, "i");
 
   const searchOptions = {
     $or: [
