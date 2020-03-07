@@ -38,12 +38,11 @@
               <h4 class="d-block bg-dark text-white my-2">Semestre</h4>
               <select name="semester" class="custom-select filter">
                   <option selected value=''>Todos</option>
-                  <option value="IV">IV</option>
-                  <option value="V">V</option>
-                  <option value="VII">VII</option>
-                  <option value="VIII">VIII</option>
-                  <option value="IX">IX</option>
-                  <option value="ninguno">Ninguno</option>
+                  <% filterList.forEach(filter => { %>
+                    <% if(filter.type == 'semestre'){ %>
+                      <option value='<%= filter.name %>'><%= filter.name %></option>
+                    <% } %>
+                  <% }); %>
               </select>
           </div>
 
@@ -51,10 +50,11 @@
               <h4 class="d-block bg-dark text-white my-2">Menci&oacute;n</h4>
               <select name="mention" class="custom-select filter">
                   <option selected value=''>Todos</option>
-                  <option value="general">General</option>
-                  <option value="computación">Computaci&oacute;n</option>
-                  <option value="control">Control</option>
-                  <option value="comunicaciones">Comunicaciones</option>
+                  <% filterList.forEach(filter => { %>
+                    <% if(filter.type == 'mencion'){ %>
+                      <option value='<%= filter.name %>'><%= filter.name %></option>
+                    <% } %>
+                  <% }); %>
               </select>
           </div>
 

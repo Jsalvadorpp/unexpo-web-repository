@@ -1,0 +1,45 @@
+<% include partials/head %> 
+
+<body>
+    <% include partials/menu-navbar %>
+    <%- messages('partials/flash-messages', locals) %>
+
+    <br>
+    <div class="container-fluid bg-3 text-center">    
+        <h3>Agregar filtro</h3><br>
+    </div>
+
+    <div class='container'>
+    
+      <form id='uploadForm' action="/files/admin/filter/new" method="POST">
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Nombre</span>
+          </div>
+          <input type="text" class="form-control" name="name">
+        </div>
+
+        
+        <div class='form-row'>
+
+            <div class="col-12 my-3">
+            <label class="input-group-text" style="border-bottom: 0;">Categoría</label>
+            <select class="custom-select mr-sm-2" name="type" id="inlineFormCustomSelect">
+              <option value='semestre'>Semestre</option>
+              <option value='mencion'>Mención</option>
+            </select>
+          </div>
+
+        </div>
+
+        <br><button id='submitButton' type="submit" class="btn btn-primary btn-block">Agregar</button>
+      </form>   
+    
+    </div>
+
+    <% include partials/footer %>
+    <% include partials/frontend-scripts %>
+</body>
+
+</html>

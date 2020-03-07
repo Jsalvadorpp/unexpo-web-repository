@@ -47,22 +47,22 @@
             <label class="input-group-text" style="border-bottom: 0;">Semestre</label>
             <select class="custom-select mr-sm-2" name="semester">
               <option value='ninguno'>Ninguno</option>
-              <option value='IV'>Cuarto</option>
-              <option value='V'>Quinto</option>
-              <option value='VI'>Sexto</option>
-              <option value='VII'>Septimo</option>
-              <option value='VIII'>Octavo</option>
-              <option value='IX'>Noveno</option>
+              <% filterList.forEach(filter => { %>
+                <% if(filter.type == 'semestre'){ %>
+                  <option value='<%= filter.name %>'><%= filter.name %></option>
+                <% } %>
+              <% }); %>
             </select>
           </div>
 
           <div class="col-6 my-3">
             <label class="input-group-text" style="border-bottom: 0;">Mención</label>
             <select class="custom-select mr-sm-2" name="mention" id="inlineFormCustomSelect">
-              <option value='computación'>Computación</option>
-              <option value='comunicaciones'>Comunicaciones</option>
-              <option value='control'>Control</option>
-              <option value='general' selected>General</option>
+              <% filterList.forEach(filter => { %>
+                <% if(filter.type == 'mencion'){ %>
+                  <option value='<%= filter.name %>'><%= filter.name %></option>
+                <% } %>
+              <% }); %>
             </select>
           </div>
 

@@ -1,4 +1,5 @@
-const limitPerPage = 30;
+const limitPerPage = 40;
+var filters = require('../models/filters');
 
 function pagination(req,res,searchData,ajaxStatus,setFilters){
 
@@ -32,24 +33,27 @@ function pagination(req,res,searchData,ajaxStatus,setFilters){
         if(page==1) previousPage = null;
         if(page==totalPages) nextPage = null; 
           
-        let dataObtained = {
-          files : docs,
-          url: url,
-          resultsTitle,
-          currentPage: page,
-          totalPages : totalPages,
-          totalFiles: count,
-          nextPage: nextPage,
-          previousPage: previousPage,
-          page: 'Biblioteca de archivos'
-        }
-        
-        if(ajaxStatus){
-          let output = showFiles(dataObtained,setFilters);
-          res.send(output);
-        }else{
-          res.render('filesAdmin',dataObtained);
-        }  
+        filters.find({}).exec( (errs, filterList)=>{
+          let dataObtained = {
+            files : docs,
+            url: url,
+            resultsTitle,
+            currentPage: page,
+            totalPages : totalPages,
+            totalFiles: count,
+            nextPage: nextPage,
+            previousPage: previousPage,
+            page: 'Biblioteca de archivos',
+            filterList
+          }
+          
+          if(ajaxStatus){
+            let output = showFiles(dataObtained,setFilters);
+            res.send(output);
+          }else{
+            res.render('filesAdmin',dataObtained);
+          }  
+        });
       }
 }
 

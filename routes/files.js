@@ -10,6 +10,7 @@ const limitPerPage = require('../config/pagination').limitPerPage;
 const paginationAdmin = require('../config/paginationAdmin').pagination;
 const limitPerPage_admin = require('../config/paginationAdmin').limitPerPage;
 const adminAuth = require('../config/adminAuth');
+var filters = require('../models/filters');
 
 //= getting data from upload database
 var files = require('../models/uploads');
@@ -213,7 +214,10 @@ router.get('/edit', userAuth , (req,res) => {
   files.findById(id).exec( (err,file) => {
     if(!file) return res.render('data-notFound', {page: 'Información no disponible'});
 
-    res.render('edit',{file,page: `${file.title}`});
+    filters.find({}).exec( (errs, filterList)=>{
+      res.render('edit',{file,page: `${file.title}`,filterList});
+    });
+
   });
 });
 
@@ -403,6 +407,62 @@ router.post('/admin',adminAuth , (req,res,next) => {
       }
 
       paginationAdmin(req,res,searchData,ajaxStatus);
+    });
+  });
+
+});
+
+router.get('/admin/filter/new',adminAuth , (req,res)=>{
+
+    res.render('newFilter',{page: 'Admin'});
+});
+
+
+router.get('/admin/filters', adminAuth ,(req,res) => {
+
+  filters.find({}).exec( (errs, filterList)=>{
+
+    res.render('filtersAdmin', {filterList,page: `Admin`});
+  });
+
+});
+
+router.post('/admin/filter/new',adminAuth , (req,res)=>{
+
+
+  const filter = new filters({
+    name: req.body.name,
+    type: req.body.type
+  });
+
+ 
+  filter.save((err,savedFile) => {
+    if (err)  return console.error(err);
+
+
+    filters.find({}).exec( (errs, filterList)=>{
+      req.flash('success','Filtro Agregado');
+      res.render('filtersAdmin', {filterList,page: `Admin`});
+    });
+
+  });
+});
+
+router.delete('/admin/filter/delete',adminAuth , (req,res)=>{
+
+  const id = req.query.id
+
+  filters.findById(id).exec( (err,data) => {
+    if(!data) return res.render('data-notFound', {page: 'Información no disponible'});
+
+    //= remove 
+    filters.findByIdAndRemove(id).exec( (err) => {
+      if(err) return res.render('data-notFound', {page: 'Información no disponible'})
+
+      filters.find({}).exec( (errs, filterList)=>{
+        req.flash('success','Filtro Eliminado');
+        res.render('filtersAdmin', {filterList,page: `Admin`});
+      });
     });
   });
 
