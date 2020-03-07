@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const pagination = require('../config/pagination').pagination;
 const limitPerPage = require('../config/pagination').limitPerPage;
+const userPermissions = require('../config/userPermissions');
 
 //= getting data from upload database
 var files = require('../models/uploads');
@@ -32,8 +33,10 @@ router.get('/files', (req,res)=>{
                             count,
                             url,
                             err,
-                            docs
+                            docs, 
+                            profile: userFound
                         }
+
                         pagination(req,res,searchData,false);
                     }else{
                         res.render('data-notFound', {page: 'Información no disponible'});
@@ -86,7 +89,8 @@ router.post('/files', (req,res,next) => {
                         count,
                         url,
                         err,
-                        docs
+                        docs,
+                        profile: userFound
                     }
                     pagination(req,res,searchData,ajaxStatus);
                 }else{
@@ -97,6 +101,46 @@ router.post('/files', (req,res,next) => {
             res.render('data-notFound', {page: 'Información no disponible'});
         }
       });
+    });
+
+});
+
+router.get('/profile/edit', userPermissions , (req,res)=>{
+
+    const id = req.query.id;
+
+    users.findOne({googleId: id}).exec( (err,user) => {
+        if(!user) return res.render('data-notFound', {page: 'Información no disponible'});
+        
+        res.render('profile', {user,page: `Perfil`});
+    });
+
+});
+
+router.put('/edit', userPermissions , (req,res)=>{
+
+    const id = req.query.id;
+
+    const updatedData = {
+        name: req.body.name,
+        contact: req.body.contact,
+        profileRole: req.body.profileRole,
+        description: req.body.description
+    };
+
+    users.findOne({googleId: id}).exec( (err,user) => {
+        if(!user) return res.render('data-notFound', {page: 'Información no disponible'});
+        
+
+        user.name = updatedData.name;
+        user.contact = updatedData.contact;
+        user.profileRole = updatedData.profileRole;
+        user.description = updatedData.description;
+
+        user.save( (err,updateUser) => {
+            req.flash('success','Perfil actualizado!');
+            res.render('profile', {user,page: `Perfil`});
+        });
     });
 
 });

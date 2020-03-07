@@ -197,3 +197,11 @@ footer p{
 #welcome-user span{
     color: white;
 }
+
+
+
+/** last moments changes .... */
+.profile span{
+    color: black;
+    font-weight: bold;
+}

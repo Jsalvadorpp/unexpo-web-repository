@@ -7,6 +7,7 @@ function pagination(req,res,searchData,ajaxStatus,setFilters){
   const docs = searchData.docs;
   const url = searchData.url
   const resultsTitle = searchData.resultsTitle;
+  const user = searchData.profile;
 
     if(searchData.err){
       return console.log(err); 
@@ -41,7 +42,8 @@ function pagination(req,res,searchData,ajaxStatus,setFilters){
           totalFiles: count,
           nextPage: nextPage,
           previousPage: previousPage,
-          page: 'Biblioteca de archivos'
+          page: 'Biblioteca de archivos',
+          profile: user
         }
         
         if(ajaxStatus){

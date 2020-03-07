@@ -8,6 +8,25 @@
   <% include partials/menu-navbar %>
   <%- messages('partials/flash-messages', locals) %>
 
+  <% if(profile){%>
+    <div class='container profile'>
+      <h2 class='text-center'>Perfil del usuario</h2>
+      <p><span>Usuario: </span><%= profile.username %></p>
+      <p><span>Nombre Completo:</span><%= profile.name %></p>
+      <p><span>Rol: </span><%= profile.profileRole %></p>
+      <p><span>Contacto: </span><%= profile.contact %></p>
+      <p><span>Descripción: </span><%= profile.description %></p>
+
+      <% if(userIsLogged && profile.googleId == user.googleId){ %>
+        <a href="/user/profile/edit/?id=<%= profile.googleId %>" class='btn btn-primary'><i class="fas fa-edit" style="margin-right: 10px;"></i>Editar perfil</a>
+  
+      <% } %>
+
+
+    </div> 
+    <br>
+  <% } %>
+
   <% if(files){ %>
   <!--$ fileFilters -->
   <div class='container-fluid' id='fileFilters'>
