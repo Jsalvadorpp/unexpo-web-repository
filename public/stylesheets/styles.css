@@ -205,3 +205,9 @@ footer p{
     color: black;
     font-weight: bold;
 }
+
+@media (max-width: 768px) {
+    .login-box{
+        opacity: 1;
+    }
+}
