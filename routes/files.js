@@ -573,7 +573,16 @@ function sendMail(sendTo,fileTitle){
     from: process.env.EMAIL,
     to: sendTo,
     subject: 'Publicación eliminada | Unexpo Cloud',
-    text: `Tu publicación "${fileTitle}" fue eliminada a causa de los reportes de otros usuarios , este es debido a que el contenido de tu publicación contiene material onfensivo o indebido`
+    text: `Su publicación en el repositorio UNEXPO CLOUD titulada "${fileTitle}" ha sido eliminada debido a que ha sido reportada por multiples usuarios.
+
+    Esta eliminación puede deberse a que el  material publicado es ofensivo o ha sido distribuido sin el permiso del autor. Esto incumple la normativa vigente para la distribución de contenido de UNEXPO CLOUD así como de la UNEXPO Vicerrectorado Barquisimeto.
+    
+    Atentamente,
+    UNEXPO CLOUD
+    
+    No respondas o reenvies correos a esta cuenta debido a que no es monitoreada.
+    
+    Dispones del siguiente correo en caso de que requieras reportar cualquier situación irregular: UNEXPOCloud@gmail.com`
   };
 
   transporter.sendMail(mailOptions, function(error, info){
