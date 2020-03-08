@@ -137,7 +137,9 @@ router.post('/search',(req,res) => {
   const searchOptions = {
     $or: [
       {title: {$regex: regex}},
-      {description: {$regex: regex}}
+      {description: {$regex: regex}},
+      {createdBy: {$regex: regex}},
+      {author: {$regex: regex}}
     ]
   };
   let ajaxStatus = true;
