@@ -71,6 +71,14 @@
         
         <div class='col-12 card-body'>
           <a href="/files/download?id=<%= file.id%>" class='btn btn-download'><i class="fas fa-file-download" style="margin-right: 10px;"></i>Descargar archivo</a>
+
+          <% if(userIsLogged && !fileAlreadyReported){ %>
+            <form class="float-right" method="POST" action='/files/submitReport?id=<%= file.id %>' onsubmit="return confirm('Estas seguro que deseas reportar este archivo?');">
+              <button type='submit' class="btn btn-delete"><i class="fas fa-flag" style="margin-right: 10px;"></i>Reportar</button>
+          </form>
+          <% } %>
+
+
           <% if((userIsLogged && user.googleId == file.userId) || (userIsLogged && user.role == 'admin')){ %>
             <a href="/files/edit?id=<%= file.id%>" class='btn btn-edit float-right'><i class="fas fa-edit" style="margin-right: 10px;"></i>Editar</a>
             <form class="float-right" method="POST" action='/files/delete?id=<%= file.id%>&_method=DELETE' onsubmit="return confirm('Estas seguro que deseas eliminar este archivo?');">

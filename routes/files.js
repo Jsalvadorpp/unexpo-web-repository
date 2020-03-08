@@ -11,6 +11,7 @@ const paginationAdmin = require('../config/paginationAdmin').pagination;
 const limitPerPage_admin = require('../config/paginationAdmin').limitPerPage;
 const adminAuth = require('../config/adminAuth');
 var filters = require('../models/filters');
+var reports = require('../models/reports');
 
 //= getting data from upload database
 var files = require('../models/uploads');
@@ -112,7 +113,15 @@ router.get('/viewFile', (req,res,next) => {
 
     if(!file) res.render('data-notFound', {page: 'Información no disponible'});
 
-    res.render('view',{file,page: `${file.title}`});
+    if(req.isAuthenticated()){
+
+      reports.countDocuments({fileId,userId: req.user.googleId},(err,count)=>{
+        const alreadyReported = (count >= 1)? true : false;
+        res.render('view',{file,page: `${file.title}`,fileAlreadyReported: alreadyReported});
+      })
+    }else{
+      res.render('view',{file,page: `${file.title}`});
+    }
   });
 });
 
@@ -489,5 +498,57 @@ function addTags(tags){
     });
   });
 }
+
+
+router.post('/submitReport',(req,res)=>{
+
+  const fileId = req.query.id;
+  const maxReports = 2;
+
+  files.findById(fileId).exec( (err,data) => {
+    if(!data) return res.render('data-notFound', {page: 'Información no disponible'});
+
+    const newReport = new reports({
+      fileId: fileId,
+      userId: req.user.googleId
+    })
+
+    newReport.save((err,savedReport) => {
+      if (err)  return console.error(err);
+  
+      reports.countDocuments({fileId},(err,count)=>{
+          // delete file
+          if(count >= maxReports){
+
+            const id = req.query.id;
+
+            files.findById(id).exec( (err,data) => {
+              if(!data) return res.render('data-notFound', {page: 'Información no disponible'});
+
+              //= remove file
+              gfs.remove({_id: data.fileId , root: 'uploads'});
+
+              //= remove file data
+              files.findByIdAndRemove(id).exec( (err) => {
+                if(err) return res.render('data-notFound', {page: 'Información no disponible'})
+
+                req.flash('success',`Se ha subido su reporte exitosamente`);
+                res.render('homepage', {page: 'home'});
+              });
+            });
+
+          }else{
+
+            req.flash('success',`Se ha subido su reporte exitosamente`);
+            res.render('homepage', {page: 'home'});
+
+          }
+      });
+    });
+  });
+
+
+});
+
 
 module.exports = router;
