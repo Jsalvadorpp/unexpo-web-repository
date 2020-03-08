@@ -22,7 +22,7 @@ router.get('/', ensureAuth, (req, res, next) => {
 
 
   filters.find({}).exec( (errs, filterList)=>{
-    req.flash('warning','Ten cuidado con el material que publicas.Más informacion en la sección de preguntas')
+    req.flash('warning','Debes ser cuidadoso con lo que publicas. Los términos de uso están en la sección de preguntas')
     res.render('upload', {page, filterList});
   });
 

@@ -454,7 +454,7 @@ router.post('/admin/filter/new',adminAuth , (req,res)=>{
 
 
     filters.find({}).exec( (errs, filterList)=>{
-      req.flash('success','Filtro Agregado');
+      req.flash('success','Filtro agregado');
       res.render('filtersAdmin', {filterList,page: `Admin`});
     });
 
@@ -473,7 +473,7 @@ router.delete('/admin/filter/delete',adminAuth , (req,res)=>{
       if(err) return res.render('data-notFound', {page: 'Información no disponible'})
 
       filters.find({}).exec( (errs, filterList)=>{
-        req.flash('success','Filtro Eliminado');
+        req.flash('success','Filtro eliminado');
         res.render('filtersAdmin', {filterList,page: `Admin`});
       });
     });
