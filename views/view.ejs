@@ -44,6 +44,7 @@
               $('#date').append(date);
             </script>
             <p><span class='text-color'>Fecha del material: </span><%= file.publicationDate %></p>
+            <p><span class='text-color'>Autoría del material: </span><%= file.disclaimer %></p>
             <p><span class='text-color'>Semestre: </span><%= file.semester %><span class='text-color'> Mención: </span><%= file.mention %></p>
             <p><span class='text-color'>Extensión: </span><%= file.filename.split('.').pop() %></p>
         </div>

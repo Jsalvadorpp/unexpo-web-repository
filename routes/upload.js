@@ -159,7 +159,8 @@ router.post('/', (req,res) => {
               elementClass:{
                 btnClass,
                 btnName
-              }
+              },
+              disclaimer: req.body.disclaimer
             });
 
             //= save file data

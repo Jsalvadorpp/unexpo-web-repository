@@ -77,6 +77,9 @@ const UploadSchema = new Schema({
     elementClass: {
         type: Object,
         require: true,
+    },
+    disclaimer: {
+        type: String
     }
 });
 

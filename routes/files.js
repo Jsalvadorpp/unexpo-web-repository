@@ -243,7 +243,8 @@ router.put('/edit', userAuth ,[
       mention : req.body.mention,
       semester: req.body.semester,
       author: req.body.author,
-      publicationDate : req.body.publicationDate
+      publicationDate : req.body.publicationDate,
+      disclaimer: req.body.disclaimer
     };
 
     if(tags != null){
@@ -280,6 +281,7 @@ router.put('/edit', userAuth ,[
           file.publicationDate = updatedData.publicationDate;
           //update date
           file.updateDate = Date.now();
+          file.disclaimer = updatedData.disclaimer;
           
           if(doc){
 
