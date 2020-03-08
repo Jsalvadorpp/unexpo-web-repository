@@ -12,6 +12,9 @@ const limitPerPage_admin = require('../config/paginationAdmin').limitPerPage;
 const adminAuth = require('../config/adminAuth');
 var filters = require('../models/filters');
 var reports = require('../models/reports');
+require('dotenv').config();
+var nodemailer = require('nodemailer');
+var users = require('../models/users');
 
 //= getting data from upload database
 var files = require('../models/uploads');
@@ -503,7 +506,7 @@ function addTags(tags){
 router.post('/submitReport',(req,res)=>{
 
   const fileId = req.query.id;
-  const maxReports = 2;
+  const maxReports = 1;
 
   files.findById(fileId).exec( (err,data) => {
     if(!data) return res.render('data-notFound', {page: 'Información no disponible'});
@@ -524,6 +527,11 @@ router.post('/submitReport',(req,res)=>{
 
             files.findById(id).exec( (err,data) => {
               if(!data) return res.render('data-notFound', {page: 'Información no disponible'});
+
+              //= send email
+              users.findOne({googleId: data.userId}).exec( (err,user) => {
+                sendMail(user.email,data.title);
+              });
 
               //= remove file
               gfs.remove({_id: data.fileId , root: 'uploads'});
@@ -549,6 +557,33 @@ router.post('/submitReport',(req,res)=>{
 
 
 });
+
+function sendMail(sendTo,fileTitle){
+
+  var transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    auth: {
+      type: "login", // default
+      user: process.env.EMAIL,
+      pass: process.env.EMAIL_PASSWORD
+    }
+  });
+  
+  var mailOptions = {
+    from: process.env.EMAIL,
+    to: sendTo,
+    subject: 'Publicación eliminada | Unexpo Cloud',
+    text: `Tu publicación "${fileTitle}" fue eliminada a causa de los reportes de otros usuarios , este es debido a que el contenido de tu publicación contiene material onfensivo o indebido`
+  };
+
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  }); 
+}
 
 
 module.exports = router;
