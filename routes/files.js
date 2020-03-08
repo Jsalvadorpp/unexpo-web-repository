@@ -580,9 +580,7 @@ function sendMail(sendTo,fileTitle){
     Atentamente,
     UNEXPO CLOUD
     
-    No respondas o reenvies correos a esta cuenta debido a que no es monitoreada.
-    
-    Dispones del siguiente correo en caso de que requieras reportar cualquier situación irregular: UNEXPOCloud@gmail.com`
+    No respondas o reenvies correos a esta cuenta debido a que no es monitoreada.`
   };
 
   transporter.sendMail(mailOptions, function(error, info){
