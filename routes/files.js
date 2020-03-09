@@ -317,7 +317,16 @@ router.put('/edit', userAuth ,[
             //= save updated data
             file.save( (err,updateFile) => {
               req.flash('success','Archivo actualizado!');
-              res.render('view',{file,page: `${file.title}`});
+              
+              if(req.isAuthenticated()){
+
+                reports.countDocuments({fileId,userId: req.user.googleId},(err,count)=>{
+                  const alreadyReported = (count >= 1)? true : false;
+                  res.render('view',{file,page: `${file.title}`,fileAlreadyReported: alreadyReported});
+                })
+              }else{
+                res.render('view',{file,page: `${file.title}`});
+              }
             });
           }
         });
