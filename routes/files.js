@@ -506,7 +506,7 @@ function addTags(tags){
 router.post('/submitReport',(req,res)=>{
 
   const fileId = req.query.id;
-  const maxReports = 1;
+  const maxReports = 20;
 
   files.findById(fileId).exec( (err,data) => {
     if(!data) return res.render('data-notFound', {page: 'Información no disponible'});
