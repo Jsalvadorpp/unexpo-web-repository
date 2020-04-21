@@ -1,11 +1,14 @@
 
-/** general */
 body{
     text-shadow: 2px 2px 3px rgba(98, 95, 95, 0.2);
     background-color: #fbf7f7;
 }
-
-/** faq page */   
+.main_cont{  /* Added to make footer stay at the bottom */
+    position:relative;
+    min-height:100vh;
+    padding-bottom:190px;
+}
+ /** faq page */   
 .accordion-section .panel-default > .panel-heading {
     border: 0;
     background: rgb(204, 208, 212);
@@ -33,7 +36,6 @@ body{
     font-style: bold;
     font-size: 1.2rem;
 }
-
 /** index.html */
 #homepage p{
    font-size: 1.2rem; 
@@ -98,6 +100,11 @@ body{
 }
 .jumbotron{
     padding: 32px 32px;
+}
+footer{
+   position:absolute;
+   bottom:0;
+   width:100%;
 }
 #footer-copyright{
     background-color: black;
@@ -197,8 +204,6 @@ footer p{
 #welcome-user span{
     color: white;
 }
-
-
 
 /** last moments changes .... */
 .profile span{
