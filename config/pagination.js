@@ -91,7 +91,7 @@ function showFiles(data,setFilters){
     </td>`;
     output+=` <td style="width: 85%">
     <h6 class='card-title font-weight-bold mb-0'>${file.title}</h6>
-    <small class='card-subtitle text-muted'>Subido por: <a href="/user/files?id=${file.userId}">${file.createdBy}</a></small>`
+    <small class='card-subtitle text-muted'>Publicado por: <a href="/user/files?id=${file.userId}">${file.createdBy}</a></small>`
     if(file.tags!= null && file.tags.length > 0){
       output+=`<div class='tags'>Etiquetas:`;
       file.tags.forEach(tag => {

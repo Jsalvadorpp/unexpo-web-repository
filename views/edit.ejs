@@ -1,6 +1,7 @@
 <% include partials/head %> 
 
 <body>
+  <div class="main_cont">
     <% include partials/menu-navbar %>
     <%- messages('partials/flash-messages', locals) %>
 
@@ -103,6 +104,7 @@
     <% include partials/frontend-scripts %>
     <script src='/javascripts/tagsinput.js'></script>
     <script src="/javascripts/edit-selectOption.js" id ='selectOption-script' data-mention='<%= file.mention %>' data-semester='<%= file.semester %>'></script>
+  </div>
 </body>
 
 </html>

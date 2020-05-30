@@ -78,7 +78,7 @@ function showFiles(data,setFilters){
     <td style="background-color: #020202eb" width='15%'>Autor original</td>
     <td style="background-color: #020202eb" width='15%'>Ultima actualización</td>
     <td style="background-color: #020202eb" width='15%'>Fecha del material</td>
-    <td style="background-color: #020202eb" width='15%'>Subido por</td>
+    <td style="background-color: #020202eb" width='15%'>Publicado por</td>
     <td style="background-color: #020202eb" width='5%'>Extensión</td>
     <td colspan="3" style="background-color: #020202eb" width='5%'></td>
     </tr>`;
