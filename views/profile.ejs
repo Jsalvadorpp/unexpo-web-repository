@@ -1,0 +1,57 @@
+<% include partials/head %> 
+<body>
+  <div class="main_cont"> 
+    <% include partials/menu-navbar %>
+    <%- messages('partials/flash-messages', locals) %>
+
+    <br>
+    <div class="container-fluid bg-3 text-center">    
+        <h3>Editar perfil</h3><br>
+    </div>
+
+    <div class='container'>
+
+      <form  action="/user/edit?id=<%= user.googleId%>&_method=PUT" method="POST">
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Nombre completo</span>
+          </div>
+          <input type="text" class="form-control" name="name" value='<%= user.name %>'>
+        </div>
+
+        <div class="my-3">
+            <label class="input-group-text" style="border-bottom: 0;">Rol</label>
+            <select id='semester-options' class="custom-select" name="profileRole">
+              <option value='estudiante'>Estudiante</option>
+              <option value='profesor'>Profesor</option>
+            </select>
+          </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Contacto (núm. teléfono, correo, etc)</span>
+            </div>
+            <input type="text" class="form-control" name="contact" value='<%= user.contact %>'>
+        </div>
+  
+       
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Descripción</span>
+          </div>
+          <textarea class="form-control"  name="description"><%= user.description %></textarea>
+        </div>
+
+        
+        <br><button type="submit" class="btn btn-primary btn-block">Actualizar</button>
+      </form>   
+
+    </div>
+
+    <% include partials/footer %>
+    <% include partials/frontend-scripts %>
+  </div>
+</body>
+
+</html>

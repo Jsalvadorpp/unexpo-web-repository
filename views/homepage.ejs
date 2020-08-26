@@ -1,7 +1,9 @@
 <% include partials/head %> 
 
 <body id='homepage'>
-  <% include partials/menu-navbar %>
+    
+    <div class="main_cont">
+    <% include partials/menu-navbar %>
   <%- messages('partials/flash-messages', locals) %>
 
   <!--$ Welcome Text-->
@@ -181,6 +183,7 @@
 
   <% include partials/footer %>
   <% include partials/frontend-scripts %>
+</div>
 </body>
 
 </html>

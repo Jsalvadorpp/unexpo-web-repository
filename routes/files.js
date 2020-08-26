@@ -10,6 +10,11 @@ const limitPerPage = require('../config/pagination').limitPerPage;
 const paginationAdmin = require('../config/paginationAdmin').pagination;
 const limitPerPage_admin = require('../config/paginationAdmin').limitPerPage;
 const adminAuth = require('../config/adminAuth');
+var filters = require('../models/filters');
+var reports = require('../models/reports');
+require('dotenv').config();
+var nodemailer = require('nodemailer');
+var users = require('../models/users');
 
 //= getting data from upload database
 var files = require('../models/uploads');
@@ -111,7 +116,15 @@ router.get('/viewFile', (req,res,next) => {
 
     if(!file) res.render('data-notFound', {page: 'Información no disponible'});
 
-    res.render('view',{file,page: `${file.title}`});
+    if(req.isAuthenticated()){
+
+      reports.countDocuments({fileId,userId: req.user.googleId},(err,count)=>{
+        const alreadyReported = (count >= 1)? true : false;
+        res.render('view',{file,page: `${file.title}`,fileAlreadyReported: alreadyReported});
+      })
+    }else{
+      res.render('view',{file,page: `${file.title}`});
+    }
   });
 });
 
@@ -136,7 +149,9 @@ router.post('/search',(req,res) => {
   const searchOptions = {
     $or: [
       {title: {$regex: regex}},
-      {description: {$regex: regex}}
+      {description: {$regex: regex}},
+      {createdBy: {$regex: regex}},
+      {author: {$regex: regex}}
     ]
   };
   let ajaxStatus = true;
@@ -213,7 +228,10 @@ router.get('/edit', userAuth , (req,res) => {
   files.findById(id).exec( (err,file) => {
     if(!file) return res.render('data-notFound', {page: 'Información no disponible'});
 
-    res.render('edit',{file,page: `${file.title}`});
+    filters.find({}).exec( (errs, filterList)=>{
+      res.render('edit',{file,page: `${file.title}`,filterList});
+    });
+
   });
 });
 
@@ -239,7 +257,8 @@ router.put('/edit', userAuth ,[
       mention : req.body.mention,
       semester: req.body.semester,
       author: req.body.author,
-      publicationDate : req.body.publicationDate
+      publicationDate : req.body.publicationDate,
+      disclaimer: req.body.disclaimer
     };
 
     if(tags != null){
@@ -276,6 +295,7 @@ router.put('/edit', userAuth ,[
           file.publicationDate = updatedData.publicationDate;
           //update date
           file.updateDate = Date.now();
+          file.disclaimer = updatedData.disclaimer;
           
           if(doc){
 
@@ -284,7 +304,16 @@ router.put('/edit', userAuth ,[
               //= save updated data
               file.save( (err,updateFile) => {
                 req.flash('success','Archivo actualizado!');
-                res.render('view',{file,page: `${file.title}`});
+                  
+                if(req.isAuthenticated()){
+
+                  reports.countDocuments({fileId,userId: req.user.googleId},(err,count)=>{
+                    const alreadyReported = (count >= 1)? true : false;
+                    res.render('view',{file,page: `${file.title}`,fileAlreadyReported: alreadyReported});
+                  })
+                }else{
+                  res.render('view',{file,page: `${file.title}`});
+                }
               });
 
             //= there's already a title with the new information in the Db
@@ -297,7 +326,16 @@ router.put('/edit', userAuth ,[
             //= save updated data
             file.save( (err,updateFile) => {
               req.flash('success','Archivo actualizado!');
-              res.render('view',{file,page: `${file.title}`});
+
+              if(req.isAuthenticated()){
+
+                reports.countDocuments({fileId,userId: req.user.googleId},(err,count)=>{
+                  const alreadyReported = (count >= 1)? true : false;
+                  res.render('view',{file,page: `${file.title}`,fileAlreadyReported: alreadyReported});
+                })
+              }else{
+                res.render('view',{file,page: `${file.title}`});
+              }
             });
           }
         });
@@ -407,6 +445,62 @@ router.post('/admin',adminAuth , (req,res,next) => {
   });
 
 });
+
+router.get('/admin/filter/new',adminAuth , (req,res)=>{
+
+    res.render('newFilter',{page: 'Admin'});
+});
+
+
+router.get('/admin/filters', adminAuth ,(req,res) => {
+
+  filters.find({}).exec( (errs, filterList)=>{
+
+    res.render('filtersAdmin', {filterList,page: `Admin`});
+  });
+
+});
+
+router.post('/admin/filter/new',adminAuth , (req,res)=>{
+
+
+  const filter = new filters({
+    name: req.body.name,
+    type: req.body.type
+  });
+
+ 
+  filter.save((err,savedFile) => {
+    if (err)  return console.error(err);
+
+
+    filters.find({}).exec( (errs, filterList)=>{
+      req.flash('success','Filtro agregado');
+      res.render('filtersAdmin', {filterList,page: `Admin`});
+    });
+
+  });
+});
+
+router.delete('/admin/filter/delete',adminAuth , (req,res)=>{
+
+  const id = req.query.id
+
+  filters.findById(id).exec( (err,data) => {
+    if(!data) return res.render('data-notFound', {page: 'Información no disponible'});
+
+    //= remove 
+    filters.findByIdAndRemove(id).exec( (err) => {
+      if(err) return res.render('data-notFound', {page: 'Información no disponible'})
+
+      filters.find({}).exec( (errs, filterList)=>{
+        req.flash('success','Filtro eliminado');
+        res.render('filtersAdmin', {filterList,page: `Admin`});
+      });
+    });
+  });
+
+});
 //###########################################
 
 //= add tags to the database function
@@ -425,5 +519,96 @@ function addTags(tags){
     });
   });
 }
+
+
+router.post('/submitReport',(req,res)=>{
+
+  const fileId = req.query.id;
+  const maxReports = 20;
+
+  files.findById(fileId).exec( (err,data) => {
+    if(!data) return res.render('data-notFound', {page: 'Información no disponible'});
+
+    const newReport = new reports({
+      fileId: fileId,
+      userId: req.user.googleId
+    })
+
+    newReport.save((err,savedReport) => {
+      if (err)  return console.error(err);
+  
+      reports.countDocuments({fileId},(err,count)=>{
+          // delete file
+          if(count >= maxReports){
+
+            const id = req.query.id;
+
+            files.findById(id).exec( (err,data) => {
+              if(!data) return res.render('data-notFound', {page: 'Información no disponible'});
+
+              //= send email
+              users.findOne({googleId: data.userId}).exec( (err,user) => {
+                sendMail(user.email,data.title);
+              });
+
+              //= remove file
+              gfs.remove({_id: data.fileId , root: 'uploads'});
+
+              //= remove file data
+              files.findByIdAndRemove(id).exec( (err) => {
+                if(err) return res.render('data-notFound', {page: 'Información no disponible'})
+
+                req.flash('success',`Se ha subido su reporte exitosamente`);
+                res.render('homepage', {page: 'home'});
+              });
+            });
+
+          }else{
+
+            req.flash('success',`Se ha subido su reporte exitosamente`);
+            res.render('homepage', {page: 'home'});
+
+          }
+      });
+    });
+  });
+
+
+});
+
+function sendMail(sendTo,fileTitle){
+
+  var transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    auth: {
+      type: "login", // default
+      user: process.env.EMAIL,
+      pass: process.env.EMAIL_PASSWORD
+    }
+  });
+  
+  var mailOptions = {
+    from: process.env.EMAIL,
+    to: sendTo,
+    subject: 'Publicación eliminada | Unexpo Cloud',
+    text: `Su publicación en el repositorio UNEXPO CLOUD titulada "${fileTitle}" ha sido eliminada debido a que ha sido reportada por multiples usuarios.
+
+    Esta eliminación puede deberse a que el  material publicado es ofensivo o ha sido distribuido sin el permiso del autor. Esto incumple la normativa vigente para la distribución de contenido de UNEXPO CLOUD así como de la UNEXPO Vicerrectorado Barquisimeto.
+    
+    Atentamente,
+    UNEXPO CLOUD
+    
+    No respondas o reenvies correos a esta cuenta debido a que no es monitoreada.`
+  };
+
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  }); 
+}
+
 
 module.exports = router;

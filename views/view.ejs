@@ -6,6 +6,7 @@
 </head>
 
 <body>
+  <div class="main_cont">
   <% include partials/menu-navbar %>
   <%- messages('partials/flash-messages', locals) %>
 
@@ -44,6 +45,7 @@
               $('#date').append(date);
             </script>
             <p><span class='text-color'>Fecha del material: </span><%= file.publicationDate %></p>
+            <p><span class='text-color'>Condición de publicación: </span><%= file.disclaimer %></p>
             <p><span class='text-color'>Semestre: </span><%= file.semester %><span class='text-color'> Mención: </span><%= file.mention %></p>
             <p><span class='text-color'>Extensión: </span><%= file.filename.split('.').pop() %></p>
         </div>
@@ -70,6 +72,14 @@
         
         <div class='col-12 card-body'>
           <a href="/files/download?id=<%= file.id%>" class='btn btn-download'><i class="fas fa-file-download" style="margin-right: 10px;"></i>Descargar archivo</a>
+
+          <% if(userIsLogged && !fileAlreadyReported){ %>
+            <form class="float-right" method="POST" action='/files/submitReport?id=<%= file.id %>' onsubmit="return confirm('Estas seguro que deseas reportar este archivo?');">
+              <button type='submit' class="btn btn-delete"><i class="fas fa-flag" style="margin-right: 10px;"></i>Reportar</button>
+          </form>
+          <% } %>
+
+
           <% if((userIsLogged && user.googleId == file.userId) || (userIsLogged && user.role == 'admin')){ %>
             <a href="/files/edit?id=<%= file.id%>" class='btn btn-edit float-right'><i class="fas fa-edit" style="margin-right: 10px;"></i>Editar</a>
             <form class="float-right" method="POST" action='/files/delete?id=<%= file.id%>&_method=DELETE' onsubmit="return confirm('Estas seguro que deseas eliminar este archivo?');">
@@ -85,6 +95,7 @@
   <script src='/javascripts/preview-box.js'></script>
   <% include partials/frontend-scripts %>
   <% include partials/footer %>
+</div>
 </body>
 
 </html>

@@ -6,6 +6,7 @@ const multer = require('multer');
 const database = require('../config/databaseConfig');
 const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
+var filters = require('../models/filters');
 
 //= getting data from upload database
 var uploads = require('../models/uploads');
@@ -16,14 +17,16 @@ var tagList = require('../models/tags');
 //= get upload page
 router.get('/', ensureAuth, (req, res, next) => {
 
-  const pageData = {
-    page: 'Publicar archivo'
-  };
 
-  req.flash('warning','Ten cuidado con el material que publicas.Más informacion en la sección de preguntas')
+  const page = 'Publicar archivo';
 
-  res.render('upload', pageData);
+
+  filters.find({}).exec( (errs, filterList)=>{
+    req.flash('warning','Debes ser cuidadoso con lo que publicas. Los términos de uso están en la sección de preguntas')
+    res.render('upload', {page, filterList});
   });
+
+});
 
 //= database instance and gfs config
 var gfs;
@@ -156,7 +159,8 @@ router.post('/', (req,res) => {
               elementClass:{
                 btnClass,
                 btnName
-              }
+              },
+              disclaimer: req.body.disclaimer
             });
 
             //= save file data

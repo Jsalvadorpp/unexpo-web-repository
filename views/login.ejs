@@ -1,13 +1,14 @@
 <% include partials/head %> 
 
 <body style="background-color: #212529">
-  <% include partials/menu-navbar %>
-  <%- messages('partials/flash-messages', locals) %>
-
+ 
   <!-- <audio autoplay loop>
     <source src="/sounds/Counter-Strike_Global_Offensive_Soundtrack_-_Team_Selection.mp3" type="audio/mp3">
   </audio>  -->
-
+  
+  <div class="main_cont">
+    <% include partials/menu-navbar %>
+    <%- messages('partials/flash-messages', locals) %>
   <div class='container' >
     <div class='row'>
 
@@ -24,10 +25,10 @@
     </div>
 
   </div>
+  <% include partials/footer %>
 
   <script>
     
-
     $('#student').click(function(){
         // var audio = document.createElement('audio'); audio.id = 'audio';
         // audio.src = '/sounds/Counter_Terrorist_win_-_CSGO_Sound_Effect.mp3'; 
@@ -51,9 +52,9 @@
     });
     
   </script>
-      
-  <% include partials/footer %>
+  
   <% include partials/frontend-scripts %>
+</div>
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 <% include partials/head %> 
 
 <body>
+  <div class="main_cont">
 <% include partials/menu-navbar %>
 <%- messages('partials/flash-messages', locals) %>
 
@@ -30,12 +31,13 @@
                             <p> <b>¿Cómo manejamos la situación con los derechos de autor del material? </b></p> 
                             <p> Es cierto que el material subido a UNEXPOCLOUD puede estar protegido por derechos de autor, sin embargo
                               el uso de estos materiales es esencial en el proceso de aprendizaje. Leyes internacionales de derecho de autor
-                              dictan que estos no son violentados si "el unico proposito es de ilustración para la instrucción", es decir, para propositos
+                              dictan que estos no son violentados si "el único propósito es de ilustración para la instrucción", es decir, para propósitos
                               educativos. De la misma manera el repositorio cumple con las siguientes condiciones:
                               <ul>
                                 <li>El uso no es comercial</li>
                                 <li>Hay suficiente reconocimiento de la autoría del material</li>
-                                <li>Los usuarios son informados de la situación y se les exhorta a ser cuidadosos con lo que publican </p>
+                                <li>Los usuarios son informados de la situación y se les exhorta a ser cuidadosos con lo que publican, al mismo tiempo que se les solicitada
+                                  indicar la condición en la que publican el material: Con autorización de distribución o sin ella. </p>
                                 </li>
                             </ul>
                             </p>
@@ -61,7 +63,7 @@
                             <p>Una vez conozcas los datos de tu correo institucional, puedes <a href="/auth/login">acceder</a> a 
                                 la plataforma como estudiante o profesor y <a href="/upload">publicar</a> contenido, 
                                 llenando de la mejor forma la información solicitada para facilitarle a otros usuarios el uso
-                                del material 
+                                del material.
                             </p>
                                 
                           </div>
@@ -79,11 +81,11 @@
                         <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
                           <div class="panel-body px-3 mb-4">
                             <p>Al acceder como estudiante, la plataforma le otorga al usuario permisos para publicar contenido y así contribuir con
-                                la comunidad universitaria en su formación académica. Los estudiantes pueden editar y eliminar sus publicaciones.
+                                la comunidad universitaria en su formación académica. Los estudiantes pueden editar y eliminar sus publicaciones. Confíamos 
+                                en que los contribuyentes de este repositorio Web harán su mejor esfuerzo para ayudar a sus compañeros estudiantes de la manera apropiada.
                             <br>
-                            <p>Ingresar a UNEXPO CLOUD como profesor permite de igual forma realizar publicaciones pero a su vez les hace posible
-                                ejecutar funciones de administrador del repositorio. Confíamos en que los contribuyentes de este repositorio Web harán su mejor esfuerzo
-                                para ayudar a sus compañeros estudiantes de la manera apropiada, sin embargo, los profesores pueden:
+                            <p>Ingresar a UNEXPO CLOUD como profesor permite realizar publicaciones y a su vez les hace posible
+                                ejecutar funciones de administrador del repositorio por lo que los profesores pueden:
                                 <ul>
                                     <li>Editar la información de publicaciones de cualquier usuario.</li>
                                     <li>Eliminar publicaciones de cualquier usuario.</li>
@@ -112,8 +114,8 @@
                                 publicado, sin embargo: </p>
                             <ul>
                                 <li>Si el visitante tiene una sesión activa como estudiante, éste hereda las funcionalidades 
-                                    disponibles para un visitante sin sesión, pero además adquiere la capacidad de publicar 
-                                    contenido y editarlo o eliminarlo, solamente si éste fue subido por él.
+                                    disponibles para un visitante sin sesión y adquiere la capacidad de publicar 
+                                    contenido y editarlo o eliminarlo, solamente si éste fue publicado por él.
                                 </li>
                                 <li>Los profesores que inicien sesión en el repositorio heredan las funcionalidades 
                                     de los estudiantes, pero a su vez obtiene privilegios de administrador, con los que, entre 
@@ -142,16 +144,16 @@
                             </p>
                             <br> 
                             <p>Por otro lado, los archivos también se pueden filtrar los archivos en base a etiquetas,
-                            es decir, palabras o frases que al hacer click en ellas se muestran todos los archivos que 
-                            poseen la misma etiqueta. Otra opción de filtrado de documentos es que al hacer click en el
-                            nombre del usuario que subió un archivo, se mostrarán todas las contribuciones de ese usuario
+                            es decir, palabras o frases que al hacer clic en ellas se muestran todos los archivos que 
+                            poseen la misma etiqueta. Otra opción de filtrado de documentos es que al hacer clic en el
+                            nombre del usuario que publicó un archivo, se mostrarán todas las contribuciones de ese usuario
                             particular. 
                             </p>
                             <br> 
                             <p> Como ultima opción de filtrado de publicaciones, se puede acceder a la página de 
                             <a href="/files/search">busqueda</a>, la cual al escribir algo en la barra, actualiza
                             el resultado instantameante comparando lo escrito por el usuario con los títulos y descripciones de las
-                        publicaciones </p>
+                        publicaciones. </p>
                           </div>
                         </div>
                       </div>
@@ -170,8 +172,31 @@
                               realiza una comunicación con un servidor externo para proveer vista previa a archivos no soportados
                               nativamente con el navegador Web. Es por este motivo que para algunos tipos de archivos, el navegador 
                               renderiza correctamente la vista previa, mientras que para otros archivos, UNEXPO CLOUD está configurado
-                              para mostrar un icono.
+                              para mostrar un ícono.
                             </p>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading p-3 mb-3" role="tab" id="heading6">
+                          <h3 class="panel-title">
+                            <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse6" aria-expanded="true" aria-controls="collapse6">
+                              Términos de uso de UNEXPO CLOUD
+                            </a>
+                          </h3>
+                        </div>
+                        <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
+                          <div class="panel-body px-3 mb-4">
+                            <p>
+                              El objetivo de UNEXPO CLOUD es contribuir con el desarrollo académico de la comunidad
+                              universitaria UNEXPO, sin embargo, la distribución de contenido sin la autorización
+                              del autor es responsabilidad totalmente del publicador. 
+                            </p>
+                            <br>
+                              <p>La plataforma NO se hace responsable de infracciones de derecho de autor debido a que 
+                              no tiene un mecanismo para corroborar si se está o no cometiendo infracciones al momento 
+                              de publicar archivos.
+                              </p>
                             </div>
                         </div>
                       </div>
@@ -190,6 +215,7 @@
 
 <% include partials/footer %>
 <% include partials/frontend-scripts %>
+</div>  
 </body>
 
 </html>

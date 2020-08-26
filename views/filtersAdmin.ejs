@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include partials/head %> 
+</head>
+
+<body>
+  <div class="main_cont">
+  <% include partials/menu-navbar %>
+  <%- messages('partials/flash-messages', locals) %>
+
+
+ 
+    <div class='container-fluid text-center my-2' id='filters-title'>
+        <h2>Filtros</h2>
+    </div>
+    
+    <table class='container table-bordered' style="width:100%">
+    
+        <tr style="color: white;">
+            <td style="background-color: #020202eb" width='40%'>Nombre</td>
+            <td style="background-color: #020202eb" width='40%'>Categoría</td>
+            <td style="background-color: #020202eb" width='20%'></td>
+          
+        </tr>
+
+      <% filterList.forEach(filter => { %>
+        <!--+ filter card -->
+        <tr>
+            <!--% filter title -->
+            <td>
+                <p class='card-title font-weight-bold mb-0'><%= filter.name %></p>
+            </td>
+
+            <!--% filter autor-->
+            <td>
+                <p class='card-title font-weight-bold mb-0'><%= filter.type %></p>
+            </td>
+
+            
+            <!--% delete -->
+            <td class='text-center'>
+
+                <form method="POST" action='/files/admin/filter/delete?id=<%= filter.id%>&_method=DELETE' onsubmit="return confirm('Estas seguro que deseas eliminar este filtro?');">
+                    <button type='submit' class="btn btn-danger d-block" style='width: 100%; margin: auto;'>Borrar</button>
+                </form>
+                
+            </td>
+
+
+        </tr>
+      <% }) %>  
+      
+    </table><hr>
+
+<style>
+.table-bordered .btn{
+    padding: 0px 6px;
+}
+#filterListResult td{
+    padding: 3px 6px;
+}
+</style>
+
+  <% include partials/footer %>
+  <% include partials/frontend-scripts %>
+</div>
+</body>
+
+</html>

@@ -1,6 +1,7 @@
 <% include partials/head %> 
 
 <body>
+  <div class="main_cont">
     <% include partials/menu-navbar %>
     <%- messages('partials/flash-messages', locals) %>
 
@@ -48,24 +49,43 @@
             <label class="input-group-text" style="border-bottom: 0;">Semestre</label>
             <select id='semester-options' class="custom-select mr-sm-2" name="semester">
               <option value='ninguno'>Ninguno</option>
-              <option value='IV'>Cuarto</option>
-              <option value='V'>Quinto</option>
-              <option value='VI'>Sexto</option>
-              <option value='VII'>Septimo</option>
-              <option value='VIII'>Octavo</option>
-              <option value='IX'>Noveno</option>
+              <% filterList.forEach(filter => { %>
+                <% if(filter.type == 'semestre'){ %>
+                  <option value='<%= filter.name %>'><%= filter.name %></option>
+                <% } %>
+              <% }); %>
             </select>
           </div>
 
           <div class="col-6 my-3">
             <label class="input-group-text" style="border-bottom: 0;">Mención</label>
             <select id='mention-options' class="custom-select mr-sm-2" name="mention" id="inlineFormCustomSelect">
-              <option value='computación'>Computación</option>
-              <option value='comunicaciones'>Comunicaciones</option>
-              <option value='control'>Control</option>
-              <option value='general' selected>General</option>
+              <% filterList.forEach(filter => { %>
+                <% if(filter.type == 'mencion'){ %>
+                  <option value='<%= filter.name %>'><%= filter.name %></option>
+                <% } %>
+              <% }); %>
             </select>
           </div>
+
+        </div>
+
+        <div class='form-row'>
+
+          <div class="col-12 my-3">
+            <label class="input-group-text" style="border-bottom: 0;">
+              Autoría del contenido
+              <button type="button" class="btn btn-secondary mx-2" data-toggle="tooltip" data-placement="top" 
+              title="Si el publicador distribuye material sin la autorización del autor, la responsabilidad es totalmente suya">
+              ?
+            </button>
+            </label>
+            <select class="custom-select mr-sm-2" name="disclaimer">
+              <option value='No autorizado para distribuir el material'>No estoy autorizado para distribuir el material</option>
+              <option value='Autorizado para distribuir el material'>Estoy autorizado para distribuir el material</option>
+            </select>
+          
+        </div>
 
         </div>
   
@@ -84,6 +104,7 @@
     <% include partials/frontend-scripts %>
     <script src='/javascripts/tagsinput.js'></script>
     <script src="/javascripts/edit-selectOption.js" id ='selectOption-script' data-mention='<%= file.mention %>' data-semester='<%= file.semester %>'></script>
+  </div>
 </body>
 
 </html>

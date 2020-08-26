@@ -5,8 +5,28 @@
 </head>
 
 <body>
+  <div class="main_cont"> 
   <% include partials/menu-navbar %>
   <%- messages('partials/flash-messages', locals) %>
+
+  <% if(profile){%>
+    <div class='container profile'>
+      <h2 class='text-center'>Perfil del usuario</h2>
+      <p><span>Usuario: </span><%= profile.username %></p>
+      <p><span>Nombre Completo: </span><%= profile.name %></p>
+      <p><span>Rol: </span><%= profile.profileRole %></p>
+      <p><span>Contacto: </span><%= profile.contact %></p>
+      <p><span>Descripción: </span><%= profile.description %></p>
+
+      <% if(userIsLogged && profile.googleId == user.googleId){ %>
+        <a href="/user/profile/edit/?id=<%= profile.googleId %>" class='btn btn-primary'><i class="fas fa-edit" style="margin-right: 10px;"></i>Editar perfil</a>
+  
+      <% } %>
+
+
+    </div> 
+    <br>
+  <% } %>
 
   <% if(files){ %>
   <!--$ fileFilters -->
@@ -19,12 +39,11 @@
               <h4 class="d-block bg-dark text-white my-2">Semestre</h4>
               <select name="semester" class="custom-select filter">
                   <option selected value=''>Todos</option>
-                  <option value="IV">IV</option>
-                  <option value="V">V</option>
-                  <option value="VII">VII</option>
-                  <option value="VIII">VIII</option>
-                  <option value="IX">IX</option>
-                  <option value="ninguno">Ninguno</option>
+                  <% filterList.forEach(filter => { %>
+                    <% if(filter.type == 'semestre'){ %>
+                      <option value='<%= filter.name %>'><%= filter.name %></option>
+                    <% } %>
+                  <% }); %>
               </select>
           </div>
 
@@ -32,10 +51,11 @@
               <h4 class="d-block bg-dark text-white my-2">Menci&oacute;n</h4>
               <select name="mention" class="custom-select filter">
                   <option selected value=''>Todos</option>
-                  <option value="general">General</option>
-                  <option value="computación">Computaci&oacute;n</option>
-                  <option value="control">Control</option>
-                  <option value="comunicaciones">Comunicaciones</option>
+                  <% filterList.forEach(filter => { %>
+                    <% if(filter.type == 'mencion'){ %>
+                      <option value='<%= filter.name %>'><%= filter.name %></option>
+                    <% } %>
+                  <% }); %>
               </select>
           </div>
 
@@ -156,6 +176,7 @@
 
   <% include partials/footer %>
   <% include partials/frontend-scripts %>
+</div> 
 </body>
 
 </html>
