@@ -1,6 +1,7 @@
 <% include partials/head %> 
 
 <body>
+  <div class="main_cont"> 
     <% include partials/menu-navbar %>
     <%- messages('partials/flash-messages', locals) %>
 
@@ -73,7 +74,8 @@
           <div class="col-12 my-3">
             <label class="input-group-text" style="border-bottom: 0;">
               Condición de publicación
-              <button type="button" class="btn btn-secondary mx-2" data-toggle="tooltip" data-placement="top" 
+              <button id="copyrightTooltip" type="button" class="btn btn-secondary mx-2" onclick="$('#copyrightTooltip').tooltip('toggle')"
+              data-toggle="tooltip" data-placement="top" 
                 title="Si el publicador distribuye material sin la autorización del autor, la responsabilidad es totalmente suya">
                 ?
               </button>
@@ -120,7 +122,7 @@
     <link rel="stylesheet" href="/stylesheets/uploadFile.css">
     <script src='/javascripts/uploadFile.js'></script>
     <script src='/javascripts/tagsinput.js'></script>
-
+  </div>
 </body>
 
 </html>
