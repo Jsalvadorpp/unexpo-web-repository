@@ -2,6 +2,17 @@
 
 you can see this project live [Here](http://unexpo-web.herokuapp.com/)
 
+## About
+
+It is a website destined to the storage of academic support material related to Electronic Engineering for the free use of students and professors, especially of the University UNEXPO VR-BQTO. This website was built with Node.js , Express.js , bootstrap , MongoDB and was deployed in Heroku 
+
+## Features
+
+* Only students and professors from UNEXPO can publish material in the website
+* Tag system
+* Report material functionality
+* File preview in the browser
+
 ### To start the web app
 
   * `clone this repository`
